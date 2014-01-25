@@ -1,10 +1,6 @@
-This revision of this page is for v0.3.0.2
-
 The goal of this plugin is to handle all item actions (Dropping, Throwing, Picking Up, etc.).
 
 Permissions:
-
-THEY CHANGED IN THIS UPDATE!
 
 (Should be last major rework of these as this should be more future proof and less confusing for people).
 Self
