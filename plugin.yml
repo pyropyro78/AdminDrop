@@ -1,0 +1,24 @@
+name: AdminDrop
+version: 0.3.0.2
+description: Stops users from dropping items if enabled.
+authors: [pyropyro78, NitroNumberOne]
+main: com.pyromanticgaming.admindrop.AdminDrop
+commands:
+   ad:
+      description: The goal of this plugin is to handle all item actions (Dropping, Throwing, Picking Up, etc.).
+      usage: |
+        /admindrop deathdrop - Toggles Death Drops on/off
+        /admindrop deathdrop [player] - Toggles other's Death Drops on/off
+        /admindrop list - Lists users with Toggle on
+        /admindrop throwaway - Toggles the ability to throw away items on/off
+        /admindrop throwaway [player] - Toggles other's throw away items on/off
+        /admindrop pickup - Toggles the ability to pick up items on/off
+        /admindrop pickup [player] - Toggles other's ability to pick up items on/off
+        /admindrop chestaccess - Toggles the ability to open chests on/off
+        /admindrop chestaccess [player] - Toggles other's ability to open chests on/off
+        /admindrop status - Gets current status
+        /admindrop status [player] - Gets players current status
+        /admindrop help - Displays commands
+        /admindrop altcommands - Shows alternate commands
+aliases:
+    ad: admindrop

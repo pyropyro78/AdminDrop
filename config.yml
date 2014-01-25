@@ -1,0 +1,56 @@
+#########################################
+#########################################
+#########################################
+#########################################
+####            AdminDrop            ####
+####                                 ####
+####               By:               ####
+####                                 ####
+####   Pyropyro78 & NitroNumberOne   ####
+####                                 ####
+####   "Human knowledge belongs to   ####
+####           the world."           ####
+####        ~Antitrust(2001)         ####
+#### (www.imdb.com/title/tt0218817/) ####
+#########################################
+#########################################
+#########################################
+#########################################
+
+#This sets the log level to the console for Death Drops.
+#Default is 0.
+#0 = None other than enabling and disabling.
+#1 = Logs when a user dies with Death Drop enabled
+# Excluding the users with AdminDrop.dd
+#2 = Will also log when a user uses /admindrop deathdrop on self
+# Will show enable and disable
+#3 = Will also log when a user uses /admindrop deathdrop [player] successfully on another
+# Will show enable and disable
+DeathDropLogLevel: 0
+
+#This sets the log level to the console for throwing away items.
+#Default is 0.
+#0 = None other than enabling and disabling.
+#1 = Will log when a user uses /admindrop throwaway on self
+# Will show enable and disable
+#2 = Will also log when a user uses /admindrop throwaway [player] successfully on another
+# Will show enable and disable
+ThrowAwayLogLevel: 0
+
+#This sets the log level to the console for throwing away items.
+#Default is 0.
+#0 = None other than enabling and disabling.
+#1 = Will log when a user uses /admindrop pickup on self
+# Will show enable and disable
+#2 = Will also log when a user uses /admindrop pickup [player] successfully on another
+# Will show enable and disable
+PickUpLogLevel: 0
+
+#This sets the log level to the console for opening chests.
+#Default is 0.
+#0 = None other than enabling and disabling.
+#1 = Will log when a user uses /admindrop chestaccess on self
+# Will show enable and disable
+#2 = Will also log when a user uses /admindrop chestaccess [player] successfully on another
+# Will show enable and disable
+ChestAccessLevel: 0
