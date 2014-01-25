@@ -1,7 +1,9 @@
 This revision of this page is for v0.3.0.2
 
 The goal of this plugin is to handle all item actions (Dropping, Throwing, Picking Up, etc.).
+
 Permissions:
+
 THEY CHANGED IN THIS UPDATE!
 
 (Should be last major rework of these as this should be more future proof and less confusing for people).
@@ -28,7 +30,7 @@ Overrides
 
 Override Ignore Star
 
-If you use the '*' permission on a user/group that you wish to have something like AdminDrop.alwayson.pickup you will need to use - -AdminDrop.ignore.star.pickup before the '*' permission to enable it on that a user/group.
+If you use the * permission on a user/group that you wish to have something like AdminDrop.alwayson.pickup you will need to use - -AdminDrop.ignore.star.pickup before the * permission to enable it on that a user/group.
 
     AdminDrop.ignore.star.deathdrop - Makes toggle for drops on death always on.
     AdminDrop.ignore.star.throwaway - Makes throwing away toggle always on.
