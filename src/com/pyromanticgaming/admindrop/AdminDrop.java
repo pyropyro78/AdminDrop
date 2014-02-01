@@ -15,8 +15,6 @@ package com.pyromanticgaming.admindrop;
 import java.io.IOException;
 
 import org.bukkit.ChatColor;
-import org.bukkit.block.Chest;
-import org.bukkit.block.DoubleChest;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
@@ -25,6 +23,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -33,6 +32,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class AdminDrop extends JavaPlugin implements Listener {
 
 	public static int DDLogLevel = 0, TALogLevel = 0, PULogLevel = 0, CALogLevel = 0;
+	public static boolean chestitem, enderchestitem;
 	//	public static String thrownitems;
 
 	@Override
@@ -54,6 +54,8 @@ public final class AdminDrop extends JavaPlugin implements Listener {
 		TALogLevel = this.getConfig().getInt("ThrowAwayLogLevel");
 		PULogLevel = this.getConfig().getInt("PickUpLogLevel");
 		CALogLevel = this.getConfig().getInt("ChestAccessLogLevel");
+		chestitem = this.getConfig().getBoolean("ChestItem");
+		enderchestitem = this.getConfig().getBoolean("EnderChestItem");
 		//		thrownitems = this.getConfig().getString("thrownitems");
 
 		getCommand("ad").setExecutor(new AdminDropCommandExecutor(this));
@@ -124,7 +126,8 @@ public final class AdminDrop extends JavaPlugin implements Listener {
 
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onInventoryOpenEvent(InventoryOpenEvent event){
-        if (event.getInventory().getHolder() instanceof Chest || event.getInventory().getHolder() instanceof DoubleChest){
+        event.getInventory().getType();
+		if ((event.getInventory().getType() == InventoryType.CHEST && chestitem) || (event.getInventory().getType() == InventoryType.ENDER_CHEST && enderchestitem)){
         	HumanEntity p = event.getPlayer();
     		if (AdminDropCommandExecutor.chestaccess.contains(p.getName())) {
     			event.setCancelled(true);

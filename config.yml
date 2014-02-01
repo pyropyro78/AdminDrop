@@ -49,4 +49,11 @@ PickUpLogLevel: 0
 # Will show enable and disable
 #2 = Will also log when a user uses /admindrop chestaccess [player] successfully on another
 # Will show enable and disable
-ChestAccessLevel: 0
+ChestAccessLogLevel: 0
+
+#The following options are as follows:
+#True: When user has restricted chest access this option will stop them from opening said item.
+#False: Allows user to open said chest even with chest access restricted.
+#Default is True.
+ChestItem: True
+EnderChestItem: True
