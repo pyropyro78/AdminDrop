@@ -148,12 +148,6 @@ public class AdminDropCommandExecutor implements CommandExecutor {
 								otherPlayer = Bukkit.getPlayer(args[1]);
 								ModifyOtherDD(otherPlayer, sender);
 								return true;
-							} else if (args[0].equalsIgnoreCase("status")
-									&& !playerList.contains(args[1]) && canSo) {
-								sender.sendMessage(ChatColor.DARK_BLUE
-										+ args[1]
-												+ " is either not logged in or name was typed incorrectly.");
-								return true;
 							}
 						} else if (args.length > 2) {
 							sender.sendMessage("AdminDrop - Too many arguments!");
