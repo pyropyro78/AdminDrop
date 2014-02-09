@@ -1,7 +1,7 @@
 package com.pyromanticgaming.admindrop;
 
 /*
-*Copyright (c) <2013>, <pyropyro78>, <pyropyro78@gmail.com>
+*Copyright (c) <2013-2014>, <pyropyro78>, <pyropyro78@gmail.com>
 *All rights reserved.
 *
 *Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
