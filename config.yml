@@ -1,59 +1,19 @@
-#########################################
-#########################################
-#########################################
-#########################################
-####            AdminDrop            ####
-####                                 ####
-####               By:               ####
-####                                 ####
-####           Pyropyro78            ####
-####                                 ####
-#########################################
-#########################################
-#########################################
-#########################################
-
-#This sets the log level to the console for Death Drops.
-#Default is 0.
-#0 = None other than enabling and disabling.
-#1 = Logs when a user dies with Death Drop enabled
-# Excluding the users with AdminDrop.dd
-#2 = Will also log when a user uses /admindrop deathdrop on self
-# Will show enable and disable
-#3 = Will also log when a user uses /admindrop deathdrop [player] successfully on another
-# Will show enable and disable
-DeathDropLogLevel: 0
-
-#This sets the log level to the console for throwing away items.
-#Default is 0.
-#0 = None other than enabling and disabling.
-#1 = Will log when a user uses /admindrop throwaway on self
-# Will show enable and disable
-#2 = Will also log when a user uses /admindrop throwaway [player] successfully on another
-# Will show enable and disable
-ThrowAwayLogLevel: 0
-
-#This sets the log level to the console for throwing away items.
-#Default is 0.
-#0 = None other than enabling and disabling.
-#1 = Will log when a user uses /admindrop pickup on self
-# Will show enable and disable
-#2 = Will also log when a user uses /admindrop pickup [player] successfully on another
-# Will show enable and disable
-PickUpLogLevel: 0
-
-#This sets the log level to the console for opening chests.
-#Default is 0.
-#0 = None other than enabling and disabling.
-#1 = Will log when a user uses /admindrop chestaccess on self
-# Will show enable and disable
-#2 = Will also log when a user uses /admindrop chestaccess [player] successfully on another
-# Will show enable and disable
-ChestAccessLogLevel: 0
-
 #The following options are as follows:
 #True: When user has restricted chest access this option will stop them from opening said item.
 #False: Allows user to open said chest even with chest access restricted.
 #Default is True.
-ChestItem: True
-EnderChestItem: True
+
+ChestItem: true
+EnderChestItem: true
+
+PickUpMessage: You cannot pickup items.
+PickUpMessageToggle: false
+
+ThrowMessage: You cannot throw items.
+ThrowMessageToggle: true
+
+ChestMessage: You cannot open this.
+ChestMessageToggle: true
+
+DropMessage: Your items have vanished upon your death.
+DropMessageToggle: true

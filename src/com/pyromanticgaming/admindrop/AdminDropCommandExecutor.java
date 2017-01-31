@@ -1,9 +1,11 @@
 package com.pyromanticgaming.admindrop;
 
 /*
-*Copyright (c) <2013-2016>, <pyropyro78>, <pyropyro78@gmail.com>
-*All rights reserved.
-*/
+ *Copyright (c) <2013-2017>, <pyropyro78>, <pyropyro78@gmail.com>
+ *All rights reserved.
+ *
+ *THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
 
 import java.util.HashSet;
 import java.util.Set;
@@ -17,15 +19,7 @@ import org.bukkit.entity.Player;
 
 public class AdminDropCommandExecutor implements CommandExecutor {
 
-	public static Set<String> dropless = new HashSet<String>();
-	public static Set<String> throwless = new HashSet<String>();
-	public static Set<String> pickupless = new HashSet<String>();
-	public static Set<String> playerList = new HashSet<String>();
-	public static Set<String> chestaccess = new HashSet<String>();
-	public static Set<String> protectPlayerListCA = new HashSet<String>();
-	public static Set<String> protectPlayerListDD = new HashSet<String>();
-	public static Set<String> protectPlayerListTA = new HashSet<String>();
-	public static Set<String> protectPlayerListPU = new HashSet<String>();
+
 
 	private AdminDrop admindrop;
 
@@ -53,8 +47,6 @@ public class AdminDropCommandExecutor implements CommandExecutor {
 				boolean canTa = sender.hasPermission("AdminDrop.self.throwaway")
 						|| sender.isOp();
 				boolean canS = sender.hasPermission("AdminDrop.self.status")
-						|| sender.isOp();
-				boolean canStar = sender.hasPermission("AdminDrop.*")
 						|| sender.isOp();
 				boolean canSo = sender.hasPermission("AdminDrop.other.status")
 						|| sender.isOp();
