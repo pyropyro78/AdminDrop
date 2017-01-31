@@ -5,6 +5,10 @@
 
 ChestItem: true
 EnderChestItem: true
+Hopper: True 
+Dropper: True 
+Dispenser: True 
+BrewingStand: Tru
 
 PickUpMessage: You cannot pickup items.
 PickUpMessageToggle: false
