@@ -19,4 +19,4 @@ commands:
         /ad status - Gets current status
         /ad status [player] - Gets players current status
         /ad help - Displays commands
-        /ad altcommands - Shows alternate commands
+        /ad alt - Shows alternate commands

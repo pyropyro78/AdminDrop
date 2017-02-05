@@ -9,57 +9,47 @@ package com.pyromanticgaming.admindrop;
 
 public class PlayerTogglesConfig {
 
-	private static FunWithNumbers plugin = PlayerToggles.getPlugin();
-	public static void savenumbers() {
-		for(String p : PlayerToggles.getJoinsMap().keySet()) {
-			plugin.getConfig().set("Players." + p + ".Joins", PlayerToggles.getJoinsMap().get(p));
+	private static AdminDrop plugin = PlayerToggles.getPlugin();
+	public static void savetoggles() {
+		
+		for(String p : PlayerToggles.getChestAccessMap().keySet()) {
+			plugin.getConfig().set("Players." + p + ".ChestAccess", PlayerToggles.getChestAccessMap().get(p));
 		}
-		for(String p : PlayerToggles.getBlockspMap().keySet()) {
-			plugin.getConfig().set("Players." + p + ".BlocksPlaced", PlayerToggles.getBlockspMap().get(p));
+		
+		for(String p : PlayerToggles.getDropAccessMap().keySet()) {
+			plugin.getConfig().set("Players." + p + ".DropAccess", PlayerToggles.getDropAccessMap().get(p));
 		}
-		for(String p : PlayerToggles.getBlocksbMap().keySet()) {
-			plugin.getConfig().set("Players." + p + ".BlocksBroken", PlayerToggles.getBlocksbMap().get(p));
+		
+		for(String p : PlayerToggles.getThrowAccessMap().keySet()) {
+			plugin.getConfig().set("Players." + p + ".ThrowAccess", PlayerToggles.getThrowAccessMap().get(p));
 		}
-		for(String p : PlayerToggles.getKillsMap().keySet()) {
-			plugin.getConfig().set("Players." + p + ".Kills", PlayerToggles.getKillsMap().get(p));
+		
+		for(String p : PlayerToggles.getPickUpAccessMap().keySet()) {
+			plugin.getConfig().set("Players." + p + ".PickUpAccess", PlayerToggles.getPickUpAccessMap().get(p));
 		}
-		for(String p : PlayerToggles.getPVPDeathsMap().keySet()) {
-			plugin.getConfig().set("Players." + p + ".PVPDeaths", PlayerToggles.getPVPDeathsMap().get(p));
-		}
-		for(String p : PlayerToggles.getDeathsMap().keySet()) {
-			plugin.getConfig().set("Players." + p + ".Deaths", PlayerToggles.getDeathsMap().get(p));
-		}
-		for(String p : PlayerToggles.getPlayTimeMap().keySet()) {
-			plugin.getConfig().set("Players." + p + ".PlayTime", PlayerToggles.getPlayTimeMap().get(p));
-		}
+		
 		plugin.saveConfig();
 	}
 
-	public static void loadnumbers() {
+	public static void loadtoggles() {
 		if(!plugin.getConfig().contains("Players")) {
 			return;
 		}
 
 		for(String s : plugin.getConfig().getConfigurationSection("Players").getKeys(false)) {
-			PlayerToggles.setJoins(s, plugin.getConfig().getInt("Players." + s + ".Joins"));
+			PlayerToggles.setChestAccess(s, plugin.getConfig().getBoolean("Players." + s + ".ChestAccess"));
 		}
+		
 		for(String s : plugin.getConfig().getConfigurationSection("Players").getKeys(false)) {
-			PlayerToggles.setBlocksBroken(s, plugin.getConfig().getInt("Players." + s + ".BlocksBroken"));
+			PlayerToggles.setDropAccess(s, plugin.getConfig().getBoolean("Players." + s + ".DropAccess"));
 		}
+		
 		for(String s : plugin.getConfig().getConfigurationSection("Players").getKeys(false)) {
-			PlayerToggles.setBlocksPlaced(s, plugin.getConfig().getInt("Players." + s + ".BlocksPlaced"));
+			PlayerToggles.setPickUpAccess(s, plugin.getConfig().getBoolean("Players." + s + ".PickUpAccess"));
 		}
+		
 		for(String s : plugin.getConfig().getConfigurationSection("Players").getKeys(false)) {
-			PlayerToggles.setPVPDeaths(s, plugin.getConfig().getInt("Players." + s + ".PVPDeaths"));
-		}
-		for(String s : plugin.getConfig().getConfigurationSection("Players").getKeys(false)) {
-			PlayerToggles.setDeaths(s, plugin.getConfig().getInt("Players." + s + ".Deaths"));
-		}
-		for(String s : plugin.getConfig().getConfigurationSection("Players").getKeys(false)) {
-			PlayerToggles.setTime(s, plugin.getConfig().getInt("Players." + s + ".PlayTime"));
-		}
-		for(String s : plugin.getConfig().getConfigurationSection("Players").getKeys(false)) {
-			PlayerToggles.setKill(s, plugin.getConfig().getInt("Players." + s + ".Kills"));
+			PlayerToggles.setThrowAccess(s, plugin.getConfig().getBoolean("Players." + s + ".ThrowAccess"));
 		}
 
 	}

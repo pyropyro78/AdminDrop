@@ -8,7 +8,7 @@ EnderChestItem: true
 Hopper: True 
 Dropper: True 
 Dispenser: True 
-BrewingStand: Tru
+BrewingStand: True
 
 PickUpMessage: You cannot pickup items.
 PickUpMessageToggle: false

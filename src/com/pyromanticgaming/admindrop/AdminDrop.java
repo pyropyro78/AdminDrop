@@ -35,7 +35,7 @@ public final class AdminDrop extends JavaPlugin implements Listener {
 		new MainConfig(this);
 		MainConfig.GetMainValues();
 		new PlayerToggles(this);
-		PlayerTogglesConfig.loadnumbers();
+		PlayerTogglesConfig.loadtoggles();
 		
 		getServer().getPluginManager().registerEvents(this, this);
 
@@ -47,7 +47,7 @@ public final class AdminDrop extends JavaPlugin implements Listener {
 	@Override
 	public void onDisable() {
 
-		PlayerTogglesConfig.savenumbers();
+		PlayerTogglesConfig.savetoggles();
 		
 		getLogger().info("AdminDrop has been disabled.");
 		
@@ -119,7 +119,7 @@ public final class AdminDrop extends JavaPlugin implements Listener {
 			
 			if (MainConfig.dropmessagetoggle) {
 				
-				e.sendMessage(MainConfig.dropmessage);
+				e.sendMessage(MainConfig.dropmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 			}
 		}
 	}
@@ -131,41 +131,22 @@ public final class AdminDrop extends JavaPlugin implements Listener {
 			
 			if (MainConfig.throwmessagetoggle) {
 				
-				e.getPlayer().sendMessage(MainConfig.throwmessage); 
+				e.getPlayer().sendMessage(MainConfig.throwmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2")); 
 			}
 		}
 	}
-/*
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * Left off with line 163
- * make messages able to handle color codes
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- */
+
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onInventoryOpenEvent(InventoryOpenEvent e){
         e.getInventory().getType();
 		if ((e.getInventory().getType() == InventoryType.CHEST && MainConfig.chestitem) || (e.getInventory().getType() == InventoryType.ENDER_CHEST && MainConfig.enderchestitem)){
         	HumanEntity p = e.getPlayer();
-    		if (AdminDropCommandExecutor.chestaccess.contains(p.getName())) {
+    		if (PlayerToggles.chestaccess.get(p.getName())) {
     			e.setCancelled(true);
     			
     			if (MainConfig.chestmessagetoggle) {
     				
-    				p.sendMessage(MainConfig.chestmessage);
+    				p.sendMessage(MainConfig.chestmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
     			}
     		}
         }
@@ -174,7 +155,7 @@ public final class AdminDrop extends JavaPlugin implements Listener {
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onPlayerPickupItemEvent(PlayerPickupItemEvent e) {
 		Player p = e.getPlayer();
-		if (AdminDropCommandExecutor.pickupless.contains(p.getName())) {
+		if (PlayerToggles.pickupaccess.get(p.getName())) {
 			e.setCancelled(true);
 			
 			if (MainConfig.pickupmessagetoggle) {

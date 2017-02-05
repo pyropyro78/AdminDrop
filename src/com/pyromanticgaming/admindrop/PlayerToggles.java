@@ -24,11 +24,6 @@ public class PlayerToggles {
 
 	
 	
-	public static void addBlocksBroken(String player) {
-		blocksb.put(player, blocksb.get(player) + 1);
-	}
-
-
 
 	public static void setDropAccess(String player, boolean toggle) {
 		dropaccess.put(player,  toggle);
