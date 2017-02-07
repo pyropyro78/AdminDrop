@@ -15,11 +15,13 @@ public class MainConfig {
 		plugin = instance;
 	}
 	
+	public static long SaveTimer = 200;
 	public static boolean enderchestitem, chestitem, pickupmessagetoggle, throwmessagetoggle, chestmessagetoggle, dropmessagetoggle;
 	public static String dropmessage, chestmessage, throwmessage, pickupmessage;
 	
 	public static void GetMainValues() {
 		
+		SaveTimer = plugin.getConfig().getLong("SaveTimer");
 		chestitem = plugin.getConfig().getBoolean("ChestItem");
 		pickupmessagetoggle = plugin.getConfig().getBoolean("PickUpMessageToggle");
 		throwmessagetoggle = plugin.getConfig().getBoolean("ThrowMessageToggle");

@@ -7,9 +7,6 @@ package com.pyromanticgaming.admindrop;
  *THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -36,8 +33,8 @@ public class AdminDropCommandExecutor implements CommandExecutor {
 				// in the nested if statements
 				Player otherPlayer;
 
-				boolean canList = sender.hasPermission("AdminDrop.other.list")
-						|| sender.isOp();
+				/*boolean canList = sender.hasPermission("AdminDrop.other.list")
+						|| sender.isOp(); */
 				boolean canMoCA = sender.hasPermission("AdminDrop.other.chestaccess")
 						|| sender.isOp();
 				boolean canCA = sender.hasPermission("AdminDrop.self.chestaccess")
@@ -61,11 +58,11 @@ public class AdminDropCommandExecutor implements CommandExecutor {
 
 
 
-				if (args.length == 1) {
-					if (args[0].equalsIgnoreCase("list") && canList) {
+				if (args.length == 1 && sender instanceof Player) {
+					/*	if (args[0].equalsIgnoreCase("list") && canList) {
 						ListCommand(sender);
 						return true;
-					} else if ((args[0].equalsIgnoreCase("dd") || args[0].equalsIgnoreCase("deathdrop")) && canDD) {
+					} else */if ((args[0].equalsIgnoreCase("dd") || args[0].equalsIgnoreCase("deathdrop")) && canDD) {
 						DDropCommand(sender);
 						return true;
 					} else if ((args[0].equalsIgnoreCase("ta") || args[0].equalsIgnoreCase("throwaway")) && canTa) {
@@ -138,188 +135,189 @@ public class AdminDropCommandExecutor implements CommandExecutor {
 					return true;
 				}
 			} else {
-				sender.sendMessage(ChatColor.DARK_BLUE
+				sender.sendMessage(ChatColor.ITALIC
 						+ "That is not a proper command.");
 				InfoArea(sender);
 				return true;
 			}
 		}
-	}
-	return false;
-}
-
-/**
- * Checks the status of the target player
- * 
- * @param otherPlayer
- * @param sender
- */
-private void StatusOtherCommand(Player otherPlayer, CommandSender sender) {
-	String message = String.format("%s%s", ChatColor.DARK_BLUE,
-			otherPlayer.getDisplayName());
-	if (!dropless.contains(otherPlayer.getName())
-			&& !otherPlayer.hasPermission("AdminDrop.alwayson.deathdrops")) {
-		sender.sendMessage(message + "'s Death Drops are not safe.");
+		return false;
 	}
 
-	if (dropless.contains(otherPlayer.getName())) {
-		sender.sendMessage(message + "'s Death Drops are safe.");
+
+	/**
+	 * Checks the status of the target player
+	 * 
+	 * @param otherPlayer
+	 * @param sender
+	 */
+	private void StatusOtherCommand(Player otherPlayer, CommandSender sender) {
+		String message = String.format("%s%s", ChatColor.ITALIC,
+				otherPlayer.getDisplayName());
+		if (PlayerToggles.dropaccess.get(otherPlayer.getName()) == false
+				&& !otherPlayer.hasPermission("AdminDrop.alwayson.deathdrops")) {
+			sender.sendMessage(message + "'s Death Drops are not safe.");
+		}
+
+		if (PlayerToggles.dropaccess.get(otherPlayer.getName()) == true) {
+			sender.sendMessage(message + "'s Death Drops are safe.");
+		}
+
+		if (otherPlayer.hasPermission("AdminDrop.alwayson.deathdrops")
+				&& !otherPlayer.hasPermission("AdminDrop.ignore.star.deathdrops")) {
+			sender.sendMessage(message + "'s Death Drops are always safe.");
+		}
+
+		if (PlayerToggles.throwaccess.get(otherPlayer.getName()) == true) {
+			sender.sendMessage(message + "'s throws are safe.");
+		}
+
+		if (PlayerToggles.throwaccess.get(otherPlayer.getName()) == false
+				&& !otherPlayer.hasPermission("AdminDrop.alwayson.throwaway")) {
+			sender.sendMessage(message + "'s throws are not safe.");
+		}
+
+		if (otherPlayer.hasPermission("AdminDrop.alwayson.throwaway")
+				&& !otherPlayer.hasPermission("AdminDrop.ignore.star.throwaway")) {
+			sender.sendMessage(message + "'s throws are always safe.");
+		}
+
+		if (PlayerToggles.chestaccess.get(otherPlayer.getName()) == true) {
+			sender.sendMessage(message + " cannot access chests.");
+		}
+
+		if (PlayerToggles.chestaccess.get(otherPlayer.getName()) == false
+				&& !otherPlayer.hasPermission("AdminDrop.alwayson.chestaccess")) {
+			sender.sendMessage(message + " can access chests.");
+		}
+
+		if (otherPlayer.hasPermission("AdminDrop.alwayson.chestaccess")
+				&& !otherPlayer.hasPermission("AdminDrop.ignore.star.chestaccess")) {
+			sender.sendMessage(message + " cannot ever access chests.");
+		}
+
+		if (PlayerToggles.pickupaccess.get(otherPlayer.getName()) == true) {
+			sender.sendMessage(message + "'s cannot pick up items.");
+		}
+
+		if (PlayerToggles.pickupaccess.get(otherPlayer.getName()) == false 
+				&& !otherPlayer.hasPermission("AdminDrop.alwayson.pickup")) {
+			sender.sendMessage(message + "'s can pick up items.");
+		}
+
+		if (otherPlayer.hasPermission("AdminDrop.alwayson.pickup")
+				&& !otherPlayer.hasPermission("AdminDrop.ignore.star.pickup")) {
+			sender.sendMessage(message + "'s can never pick up items.");
+		} else {
+			sender.sendMessage(message + "'s actions are not protected.");
+		}
+
 	}
 
-	if (otherPlayer.hasPermission("AdminDrop.alwayson.deathdrops")
-			&& !otherPlayer.hasPermission("AdminDrop.ignore.star.deathdrops")) {
-		sender.sendMessage(message + "'s Death Drops are always safe.");
+	/**
+	 * Stores the informational data on command syntax to send to the user
+	 * 
+	 * @param sender
+	 */
+	private void InfoArea(CommandSender sender) {
+		sender.sendMessage("/ad deathdrop - Toggles Death Drops on/off");
+		sender.sendMessage("/ad deathdrop [player] - Toggles other's Death Drops on/off");
+		//	sender.sendMessage("/ad list - Lists users with Toggle on");
+		sender.sendMessage("/ad throwaway - Toggles throwing items");
+		sender.sendMessage("/ad throwaway [player] - Toggles other's throw away items on/off");
+		sender.sendMessage("/ad pickup - Toggles the ability to pick up items on/off");
+		sender.sendMessage("/ad pickup [player] - Toggles other's ability to pick up items on/off");
+		sender.sendMessage("/ad chestaccess - Toggles the ability to open chests on/off");
+		sender.sendMessage("/ad chestaccess [player] - Toggles other's ability to open chests on/off");
+		sender.sendMessage("/ad status - Gets current status");
+		sender.sendMessage("/ad help - Displays commands");
+		sender.sendMessage("/ad status [player] - Gets players current status");
+		sender.sendMessage("/ad alt - Shows alternate commands");
 	}
 
-	if (throwless.contains(otherPlayer.getName())) {
-		sender.sendMessage(message + "'s throws are safe.");
+	private void AlternateInfoArea(CommandSender sender) {
+		sender.sendMessage("/ad dd - Toggles Death Drops on/off");
+		sender.sendMessage("/ad dd [player] - Toggles other's Death Drops on/off");
+		//	sender.sendMessage("/ad list - Lists users with Toggle on");
+		sender.sendMessage("/ad ta - Toggles throwing items");
+		sender.sendMessage("/ad ta [player] - Toggles other's throw away items on/off");
+		sender.sendMessage("/ad pu - Toggles the ability to pick up items on/off");
+		sender.sendMessage("/ad pu [player] - Toggles other's ability to pick up items on/off");
+		sender.sendMessage("/ad ca - Toggles the ability to open chests on/off");
+		sender.sendMessage("/ad ca [player] - Toggles other's ability to open chests on/off");
+		sender.sendMessage("/ad status - Gets current status");
+		sender.sendMessage("/ad help - Displays commands");
+		sender.sendMessage("/ad status [player] - Gets players current status");
+		sender.sendMessage("/ad ac - Shows alternate commands");
 	}
 
-	if (!throwless.contains(otherPlayer.getName())
-			&& !otherPlayer.hasPermission("AdminDrop.alwayson.throwaway")) {
-		sender.sendMessage(message + "'s throws are not safe.");
+	/**
+	 * Checks status of the player send the command
+	 * 
+	 * @param sender
+	 */
+	private void StatusCommand(CommandSender sender) {
+		if (PlayerToggles.dropaccess.get(sender.getName()) == false
+				&& !sender.hasPermission("AdminDrop.alwayson.deathdrop")) {
+			sender.sendMessage(ChatColor.ITALIC + "Your Death Drops are not safe.");
+		}
+
+		if (PlayerToggles.dropaccess.get(sender.getName()) == true) {
+			sender.sendMessage(ChatColor.ITALIC + "Your Death Drops are safe.");
+		}
+
+		if (sender.hasPermission("AdminDrop.alwayson.deathdrop")
+				&& !sender.hasPermission("AdminDrop.ignore.star.deathdrop")) {
+			sender.sendMessage(ChatColor.ITALIC + "Your Death Drops are always safe.");
+		}
+
+		if (PlayerToggles.throwaccess.get(sender.getName()) == true) {
+			sender.sendMessage(ChatColor.ITALIC + "You throws are safe.");
+		}
+
+		if (PlayerToggles.throwaccess.get(sender.getName()) == false
+				&& !sender.hasPermission("AdminDrop.throwaway")) {
+			sender.sendMessage(ChatColor.ITALIC + "You throws are not safe.");
+		}
+
+		if (sender.hasPermission("AdminDrop.alwayson.throwaway")
+				&& !sender.hasPermission("AdminDrop.ignore.star.throwaway")) {
+			sender.sendMessage(ChatColor.ITALIC + "Your throws are always safe.");
+		}
+
+		if (PlayerToggles.chestaccess.get(sender.getName()) == true) {
+			sender.sendMessage(ChatColor.ITALIC + "You cannot access chests.");
+		}
+
+		if (PlayerToggles.chestaccess.get(sender.getName()) == false
+				&& !sender.hasPermission("AdminDrop.alwayson.chestaccess")) {
+			sender.sendMessage(ChatColor.ITALIC + "You can access chests.");
+		}
+
+		if (sender.hasPermission("AdminDrop.alwayson.chestaccess")
+				&& !sender.hasPermission("AdminDrop.ignore.star.chestaccess")) {
+			sender.sendMessage(ChatColor.ITALIC + "You cannot ever access chests.");
+		}
+
+		if (PlayerToggles.pickupaccess.get(sender.getName()) == true) {
+			sender.sendMessage(ChatColor.ITALIC + "You cannot pick up items.");
+		}
+
+		if (PlayerToggles.pickupaccess.get(sender.getName()) == false
+				&& !sender.hasPermission("AdminDrop.alwayson.pickup")) {
+			sender.sendMessage(ChatColor.ITALIC + "You can pick up items.");
+		}
+
+		if (sender.hasPermission("AdminDrop.alwayson.pickup")
+				&& !sender.hasPermission("AdminDrop.ignore.star.pickup")) {
+			sender.sendMessage(ChatColor.ITALIC + "You can never pick up items.");
+		} else {
+			sender.sendMessage(ChatColor.ITALIC + "Your actions are not protected.");
+		}
+
 	}
 
-	if (otherPlayer.hasPermission("AdminDrop.alwayson.throwaway")
-			&& !otherPlayer.hasPermission("AdminDrop.ignore.star.throwaway")) {
-		sender.sendMessage(message + "'s throws are always safe.");
-	}
-
-	if (chestaccess.contains(otherPlayer.getName())) {
-		sender.sendMessage(message + " cannot access chests.");
-	}
-
-	if (!chestaccess.contains(otherPlayer.getName())
-			&& !otherPlayer.hasPermission("AdminDrop.alwayson.chestaccess")) {
-		sender.sendMessage(message + " can access chests.");
-	}
-
-	if (otherPlayer.hasPermission("AdminDrop.alwayson.chestaccess")
-			&& !otherPlayer.hasPermission("AdminDrop.ignore.star.chestaccess")) {
-		sender.sendMessage(message + " cannot ever access chests.");
-	}
-
-	if (pickupless.contains(otherPlayer.getName())) {
-		sender.sendMessage(message + "'s cannot pick up items.");
-	}
-
-	if (!pickupless.contains(otherPlayer.getName())
-			&& !otherPlayer.hasPermission("AdminDrop.alwayson.pickup")) {
-		sender.sendMessage(message + "'s can pick up items.");
-	}
-
-	if (otherPlayer.hasPermission("AdminDrop.alwayson.pickup")
-			&& !otherPlayer.hasPermission("AdminDrop.ignore.star.pickup")) {
-		sender.sendMessage(message + "'s can never pick up items.");
-	} else {
-		sender.sendMessage(message + "'s actions are not protected.");
-	}
-
-}
-
-/**
- * Stores the informational data on command syntax to send to the user
- * 
- * @param sender
- */
-private void InfoArea(CommandSender sender) {
-	sender.sendMessage("/ad deathdrop - Toggles Death Drops on/off");
-	sender.sendMessage("/ad deathdrop [player] - Toggles other's Death Drops on/off");
-	sender.sendMessage("/ad list - Lists users with Toggle on");
-	sender.sendMessage("/ad throwaway - Toggles throwing items");
-	sender.sendMessage("/ad throwaway [player] - Toggles other's throw away items on/off");
-	sender.sendMessage("/ad pickup - Toggles the ability to pick up items on/off");
-	sender.sendMessage("/ad pickup [player] - Toggles other's ability to pick up items on/off");
-	sender.sendMessage("/ad chestaccess - Toggles the ability to open chests on/off");
-	sender.sendMessage("/ad chestaccess [player] - Toggles other's ability to open chests on/off");
-	sender.sendMessage("/ad status - Gets current status");
-	sender.sendMessage("/ad help - Displays commands");
-	sender.sendMessage("/ad status [player] - Gets players current status");
-	sender.sendMessage("/ad alt - Shows alternate commands");
-}
-
-private void AlternateInfoArea(CommandSender sender) {
-	sender.sendMessage("/ad dd - Toggles Death Drops on/off");
-	sender.sendMessage("/ad dd [player] - Toggles other's Death Drops on/off");
-	sender.sendMessage("/ad list - Lists users with Toggle on");
-	sender.sendMessage("/ad ta - Toggles throwing items");
-	sender.sendMessage("/ad ta [player] - Toggles other's throw away items on/off");
-	sender.sendMessage("/ad pu - Toggles the ability to pick up items on/off");
-	sender.sendMessage("/ad pu [player] - Toggles other's ability to pick up items on/off");
-	sender.sendMessage("/ad ca - Toggles the ability to open chests on/off");
-	sender.sendMessage("/ad ca [player] - Toggles other's ability to open chests on/off");
-	sender.sendMessage("/ad status - Gets current status");
-	sender.sendMessage("/ad help - Displays commands");
-	sender.sendMessage("/ad status [player] - Gets players current status");
-	sender.sendMessage("/ad ac - Shows alternate commands");
-}
-
-/**
- * Checks status of the player send the command
- * 
- * @param sender
- */
-private void StatusCommand(CommandSender sender) {
-	if (!dropless.contains(sender.getName())
-			&& !sender.hasPermission("AdminDrop.alwayson.deathdrop")) {
-		sender.sendMessage(ChatColor.DARK_BLUE + "Your Death Drops are not safe.");
-	}
-
-	if (dropless.contains(sender.getName())) {
-		sender.sendMessage(ChatColor.DARK_BLUE + "Your Death Drops are safe.");
-	}
-
-	if (sender.hasPermission("AdminDrop.alwayson.deathdrop")
-			&& !sender.hasPermission("AdminDrop.ignore.star.deathdrop")) {
-		sender.sendMessage(ChatColor.DARK_BLUE + "Your Death Drops are always safe.");
-	}
-
-	if (throwless.contains(sender.getName())) {
-		sender.sendMessage(ChatColor.DARK_BLUE + "You throws are safe.");
-	}
-
-	if (!throwless.contains(sender.getName())
-			&& !sender.hasPermission("AdminDrop.throwaway")) {
-		sender.sendMessage(ChatColor.DARK_BLUE + "You throws are not safe.");
-	}
-
-	if (sender.hasPermission("AdminDrop.alwayson.throwaway")
-			&& !sender.hasPermission("AdminDrop.ignore.star.throwaway")) {
-		sender.sendMessage(ChatColor.DARK_BLUE + "Your throws are always safe.");
-	}
-
-	if (chestaccess.contains(sender.getName())) {
-		sender.sendMessage(ChatColor.DARK_BLUE + "You cannot access chests.");
-	}
-
-	if (!chestaccess.contains(sender.getName())
-			&& !sender.hasPermission("AdminDrop.alwayson.chestaccess")) {
-		sender.sendMessage(ChatColor.DARK_BLUE + "You can access chests.");
-	}
-
-	if (sender.hasPermission("AdminDrop.alwayson.chestaccess")
-			&& !sender.hasPermission("AdminDrop.ignore.star.chestaccess")) {
-		sender.sendMessage(ChatColor.DARK_BLUE + "You cannot ever access chests.");
-	}
-
-	if (pickupless.contains(sender.getName())) {
-		sender.sendMessage(ChatColor.DARK_BLUE + "You cannot pick up items.");
-	}
-
-	if (!pickupless.contains(sender.getName())
-			&& !sender.hasPermission("AdminDrop.alwayson.pickup")) {
-		sender.sendMessage(ChatColor.DARK_BLUE + "You can pick up items.");
-	}
-
-	if (sender.hasPermission("AdminDrop.alwayson.pickup")
-			&& !sender.hasPermission("AdminDrop.ignore.star.pickup")) {
-		sender.sendMessage(ChatColor.DARK_BLUE + "You can never pick up items.");
-	} else {
-		sender.sendMessage(ChatColor.DARK_BLUE + "Your actions are not protected.");
-	}
-
-}
-
+	/*
 private void ListCommand(CommandSender sender) {
 	for (Player onlineplayer : admindrop.getServer().getOnlinePlayers()) {
 		if (onlineplayer.hasPermission("AdminDrop.alwayson.deathdrop") && !onlineplayer.hasPermission("AdminDrop.ignore.star.deathdrop")) {
@@ -368,271 +366,202 @@ private void ListCommand(CommandSender sender) {
 	}
 
 }
+	 */
 
-/**
- * Function to check target's name and send it to be toggled
- * 
- * @param otherPlayer
- * @param sender
- */
-private void ModifyOtherDD(Player otherPlayer, CommandSender sender) {
-	if (!dropless.contains(otherPlayer.getName())) {
-		if (!otherPlayer.hasPermission("AdminDrop.alwayson.deathdrops")
-				|| otherPlayer.hasPermission("AdminDrop.ignore.star.deathdrops")) {
-			DisableDDrops(otherPlayer);
-			sender.sendMessage(ChatColor.DARK_BLUE
-					+ otherPlayer.getDisplayName() + ChatColor.DARK_BLUE
-					+ "'s Death Drops are safe.");
-			if (AdminDrop.DDLogLevel == 3) {
-				admindrop.getLogger().info(
-						sender.getName() + " Has protected Death Drops for "
-								+ otherPlayer.getName() + "!");
+
+
+	/**
+	 * Function to check target's name and send it to be toggled
+	 * 
+	 * @param otherPlayer
+	 * @param sender
+	 */
+	private void ModifyOtherDD(Player otherPlayer, CommandSender sender) {
+		if (PlayerToggles.listedDropAccess(sender.getName()) == false) {
+			if (!otherPlayer.hasPermission("AdminDrop.alwayson.deathdrops")
+					|| otherPlayer.hasPermission("AdminDrop.ignore.star.deathdrops")) {
+				DisableDDrops(otherPlayer);
+				sender.sendMessage(ChatColor.ITALIC
+						+ otherPlayer.getDisplayName() + ChatColor.ITALIC
+						+ "'s Death Drops are safe.");
 			}
+		} else if (otherPlayer.hasPermission("AdminDrop.alwayson.deathdrops")
+				&& !otherPlayer.hasPermission("AdminDrop.ignore.star.deathdrops")) {
+			sender.sendMessage(ChatColor.ITALIC
+					+ otherPlayer.getDisplayName()
+					+ " always has protected Death Drops.");
+		} else {
+			EnableDDrops(otherPlayer);
+			sender.sendMessage(ChatColor.ITALIC
+					+ otherPlayer.getDisplayName() + ChatColor.ITALIC
+					+ "'s Death Drops are not safe.");
 		}
-	} else if (otherPlayer.hasPermission("AdminDrop.alwayson.deathdrops")
-			&& !otherPlayer.hasPermission("AdminDrop.ignore.star.deathdrops")) {
-		sender.sendMessage(ChatColor.DARK_BLUE
-				+ otherPlayer.getDisplayName()
-				+ " always has protected Death Drops.");
-	} else {
-		EnableDDrops(otherPlayer);
-		sender.sendMessage(ChatColor.DARK_BLUE
-				+ otherPlayer.getDisplayName() + ChatColor.DARK_BLUE
-				+ "'s Death Drops are not safe.");
-		if (AdminDrop.DDLogLevel == 3) {
-			admindrop.getLogger().info(
-					sender.getName() + " Has removed protection of Death Drops for "
-							+ otherPlayer.getName() + "!");
-		}
+
 	}
 
-}
-
-private void ModifyOtherPU(Player otherPlayer, CommandSender sender) {
-	if (!pickupless.contains(otherPlayer.getName())) {
-		if (!otherPlayer.hasPermission("AdminDrop.alwayson.pickup")
-				|| otherPlayer.hasPermission("AdminDrop.ignore.star.pickup")) {
-			DisableDDrops(otherPlayer);
-			sender.sendMessage(ChatColor.DARK_BLUE
-					+ otherPlayer.getDisplayName() + ChatColor.DARK_BLUE
-					+ "'s cannot pick up items.");
-			if (AdminDrop.PULogLevel == 2) {
-				admindrop.getLogger().info(
-						sender.getName() + " Has disabled item pickups for "
-								+ otherPlayer.getName() + "!");
+	private void ModifyOtherPU(Player otherPlayer, CommandSender sender) {
+		if (PlayerToggles.listedPickUpAccess(sender.getName()) == false) {
+			if (!otherPlayer.hasPermission("AdminDrop.alwayson.pickup")
+					|| otherPlayer.hasPermission("AdminDrop.ignore.star.pickup")) {
+				DisablePUs(otherPlayer);
+				sender.sendMessage(ChatColor.ITALIC
+						+ otherPlayer.getDisplayName() + ChatColor.ITALIC
+						+ "'s cannot pick up items.");
 			}
+		} else if (otherPlayer.hasPermission("AdminDrop.alwayson.pickup")
+				&& !otherPlayer.hasPermission("AdminDrop.ignore.star.pickup")) {
+			sender.sendMessage(ChatColor.ITALIC
+					+ otherPlayer.getDisplayName()
+					+ " can never pick up items.");
+		} else {
+			EnablePUs(otherPlayer);
+			sender.sendMessage(ChatColor.ITALIC
+					+ otherPlayer.getDisplayName() + ChatColor.ITALIC
+					+ "'s can pick up items.");
 		}
-	} else if (otherPlayer.hasPermission("AdminDrop.alwayson.pickup")
-			&& !otherPlayer.hasPermission("AdminDrop.ignore.star.pickup")) {
-		sender.sendMessage(ChatColor.DARK_BLUE
-				+ otherPlayer.getDisplayName()
-				+ " can never pick up items.");
-	} else {
-		EnableDDrops(otherPlayer);
-		sender.sendMessage(ChatColor.DARK_BLUE
-				+ otherPlayer.getDisplayName() + ChatColor.DARK_BLUE
-				+ "'s can pick up items.");
-		if (AdminDrop.PULogLevel == 2) {
-			admindrop.getLogger().info(
-					sender.getName() + " Has enabled item pickups for "
-							+ otherPlayer.getName() + "!");
-		}
+
 	}
 
-}
-
-private void ModifyOtherTA(Player otherPlayer, CommandSender sender) {
-	if (!throwless.contains(otherPlayer.getName())) {
-		if (!otherPlayer.hasPermission("AdminDrop.alwayson.throwaway")
-				|| otherPlayer.hasPermission("AdminDrop.ignore.star.throwaway")) {
-			DisableThrows(otherPlayer);
-			sender.sendMessage(ChatColor.DARK_BLUE
-					+ otherPlayer.getDisplayName() + ChatColor.DARK_BLUE
-					+ "'s throws are safe.");
-			if (AdminDrop.TALogLevel == 2) {
-				admindrop.getLogger().info(
-						sender.getName() + " Has disabled ability to throw away items for "
-								+ otherPlayer.getName() + "!");
+	private void ModifyOtherTA(Player otherPlayer, CommandSender sender) {
+		if (PlayerToggles.listedThrowAccess(sender.getName()) == false) {
+			if (!otherPlayer.hasPermission("AdminDrop.alwayson.throwaway")
+					|| otherPlayer.hasPermission("AdminDrop.ignore.star.throwaway")) {
+				DisableThrows(otherPlayer);
+				sender.sendMessage(ChatColor.ITALIC
+						+ otherPlayer.getDisplayName() + ChatColor.ITALIC
+						+ "'s throws are safe.");
 			}
+		} else if (otherPlayer.hasPermission("AdminDrop.alwayson.throwaway")
+				&& !otherPlayer.hasPermission("AdminDrop.ignore.star.throwaway")) {
+			sender.sendMessage(ChatColor.ITALIC
+					+ otherPlayer.getDisplayName()
+					+ " can never throw away items.");
+		} else {
+			EnableThrows(otherPlayer);
+			sender.sendMessage(ChatColor.ITALIC
+					+ otherPlayer.getDisplayName() + ChatColor.ITALIC
+					+ "'s throws are not safe.");
 		}
-	} else if (otherPlayer.hasPermission("AdminDrop.alwayson.throwaway")
-			&& !otherPlayer.hasPermission("AdminDrop.ignore.star.throwaway")) {
-		sender.sendMessage(ChatColor.DARK_BLUE
-				+ otherPlayer.getDisplayName()
-				+ " can never throw away items.");
-	} else {
-		EnableThrows(otherPlayer);
-		sender.sendMessage(ChatColor.DARK_BLUE
-				+ otherPlayer.getDisplayName() + ChatColor.DARK_BLUE
-				+ "'s throws are not safe.");
-		if (AdminDrop.TALogLevel == 2) {
-			admindrop.getLogger().info(
-					sender.getName() + " Has enabled ability to throw away items for "
-							+ otherPlayer.getName() + "!");
-		}
+
 	}
 
-}
-
-private void ModifyOtherCA(Player otherPlayer, CommandSender sender) {
-	if (!chestaccess.contains(otherPlayer.getName())) {
-		if (!otherPlayer.hasPermission("AdminDrop.alwayson.chestaccess")
-				|| otherPlayer.hasPermission("AdminDrop.ignore.star.chestaccess")) {
-			DisableChestAccess(otherPlayer);
-			sender.sendMessage(ChatColor.DARK_BLUE
-					+ otherPlayer.getDisplayName() + ChatColor.DARK_BLUE
-					+ " cannot access chests");
-			if (AdminDrop.CALogLevel == 2) {
-				admindrop.getLogger().info(
-						sender.getName() + " Has disabled ability to open chests for "
-								+ otherPlayer.getName() + "!");
+	private void ModifyOtherCA(Player otherPlayer, CommandSender sender) {
+		if (PlayerToggles.listedChestAccess(sender.getName()) == false) {
+			if (!otherPlayer.hasPermission("AdminDrop.alwayson.chestaccess")
+					|| otherPlayer.hasPermission("AdminDrop.ignore.star.chestaccess")) {
+				DisableChestAccess(otherPlayer);
+				sender.sendMessage(ChatColor.ITALIC
+						+ otherPlayer.getDisplayName() + ChatColor.ITALIC
+						+ " cannot access chests");
 			}
+		} else if (otherPlayer.hasPermission("AdminDrop.alwayson.chestaccess")
+				&& !otherPlayer.hasPermission("AdminDrop.ignore.star.chestaccess")) {
+			sender.sendMessage(ChatColor.ITALIC
+					+ otherPlayer.getDisplayName()
+					+ " can never open chests.");
+		} else {
+			EnableChestAccess(otherPlayer);
+			sender.sendMessage(ChatColor.ITALIC
+					+ otherPlayer.getDisplayName() + ChatColor.ITALIC
+					+ " can open chests");
 		}
-	} else if (otherPlayer.hasPermission("AdminDrop.alwayson.chestaccess")
-			&& !otherPlayer.hasPermission("AdminDrop.ignore.star.chestaccess")) {
-		sender.sendMessage(ChatColor.DARK_BLUE
-				+ otherPlayer.getDisplayName()
-				+ " can never open chests.");
-	} else {
-		EnableChestAccess(otherPlayer);
-		sender.sendMessage(ChatColor.DARK_BLUE
-				+ otherPlayer.getDisplayName() + ChatColor.DARK_BLUE
-				+ " can open chests");
-		if (AdminDrop.CALogLevel == 2) {
-			admindrop.getLogger().info(
-					sender.getName() + " Has enabled ability to open chests for "
-							+ otherPlayer.getName() + "!");
+
+	}
+
+	private void NoThrowCommand(CommandSender sender) {
+		Player player = (Player) sender;
+		if (PlayerToggles.listedThrowAccess(sender.getName()) == false) {
+			DisableThrows(player);
+		} else {
+			EnableThrows(player);
+		}
+
+	}
+
+	private void DisableChestAccess(Player player) {
+		player.sendMessage(ChatColor.ITALIC + "Accessing chests has been disabled.");
+		PlayerToggles.setChestAccess(player.getName(), true);
+	}
+
+	private void EnableChestAccess(Player player) {
+		player.sendMessage(ChatColor.ITALIC + "Accessing chests has been enabled.");
+		PlayerToggles.setChestAccess(player.getName(), false);
+	}
+
+	private void CACommand(CommandSender sender) {
+		Player player = (Player) sender;
+		if (PlayerToggles.listedChestAccess(sender.getName()) == false) {
+			DisableChestAccess(player);
+		} else {
+			EnableChestAccess(player);
+		}
+
+	}
+
+	private void DisableThrows(Player player) {
+		player.sendMessage(ChatColor.ITALIC + "Throwing away your items has been disabled.");
+		PlayerToggles.setThrowAccess(player.getName(), true);
+	}
+
+	private void EnableThrows(Player player) {
+		player.sendMessage(ChatColor.ITALIC + "Throwing away your items has been enabled.");
+		PlayerToggles.setThrowAccess(player.getName(), false);
+	}
+
+	private void DDropCommand(CommandSender sender) {
+		// Reason for the conversion here is to use Player in a later function
+		// instead of CommandSender
+		Player player = (Player) sender;
+		// If the players name is not in the hashmap it
+		// will stop drops on death
+		if (PlayerToggles.dropaccess.get(player.getName()) == false) {
+			DisableDDrops(player);
+		} else {
+			// Otherwise it will run this function to allow drops to take
+			// place again on death
+			EnableDDrops(player);
 		}
 	}
 
-}
+	/**
+	 * Stops drops on death by adding the players name to a hashmap
+	 * 
+	 * @param player
+	 */
+	private void DisableDDrops(Player player) {
+		player.sendMessage(ChatColor.ITALIC + "Your Death Drops are safe.");
+		PlayerToggles.setDropAccess(player.getName(), true);
 
-private void NoThrowCommand(CommandSender sender) {
-	Player player = (Player) sender;
-	if (!throwless.contains(player.getName())) {
-		DisableThrows(player);
-		if (AdminDrop.TALogLevel == 1 || AdminDrop.TALogLevel == 2) {
-			admindrop.getLogger().info(
-					player.getName() + " Has disabled throwing abilities!");
-		}
-	} else {
-		EnableThrows(player);
-		if (AdminDrop.TALogLevel == 1 || AdminDrop.TALogLevel == 2) {
-			admindrop.getLogger().info(
-					player.getName() + " Has enable throwing abilities!");
-		}
 	}
 
-}
-
-private void DisableChestAccess(Player player) {
-	player.sendMessage(ChatColor.DARK_BLUE + "Accessing chests has been disabled.");
-	chestaccess.add(player.getName());
-}
-
-private void EnableChestAccess(Player player) {
-	player.sendMessage(ChatColor.DARK_BLUE + "Accessing chests has been enabled.");
-	chestaccess.remove(player.getName());
-}
-
-private void CACommand(CommandSender sender) {
-	Player player = (Player) sender;
-	if (!chestaccess.contains(player.getName())) {
-		DisableChestAccess(player);
-		if (AdminDrop.CALogLevel == 1 || AdminDrop.CALogLevel == 2) {
-			admindrop.getLogger().info(
-					player.getName() + " Has disabled chest opening abilities!");
-		}
-	} else {
-		EnableChestAccess(player);
-		if (AdminDrop.CALogLevel == 1 || AdminDrop.CALogLevel == 2) {
-			admindrop.getLogger().info(
-					player.getName() + " Has enable chest opening abilities!");
-		}
+	/**
+	 * Enables drops on death by removing the players name from the hashmap
+	 * 
+	 * @param player
+	 */
+	private void EnableDDrops(Player player) {
+		player.sendMessage(ChatColor.ITALIC + "Your Death Drops are not safe.");
+		PlayerToggles.setDropAccess(player.getName(), false);
 	}
 
-}
-
-private void DisableThrows(Player player) {
-	player.sendMessage(ChatColor.DARK_BLUE + "Throwing away your items has been disabled.");
-	throwless.add(player.getName());
-}
-
-private void EnableThrows(Player player) {
-	player.sendMessage(ChatColor.DARK_BLUE + "Throwing away your items has been enabled.");
-	throwless.remove(player.getName());
-}
-
-private void DDropCommand(CommandSender sender) {
-	// Reason for the conversion here is to use Player in a later function
-	// instead of CommandSender
-	Player player = (Player) sender;
-	// If the players name is not in the hashmap it
-	// will stop drops on death
-	if (!dropless.contains(player.getName())) {
-		DisableDDrops(player);
-		if (AdminDrop.DDLogLevel == 2 || AdminDrop.DDLogLevel == 3) {
-			admindrop.getLogger().info(
-					player.getName() + " Has enabled Death Drops!");
+	private void NoPickUpCommand(CommandSender sender) {
+		Player player = (Player) sender;
+		if (PlayerToggles.listedPickUpAccess(player.getName()) == false) {
+			DisablePUs(player);
+		} else {
+			EnablePUs(player);
 		}
-	} else {
-		// Otherwise it will run this function to allow drops to take
-		// place again on death
-		EnableDDrops(player);
-		if (AdminDrop.DDLogLevel == 2 || AdminDrop.DDLogLevel == 3) {
-			admindrop.getLogger().info(
-					player.getName() + " Has disabled Death Drops!");
-		}
-	}
-}
 
-/**
- * Stops drops on death by adding the players name to a hashmap
- * 
- * @param player
- */
-private void DisableDDrops(Player player) {
-	player.sendMessage(ChatColor.DARK_BLUE + "Your Death Drops are safe.");
-	dropless.add(player.getName());
-
-}
-
-/**
- * Enables drops on death by removing the players name from the hashmap
- * 
- * @param player
- */
-private void EnableDDrops(Player player) {
-	player.sendMessage(ChatColor.DARK_BLUE + "Your Death Drops are not safe.");
-	dropless.remove(player.getName());
-}
-
-private void NoPickUpCommand(CommandSender sender) {
-	Player player = (Player) sender;
-	if (!pickupless.contains(player.getName())) {
-		DisablePUs(player);
-		if (AdminDrop.PULogLevel == 1 || AdminDrop.PULogLevel == 2) {
-			admindrop.getLogger().info(
-					player.getName() + " Has disabled picking up item abilities!");
-		}
-	} else {
-		EnablePUs(player);
-		if (AdminDrop.PULogLevel == 1 || AdminDrop.PULogLevel == 2) {
-			admindrop.getLogger().info(
-					player.getName() + " Has enable picking up item abilities!");
-		}
 	}
 
-}
+	private void DisablePUs(Player player) {
+		player.sendMessage(ChatColor.ITALIC + "You wont pick up items.");
+		PlayerToggles.setPickUpAccess(player.getName(), true);
 
-private void DisablePUs(Player player) {
-	player.sendMessage(ChatColor.DARK_BLUE + "You wont pick up items.");
-	pickupless.add(player.getName());
+	}
 
-}
-
-private void EnablePUs(Player player) {
-	player.sendMessage(ChatColor.DARK_BLUE + "You can now pick up items.");
-	pickupless.remove(player.getName());
-}
+	private void EnablePUs(Player player) {
+		player.sendMessage(ChatColor.ITALIC + "You can now pick up items.");
+		PlayerToggles.setPickUpAccess(player.getName(), false);
+	}
 }

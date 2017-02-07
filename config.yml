@@ -1,3 +1,5 @@
+SaveTimer: 200
+
 #The following options are as follows:
 #True: When user has restricted chest access this option will stop them from opening said item.
 #False: Allows user to open said chest even with chest access restricted.
@@ -15,7 +17,7 @@ PickUpMessageToggle: false
 
 ThrowMessage: You cannot throw items.
 ThrowMessageToggle: true
-
+ 
 ChestMessage: You cannot open this.
 ChestMessageToggle: true
 

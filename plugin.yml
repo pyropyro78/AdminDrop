@@ -9,7 +9,6 @@ commands:
       usage: |
         /ad deathdrop - Toggles Death Drops on/off
         /ad deathdrop [player] - Toggles other's Death Drops on/off
-        /ad list - Lists users with Toggle on
         /ad throwaway - Toggles the ability to throw away items on/off
         /ad throwaway [player] - Toggles other's throw away items on/off
         /ad pickup - Toggles the ability to pick up items on/off
