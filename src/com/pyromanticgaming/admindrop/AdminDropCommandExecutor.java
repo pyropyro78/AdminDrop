@@ -58,7 +58,7 @@ public class AdminDropCommandExecutor implements CommandExecutor {
 
 
 
-				if (args.length == 1 && sender instanceof Player) {
+				if (args.length == 1) {
 					/*	if (args[0].equalsIgnoreCase("list") && canList) {
 						ListCommand(sender);
 						return true;
@@ -377,7 +377,7 @@ private void ListCommand(CommandSender sender) {
 	 * @param sender
 	 */
 	private void ModifyOtherDD(Player otherPlayer, CommandSender sender) {
-		if (PlayerToggles.listedDropAccess(sender.getName()) == false) {
+		if (PlayerToggles.dropaccess.get(sender.getName()) == false) {
 			if (!otherPlayer.hasPermission("AdminDrop.alwayson.deathdrops")
 					|| otherPlayer.hasPermission("AdminDrop.ignore.star.deathdrops")) {
 				DisableDDrops(otherPlayer);
@@ -400,7 +400,7 @@ private void ListCommand(CommandSender sender) {
 	}
 
 	private void ModifyOtherPU(Player otherPlayer, CommandSender sender) {
-		if (PlayerToggles.listedPickUpAccess(sender.getName()) == false) {
+		if (PlayerToggles.pickupaccess.get(sender.getName()) == false) {
 			if (!otherPlayer.hasPermission("AdminDrop.alwayson.pickup")
 					|| otherPlayer.hasPermission("AdminDrop.ignore.star.pickup")) {
 				DisablePUs(otherPlayer);
@@ -423,7 +423,7 @@ private void ListCommand(CommandSender sender) {
 	}
 
 	private void ModifyOtherTA(Player otherPlayer, CommandSender sender) {
-		if (PlayerToggles.listedThrowAccess(sender.getName()) == false) {
+		if (PlayerToggles.throwaccess.get(sender.getName()) == false) {
 			if (!otherPlayer.hasPermission("AdminDrop.alwayson.throwaway")
 					|| otherPlayer.hasPermission("AdminDrop.ignore.star.throwaway")) {
 				DisableThrows(otherPlayer);
@@ -446,7 +446,7 @@ private void ListCommand(CommandSender sender) {
 	}
 
 	private void ModifyOtherCA(Player otherPlayer, CommandSender sender) {
-		if (PlayerToggles.listedChestAccess(sender.getName()) == false) {
+		if (PlayerToggles.chestaccess.get(sender.getName()) == false) {
 			if (!otherPlayer.hasPermission("AdminDrop.alwayson.chestaccess")
 					|| otherPlayer.hasPermission("AdminDrop.ignore.star.chestaccess")) {
 				DisableChestAccess(otherPlayer);
@@ -470,7 +470,7 @@ private void ListCommand(CommandSender sender) {
 
 	private void NoThrowCommand(CommandSender sender) {
 		Player player = (Player) sender;
-		if (PlayerToggles.listedThrowAccess(sender.getName()) == false) {
+		if (PlayerToggles.throwaccess.get(sender.getName()) == false) {
 			DisableThrows(player);
 		} else {
 			EnableThrows(player);
@@ -490,7 +490,7 @@ private void ListCommand(CommandSender sender) {
 
 	private void CACommand(CommandSender sender) {
 		Player player = (Player) sender;
-		if (PlayerToggles.listedChestAccess(sender.getName()) == false) {
+		if (PlayerToggles.chestaccess.get(sender.getName()) == false) {
 			DisableChestAccess(player);
 		} else {
 			EnableChestAccess(player);
@@ -546,7 +546,7 @@ private void ListCommand(CommandSender sender) {
 
 	private void NoPickUpCommand(CommandSender sender) {
 		Player player = (Player) sender;
-		if (PlayerToggles.listedPickUpAccess(player.getName()) == false) {
+		if (PlayerToggles.pickupaccess.get(player.getName()) == false) {
 			DisablePUs(player);
 		} else {
 			EnablePUs(player);
