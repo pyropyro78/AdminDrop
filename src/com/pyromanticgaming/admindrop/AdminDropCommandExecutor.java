@@ -28,41 +28,43 @@ public class AdminDropCommandExecutor implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String label,
 			String[] args) {
 		if (cmd.getName().equalsIgnoreCase("ad") || cmd.getName().equalsIgnoreCase("admindrop")) {
-			if (sender instanceof Player) {
-				// Declared here to allow use later
-				// in the nested if statements
-				Player otherPlayer;
 
-				/*boolean canList = sender.hasPermission("AdminDrop.other.list")
+			// Declared here to allow use later
+			// in the nested if statements
+			Player otherPlayer;
+
+			/*boolean canList = sender.hasPermission("AdminDrop.other.list")
 						|| sender.isOp(); */
-				boolean canMoCA = sender.hasPermission("AdminDrop.other.chestaccess")
-						|| sender.isOp();
-				boolean canCA = sender.hasPermission("AdminDrop.self.chestaccess")
-						|| sender.isOp();
-				boolean canMoDD = sender.hasPermission("AdminDrop.other.deathdrop")
-						|| sender.isOp();
-				boolean canTa = sender.hasPermission("AdminDrop.self.throwaway")
-						|| sender.isOp();
-				boolean canS = sender.hasPermission("AdminDrop.self.status")
-						|| sender.isOp();
-				boolean canSo = sender.hasPermission("AdminDrop.other.status")
-						|| sender.isOp();
-				boolean canDD = sender.hasPermission("AdminDrop.self.deathdrop")
-						|| sender.isOp();
-				boolean canMoTA = sender.hasPermission("AdminDrop.other.throwaway")
-						|| sender.isOp();
-				boolean canMoPU = sender.hasPermission("AdminDrop.other.pickup")
-						|| sender.isOp();
-				boolean canPU = sender.hasPermission("AdminDrop.self.pickup")
-						|| sender.isOp();
+			boolean canMoCA = sender.hasPermission("AdminDrop.other.chestaccess")
+					|| sender.isOp();
+			boolean canCA = sender.hasPermission("AdminDrop.self.chestaccess")
+					|| sender.isOp();
+			boolean canMoDD = sender.hasPermission("AdminDrop.other.deathdrop")
+					|| sender.isOp();
+			boolean canTa = sender.hasPermission("AdminDrop.self.throwaway")
+					|| sender.isOp();
+			boolean canS = sender.hasPermission("AdminDrop.self.status")
+					|| sender.isOp();
+			boolean canSo = sender.hasPermission("AdminDrop.other.status")
+					|| sender.isOp();
+			boolean canDD = sender.hasPermission("AdminDrop.self.deathdrop")
+					|| sender.isOp();
+			boolean canMoTA = sender.hasPermission("AdminDrop.other.throwaway")
+					|| sender.isOp();
+			boolean canMoPU = sender.hasPermission("AdminDrop.other.pickup")
+					|| sender.isOp();
+			boolean canPU = sender.hasPermission("AdminDrop.self.pickup")
+					|| sender.isOp();
 
 
 
-				if (args.length == 1) {
-					/*	if (args[0].equalsIgnoreCase("list") && canList) {
+			if (args.length == 1) {
+				/*	if (args[0].equalsIgnoreCase("list") && canList) {
 						ListCommand(sender);
 						return true;
-					} else */if ((args[0].equalsIgnoreCase("dd") || args[0].equalsIgnoreCase("deathdrop")) && canDD) {
+					} else */
+				if (sender instanceof Player) {
+					if ((args[0].equalsIgnoreCase("dd") || args[0].equalsIgnoreCase("deathdrop")) && canDD) {
 						DDropCommand(sender);
 						return true;
 					} else if ((args[0].equalsIgnoreCase("ta") || args[0].equalsIgnoreCase("throwaway")) && canTa) {
@@ -78,68 +80,65 @@ public class AdminDropCommandExecutor implements CommandExecutor {
 							&& canS) {
 						StatusCommand(sender);
 						return true;
-					} else if (args[0].equalsIgnoreCase("help")) {
-						sender.sendMessage("AdminDrop Help Information.");
-						InfoArea(sender);
-						return true;
-					} else if ((args[0].equalsIgnoreCase("alt") ||args[0].equalsIgnoreCase("ac"))) {
-						sender.sendMessage("AdminDrop Alternate Help Information.");
-						AlternateInfoArea(sender);
-						return true;
 					}
-				} else if (args.length == 2) {
-					if (args[0].equalsIgnoreCase("status") && canSo) {
-						if (Bukkit.getPlayer(args[1]) instanceof Player) {
-							otherPlayer = Bukkit.getPlayer(args[1]);
-							StatusOtherCommand(otherPlayer, sender);
-							return true;
-						}
-						sender.sendMessage("Player not found or incorrectly spelled.");
-						return true;
-					} else if ((args[0].equalsIgnoreCase("ta") || args[0].equalsIgnoreCase("throwaway")) && canMoTA) {
-						if (Bukkit.getPlayer(args[1]) instanceof Player) {
-							otherPlayer = Bukkit.getPlayer(args[1]);
-							ModifyOtherTA(otherPlayer, sender);
-							return true;
-						}
-						sender.sendMessage("Player not found or incorrectly spelled.");
-						return true;
-					} else if ((args[0].equalsIgnoreCase("pu") || args[0].equalsIgnoreCase("pickup")) && canMoPU) {
-						if (Bukkit.getPlayer(args[1]) instanceof Player) {
-							otherPlayer = Bukkit.getPlayer(args[1]);
-							ModifyOtherPU(otherPlayer, sender);
-							return true;
-						}
-						sender.sendMessage("Player not found or incorrectly spelled.");
-						return true;
-					} else if ((args[0].equalsIgnoreCase("ca") || args[0].equalsIgnoreCase("chestaccess")) && canMoCA) {
-						if (Bukkit.getPlayer(args[1]) instanceof Player) {
-							otherPlayer = Bukkit.getPlayer(args[1]);
-							ModifyOtherCA(otherPlayer, sender);
-							return true;
-						}
-						sender.sendMessage("Player not found or incorrectly spelled.");
-						return true;
-					} else if ((args[0].equalsIgnoreCase("dd") || args[0].equalsIgnoreCase("deathdrop")) && canMoDD) {
-						if (Bukkit.getPlayer(args[1]) instanceof Player) {
-							otherPlayer = Bukkit.getPlayer(args[1]);
-							ModifyOtherDD(otherPlayer, sender);
-							return true;
-						}
-						sender.sendMessage("Player not found or incorrectly spelled.");
-						return true;
-					}
-				} else if (args.length > 2) {
-					sender.sendMessage("AdminDrop - Too many arguments!");
+				} 
+				if (args[0].equalsIgnoreCase("help")) {
+					sender.sendMessage("AdminDrop Help Information.");
 					InfoArea(sender);
 					return true;
+				} else if ((args[0].equalsIgnoreCase("alt") ||args[0].equalsIgnoreCase("ac"))) {
+					sender.sendMessage("AdminDrop Alternate Help Information.");
+					AlternateInfoArea(sender);
+					return true;
 				}
-			} else {
-				sender.sendMessage(ChatColor.ITALIC
-						+ "That is not a proper command.");
+			} else if (args.length == 2) {
+				if (args[0].equalsIgnoreCase("status") && canSo) {
+					if (Bukkit.getPlayer(args[1]) instanceof Player) {
+						otherPlayer = Bukkit.getPlayer(args[1]);
+						StatusOtherCommand(otherPlayer, sender);
+						return true;
+					}
+					sender.sendMessage("Player not found or incorrectly spelled.");
+					return true;
+				} else if ((args[0].equalsIgnoreCase("ta") || args[0].equalsIgnoreCase("throwaway")) && canMoTA) {
+					if (Bukkit.getPlayer(args[1]) instanceof Player) {
+						otherPlayer = Bukkit.getPlayer(args[1]);
+						ModifyOtherTA(otherPlayer, sender);
+						return true;
+					}
+					sender.sendMessage("Player not found or incorrectly spelled.");
+					return true;
+				} else if ((args[0].equalsIgnoreCase("pu") || args[0].equalsIgnoreCase("pickup")) && canMoPU) {
+					if (Bukkit.getPlayer(args[1]) instanceof Player) {
+						otherPlayer = Bukkit.getPlayer(args[1]);
+						ModifyOtherPU(otherPlayer, sender);
+						return true;
+					}
+					sender.sendMessage("Player not found or incorrectly spelled.");
+					return true;
+				} else if ((args[0].equalsIgnoreCase("ca") || args[0].equalsIgnoreCase("chestaccess")) && canMoCA) {
+					if (Bukkit.getPlayer(args[1]) instanceof Player) {
+						otherPlayer = Bukkit.getPlayer(args[1]);
+						ModifyOtherCA(otherPlayer, sender);
+						return true;
+					}
+					sender.sendMessage("Player not found or incorrectly spelled.");
+					return true;
+				} else if ((args[0].equalsIgnoreCase("dd") || args[0].equalsIgnoreCase("deathdrop")) && canMoDD) {
+					if (Bukkit.getPlayer(args[1]) instanceof Player) {
+						otherPlayer = Bukkit.getPlayer(args[1]);
+						ModifyOtherDD(otherPlayer, sender);
+						return true;
+					}
+					sender.sendMessage("Player not found or incorrectly spelled.");
+					return true;
+				}
+			} else if (args.length > 2) {
+				sender.sendMessage("AdminDrop - Too many arguments!");
 				InfoArea(sender);
 				return true;
 			}
+
 		}
 		return false;
 	}
@@ -380,7 +379,7 @@ private void ListCommand(CommandSender sender) {
 		if (PlayerToggles.dropaccess.get(sender.getName()) == false) {
 			if (!otherPlayer.hasPermission("AdminDrop.alwayson.deathdrops")
 					|| otherPlayer.hasPermission("AdminDrop.ignore.star.deathdrops")) {
-				DisableDDrops(otherPlayer);
+				DisableDDrops(otherPlayer, sender);
 				sender.sendMessage(ChatColor.ITALIC
 						+ otherPlayer.getDisplayName() + ChatColor.ITALIC
 						+ "'s Death Drops are safe.");
@@ -391,7 +390,7 @@ private void ListCommand(CommandSender sender) {
 					+ otherPlayer.getDisplayName()
 					+ " always has protected Death Drops.");
 		} else {
-			EnableDDrops(otherPlayer);
+			EnableDDrops(otherPlayer, sender);
 			sender.sendMessage(ChatColor.ITALIC
 					+ otherPlayer.getDisplayName() + ChatColor.ITALIC
 					+ "'s Death Drops are not safe.");
@@ -403,7 +402,7 @@ private void ListCommand(CommandSender sender) {
 		if (PlayerToggles.pickupaccess.get(sender.getName()) == false) {
 			if (!otherPlayer.hasPermission("AdminDrop.alwayson.pickup")
 					|| otherPlayer.hasPermission("AdminDrop.ignore.star.pickup")) {
-				DisablePUs(otherPlayer);
+				DisablePUs(otherPlayer, sender);
 				sender.sendMessage(ChatColor.ITALIC
 						+ otherPlayer.getDisplayName() + ChatColor.ITALIC
 						+ "'s cannot pick up items.");
@@ -414,7 +413,7 @@ private void ListCommand(CommandSender sender) {
 					+ otherPlayer.getDisplayName()
 					+ " can never pick up items.");
 		} else {
-			EnablePUs(otherPlayer);
+			EnablePUs(otherPlayer, sender);
 			sender.sendMessage(ChatColor.ITALIC
 					+ otherPlayer.getDisplayName() + ChatColor.ITALIC
 					+ "'s can pick up items.");
@@ -426,7 +425,7 @@ private void ListCommand(CommandSender sender) {
 		if (PlayerToggles.throwaccess.get(sender.getName()) == false) {
 			if (!otherPlayer.hasPermission("AdminDrop.alwayson.throwaway")
 					|| otherPlayer.hasPermission("AdminDrop.ignore.star.throwaway")) {
-				DisableThrows(otherPlayer);
+				DisableThrows(otherPlayer, sender);
 				sender.sendMessage(ChatColor.ITALIC
 						+ otherPlayer.getDisplayName() + ChatColor.ITALIC
 						+ "'s throws are safe.");
@@ -437,7 +436,7 @@ private void ListCommand(CommandSender sender) {
 					+ otherPlayer.getDisplayName()
 					+ " can never throw away items.");
 		} else {
-			EnableThrows(otherPlayer);
+			EnableThrows(otherPlayer, sender);
 			sender.sendMessage(ChatColor.ITALIC
 					+ otherPlayer.getDisplayName() + ChatColor.ITALIC
 					+ "'s throws are not safe.");
@@ -449,7 +448,7 @@ private void ListCommand(CommandSender sender) {
 		if (PlayerToggles.chestaccess.get(sender.getName()) == false) {
 			if (!otherPlayer.hasPermission("AdminDrop.alwayson.chestaccess")
 					|| otherPlayer.hasPermission("AdminDrop.ignore.star.chestaccess")) {
-				DisableChestAccess(otherPlayer);
+				DisableChestAccess(otherPlayer, sender);
 				sender.sendMessage(ChatColor.ITALIC
 						+ otherPlayer.getDisplayName() + ChatColor.ITALIC
 						+ " cannot access chests");
@@ -460,7 +459,7 @@ private void ListCommand(CommandSender sender) {
 					+ otherPlayer.getDisplayName()
 					+ " can never open chests.");
 		} else {
-			EnableChestAccess(otherPlayer);
+			EnableChestAccess(otherPlayer, sender);
 			sender.sendMessage(ChatColor.ITALIC
 					+ otherPlayer.getDisplayName() + ChatColor.ITALIC
 					+ " can open chests");
@@ -471,40 +470,48 @@ private void ListCommand(CommandSender sender) {
 	private void NoThrowCommand(CommandSender sender) {
 		Player player = (Player) sender;
 		if (PlayerToggles.throwaccess.get(sender.getName()) == false) {
-			DisableThrows(player);
+			DisableThrows(player, sender);
 		} else {
-			EnableThrows(player);
+			EnableThrows(player, sender);
 		}
 
 	}
 
-	private void DisableChestAccess(Player player) {
+	private void DisableChestAccess(Player player, CommandSender sender) {
+		if (MainConfig.announcechangetoother || player.getName() == sender.getName()) {
 		player.sendMessage(ChatColor.ITALIC + "Accessing chests has been disabled.");
+		}
 		PlayerToggles.setChestAccess(player.getName(), true);
 	}
 
-	private void EnableChestAccess(Player player) {
+	private void EnableChestAccess(Player player, CommandSender sender) {
+		if (MainConfig.announcechangetoother || player.getName() == sender.getName()) {
 		player.sendMessage(ChatColor.ITALIC + "Accessing chests has been enabled.");
+		}
 		PlayerToggles.setChestAccess(player.getName(), false);
 	}
 
 	private void CACommand(CommandSender sender) {
 		Player player = (Player) sender;
 		if (PlayerToggles.chestaccess.get(sender.getName()) == false) {
-			DisableChestAccess(player);
+			DisableChestAccess(player, sender);
 		} else {
-			EnableChestAccess(player);
+			EnableChestAccess(player, sender);
 		}
 
 	}
 
-	private void DisableThrows(Player player) {
+	private void DisableThrows(Player player, CommandSender sender) {
+		if (MainConfig.announcechangetoother || player.getName() == sender.getName()) {
 		player.sendMessage(ChatColor.ITALIC + "Throwing away your items has been disabled.");
+		}
 		PlayerToggles.setThrowAccess(player.getName(), true);
 	}
 
-	private void EnableThrows(Player player) {
+	private void EnableThrows(Player player, CommandSender sender) {
+		if (MainConfig.announcechangetoother || player.getName() == sender.getName()) {
 		player.sendMessage(ChatColor.ITALIC + "Throwing away your items has been enabled.");
+		}
 		PlayerToggles.setThrowAccess(player.getName(), false);
 	}
 
@@ -515,11 +522,11 @@ private void ListCommand(CommandSender sender) {
 		// If the players name is not in the hashmap it
 		// will stop drops on death
 		if (PlayerToggles.dropaccess.get(player.getName()) == false) {
-			DisableDDrops(player);
+			DisableDDrops(player, sender);
 		} else {
 			// Otherwise it will run this function to allow drops to take
 			// place again on death
-			EnableDDrops(player);
+			EnableDDrops(player, sender);
 		}
 	}
 
@@ -528,8 +535,10 @@ private void ListCommand(CommandSender sender) {
 	 * 
 	 * @param player
 	 */
-	private void DisableDDrops(Player player) {
+	private void DisableDDrops(Player player, CommandSender sender) {
+		if (MainConfig.announcechangetoother || player.getName() == sender.getName()) {
 		player.sendMessage(ChatColor.ITALIC + "Your Death Drops are safe.");
+		}
 		PlayerToggles.setDropAccess(player.getName(), true);
 
 	}
@@ -539,29 +548,35 @@ private void ListCommand(CommandSender sender) {
 	 * 
 	 * @param player
 	 */
-	private void EnableDDrops(Player player) {
+	private void EnableDDrops(Player player, CommandSender sender) {
+		if (MainConfig.announcechangetoother || player.getName() == sender.getName()) {
 		player.sendMessage(ChatColor.ITALIC + "Your Death Drops are not safe.");
+		}
 		PlayerToggles.setDropAccess(player.getName(), false);
 	}
 
 	private void NoPickUpCommand(CommandSender sender) {
 		Player player = (Player) sender;
 		if (PlayerToggles.pickupaccess.get(player.getName()) == false) {
-			DisablePUs(player);
+			DisablePUs(player, sender);
 		} else {
-			EnablePUs(player);
+			EnablePUs(player, sender);
 		}
 
 	}
 
-	private void DisablePUs(Player player) {
+	private void DisablePUs(Player player, CommandSender sender) {
+		if (MainConfig.announcechangetoother || player.getName() == sender.getName()) {
 		player.sendMessage(ChatColor.ITALIC + "You wont pick up items.");
+		}
 		PlayerToggles.setPickUpAccess(player.getName(), true);
 
 	}
 
-	private void EnablePUs(Player player) {
+	private void EnablePUs(Player player, CommandSender sender) {
+		if (MainConfig.announcechangetoother || player.getName() == sender.getName()) {
 		player.sendMessage(ChatColor.ITALIC + "You can now pick up items.");
+		}
 		PlayerToggles.setPickUpAccess(player.getName(), false);
 	}
 }

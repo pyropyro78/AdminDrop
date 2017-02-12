@@ -16,13 +16,18 @@ public class MainConfig {
 	}
 	
 	public static long SaveTimer = 200;
-	public static boolean enderchestitem, chestitem, pickupmessagetoggle, throwmessagetoggle, chestmessagetoggle, dropmessagetoggle;
+	public static boolean enderchestitem, announcechangetoother, brewingitem, dropperitem, hopperitem, dispenseritem, chestitem, pickupmessagetoggle, throwmessagetoggle, chestmessagetoggle, dropmessagetoggle;
 	public static String dropmessage, chestmessage, throwmessage, pickupmessage;
 	
 	public static void GetMainValues() {
 		
 		SaveTimer = plugin.getConfig().getLong("SaveTimer");
-		chestitem = plugin.getConfig().getBoolean("ChestItem");
+		chestitem = plugin.getConfig().getBoolean("Chest");
+		brewingitem = plugin.getConfig().getBoolean("BrewingStand");
+		dropperitem = plugin.getConfig().getBoolean("Dropper");
+		hopperitem = plugin.getConfig().getBoolean("Hopper");
+		dispenseritem = plugin.getConfig().getBoolean("Dispenser");
+		announcechangetoother = plugin.getConfig().getBoolean("AnnounceChangeToOther");
 		pickupmessagetoggle = plugin.getConfig().getBoolean("PickUpMessageToggle");
 		throwmessagetoggle = plugin.getConfig().getBoolean("ThrowMessageToggle");
 		chestmessagetoggle = plugin.getConfig().getBoolean("ChestMessageToggle");

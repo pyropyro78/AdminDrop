@@ -5,12 +5,14 @@ SaveTimer: 200
 #False: Allows user to open said chest even with chest access restricted.
 #Default is True.
 
-ChestItem: true
-EnderChestItem: true
+Chest: true
+EnderChest: true
 Hopper: True 
 Dropper: True 
 Dispenser: True 
 BrewingStand: True
+
+AnnounceChangeToOther: True
 
 PickUpMessage: You cannot pickup items.
 PickUpMessageToggle: false
