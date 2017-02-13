@@ -1,19 +1,23 @@
+#How often players should save to the config.
+#20 = 1 sec
 SaveTimer: 200
 
 #The following options are as follows:
 #True: When user has restricted chest access this option will stop them from opening said item.
 #False: Allows user to open said chest even with chest access restricted.
 #Default is True.
-
 Chest: true
 EnderChest: true
-Hopper: True 
-Dropper: True 
-Dispenser: True 
-BrewingStand: True
+Hopper: true 
+Dropper: true 
+Dispenser: true 
+BrewingStand: true
 
-AnnounceChangeToOther: True
+#When true other player will be notified when toggles change.
+AnnounceChangeToOther: true
 
+
+#Below are notifications for when actions are prevented from happening
 PickUpMessage: You cannot pickup items.
 PickUpMessageToggle: false
 
