@@ -8,8 +8,6 @@ package com.pyromanticgaming.admindrop;
  */
 
 
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -123,13 +121,12 @@ public final class AdminDrop extends JavaPlugin implements Listener {
 
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onPlayerDeath(PlayerDeathEvent event) {
-		Entity e = event.getEntity();
-		if (PlayerToggles.dropaccess.get(e.getName())) {
+		if (PlayerToggles.dropaccess.get(event.getEntity().getName())) {
 			event.getDrops().clear();
 			
 			if (MainConfig.dropmessagetoggle) {
 				
-				e.sendMessage(MainConfig.dropmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+				event.getEntity().sendMessage(MainConfig.dropmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 			}
 		}
 	}
@@ -150,13 +147,12 @@ public final class AdminDrop extends JavaPlugin implements Listener {
 	public void onInventoryOpenEvent(InventoryOpenEvent e){
         e.getInventory().getType();
 		if ((e.getInventory().getType() == InventoryType.CHEST && MainConfig.chestitem) || (e.getInventory().getType() == InventoryType.ENDER_CHEST && MainConfig.enderchestitem) || (e.getInventory().getType() == InventoryType.HOPPER && MainConfig.hopperitem) || (e.getInventory().getType() == InventoryType.DROPPER && MainConfig.dropperitem) || (e.getInventory().getType() == InventoryType.DISPENSER && MainConfig.dispenseritem) || (e.getInventory().getType() == InventoryType.BREWING && MainConfig.brewingitem)){
-        	HumanEntity p = e.getPlayer();
-    		if (PlayerToggles.chestaccess.get(p.getName())) {
+        	Player player = (Player) e.getPlayer();
+    		if (PlayerToggles.chestaccess.get(e.getPlayer().getName())) {
     			e.setCancelled(true);
     			
     			if (MainConfig.chestmessagetoggle) {
-    				
-    				p.sendMessage(MainConfig.chestmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+    				player.sendMessage(MainConfig.chestmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
     			}
     		}
         }
@@ -170,7 +166,7 @@ public final class AdminDrop extends JavaPlugin implements Listener {
 			
 			if (MainConfig.pickupmessagetoggle) {
 				
-				p.sendMessage(MainConfig.chestmessage);
+				p.sendMessage(MainConfig.pickupmessage);
 			}
 		}
 	}

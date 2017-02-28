@@ -1,5 +1,5 @@
 name: AdminDrop
-version: 0.5.0.0
+version: 1.0.0.1
 description: Restricts item interactions.
 author: pyropyro78
 main: com.pyromanticgaming.admindrop.AdminDrop
