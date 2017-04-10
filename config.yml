@@ -14,18 +14,64 @@ Dispenser: true
 BrewingStand: true
 
 #When true other player will be notified when toggles change.
+#The toggle defaults to: true
 AnnounceChangeToOther: true
 
-
-#Below are notifications for when actions are prevented from happening
+#What is said to a player when this action is prevented and if the message is displayed.
+#The toggle defaults to: false
 PickUpMessage: You cannot pickup items.
 PickUpMessageToggle: false
 
+#Messages sent to a player when settings are changed or checked.
+PickUpDeactivatedOtherMessage: can pick up items.
+PickUpActivatedOtherMessage: cannot pick up items.
+PickUpAlwaysActiveOtherMessage: can never pick up items.
+PickUpDeactivatedSelfMessage: You can pick up items.
+PickUpActivatedSelfMessage: You cannot pick up items.
+PickUpAlwaysActiveSelfMessage: You can never pick up items.
+
+#What is said to a player when this action is prevented and if the message is displayed.
+#The toggle defaults to: true
 ThrowMessage: You cannot throw items.
 ThrowMessageToggle: true
- 
+
+#Messages sent to a player when settings are changed or checked.
+ThrowDeactivatedOtherMessage: can throw items.
+ThrowActivatedOtherMessage: cannot throw items.
+ThrowAlwaysActiveOtherMessage: can never throw items.
+ThrowDeactivatedSelfMessage: You can throw items.
+ThrowActivatedSelfMessage: You cannot throw items.
+ThrowAlwaysActiveSelfMessage: You can never throw items.
+
+#What is said to a player when this action is prevented and if the message is displayed.
+#The toggle defaults to: true
 ChestMessage: You cannot open this.
 ChestMessageToggle: true
 
+#Messages sent to a player when settings are changed or checked.
+ChestDeactivatedOtherMessage: can access chests.
+ChestActivatedOtherMessage: cannot access chests.
+ChestAlwaysActiveOtherMessage: can never access chests.
+ChestDeactivatedSelfMessage: You can access chests.
+ChestActivatedSelfMessage: You cannot access chests.
+ChestAlwaysActiveSelfMessage: You can never access chests.
+
+#What is said to a player when this action is prevented and if the message is displayed.
+#The toggle defaults to: true
 DropMessage: Your items have vanished upon your death.
 DropMessageToggle: true
+
+#Messages sent to a player when settings are changed or checked.
+DropDeactivatedOtherMessage: can drop items at death.
+DropActivatedOtherMessage: is safe from dropping items at death.
+DropAlwaysActiveOtherMessage: can never drop items at death.
+DropDeactivatedSelfMessage: You drop items at death.
+DropActivatedSelfMessage: You are safe from dropping items at death.
+DropAlwaysActiveSelfMessage: You can never drop items at death.
+
+#What is said to a player when a player name is incorrect or not found.
+PlayerNotFoundMessage: Player not found or incorrectly spelt.
+
+#What is said to a player when checking the settings of a player/self and has no restrictions.
+NothingIsActveOtherMessage: has no restrictions at this time.
+NothingIsActveSelfMessage: You have no restrictions at this time.

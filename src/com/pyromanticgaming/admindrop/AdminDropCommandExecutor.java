@@ -111,7 +111,7 @@ public class AdminDropCommandExecutor implements CommandExecutor {
 						StatusOtherCommand(otherPlayer, sender);
 						return true;
 					}
-					sender.sendMessage("Player not found or incorrectly spelled.");
+					playerNotFound(sender);
 					return true;
 				} else if ((args[0].equalsIgnoreCase("ta") || args[0].equalsIgnoreCase("throwaway")) && canMoTA) {
 					if (Bukkit.getPlayer(args[1]) instanceof Player) {
@@ -119,7 +119,7 @@ public class AdminDropCommandExecutor implements CommandExecutor {
 						ModifyOtherTA(otherPlayer, sender);
 						return true;
 					}
-					sender.sendMessage("Player not found or incorrectly spelled.");
+					playerNotFound(sender);
 					return true;
 				} else if ((args[0].equalsIgnoreCase("pu") || args[0].equalsIgnoreCase("pickup")) && canMoPU) {
 					if (Bukkit.getPlayer(args[1]) instanceof Player) {
@@ -127,7 +127,7 @@ public class AdminDropCommandExecutor implements CommandExecutor {
 						ModifyOtherPU(otherPlayer, sender);
 						return true;
 					}
-					sender.sendMessage("Player not found or incorrectly spelled.");
+					playerNotFound(sender);
 					return true;
 				} else if ((args[0].equalsIgnoreCase("ca") || args[0].equalsIgnoreCase("chestaccess")) && canMoCA) {
 					if (Bukkit.getPlayer(args[1]) instanceof Player) {
@@ -135,7 +135,7 @@ public class AdminDropCommandExecutor implements CommandExecutor {
 						ModifyOtherCA(otherPlayer, sender);
 						return true;
 					}
-					sender.sendMessage("Player not found or incorrectly spelled.");
+					playerNotFound(sender);
 					return true;
 				} else if ((args[0].equalsIgnoreCase("dd") || args[0].equalsIgnoreCase("deathdrop")) && canMoDD) {
 					if (Bukkit.getPlayer(args[1]) instanceof Player) {
@@ -143,7 +143,7 @@ public class AdminDropCommandExecutor implements CommandExecutor {
 						ModifyOtherDD(otherPlayer, sender);
 						return true;
 					}
-					sender.sendMessage("Player not found or incorrectly spelled.");
+					playerNotFound(sender);
 					return true;
 				}
 			} else if (args.length > 2) {
@@ -167,67 +167,68 @@ public class AdminDropCommandExecutor implements CommandExecutor {
 		boolean protectme = false;
 		String message = String.format("%s%s", ChatColor.ITALIC,
 				otherPlayer.getDisplayName());
+		message = message + " ";
 		if (PlayerToggles.dropaccess.get(otherPlayer.getName()) == false
 				&& !alwaysDD) {
-			sender.sendMessage(message + "'s Death Drops are not safe.");
+			sender.sendMessage(message + MainConfig.dropdeactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 		}
 
 		if (PlayerToggles.dropaccess.get(otherPlayer.getName()) == true) {
-			sender.sendMessage(message + "'s Death Drops are safe.");
+			sender.sendMessage(message + MainConfig.dropactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 			protectme = true;
 		}
 
 		if (alwaysDD) {
-			sender.sendMessage(message + "'s Death Drops are always safe.");
+			sender.sendMessage(message + MainConfig.dropalwaysactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 			protectme = true;
 		}
 
 		if (PlayerToggles.throwaccess.get(otherPlayer.getName()) == true) {
-			sender.sendMessage(message + "'s throws are safe.");
+			sender.sendMessage(message + MainConfig.throwactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 			protectme = true;
 		}
 
 		if (PlayerToggles.throwaccess.get(otherPlayer.getName()) == false
 				&& !alwaysTA) {
-			sender.sendMessage(message + "'s throws are not safe.");
+			sender.sendMessage(message + MainConfig.throwdeactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 		}
 
 		if (alwaysTA) {
-			sender.sendMessage(message + "'s throws are always safe.");
+			sender.sendMessage(message + MainConfig.throwalwaysactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 			protectme = true;
 		}
 
 		if (PlayerToggles.chestaccess.get(otherPlayer.getName()) == true) {
-			sender.sendMessage(message + " cannot access chests.");
+			sender.sendMessage(message + MainConfig.chestactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 			protectme = true;
 		}
 
 		if (PlayerToggles.chestaccess.get(otherPlayer.getName()) == false
 				&& !alwaysCA) {
-			sender.sendMessage(message + " can access chests.");
+			sender.sendMessage(message + MainConfig.chestdeactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 		}
 
 		if (alwaysCA) {
-			sender.sendMessage(message + " cannot ever access chests.");
+			sender.sendMessage(message + MainConfig.chestalwaysactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 			protectme = true;
 		}
 
 		if (PlayerToggles.pickupaccess.get(otherPlayer.getName()) == true) {
-			sender.sendMessage(message + "'s cannot pick up items.");
+			sender.sendMessage(message + MainConfig.pickupactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 			protectme = true;
 		}
 
 		if (PlayerToggles.pickupaccess.get(otherPlayer.getName()) == false 
 				&& !alwaysPU) {
-			sender.sendMessage(message + "'s can pick up items.");
+			sender.sendMessage(message + MainConfig.pickupdeactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 		}
 
 		if (alwaysPU) {
-			sender.sendMessage(message + "'s can never pick up items.");
+			sender.sendMessage(message + MainConfig.pickupalwaysactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 			protectme = true;
 		}
 		if (!protectme) {
-			sender.sendMessage(message + "'s actions are not protected.");
+			sender.sendMessage(message + MainConfig.nothingactiveothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 		}
 
 	}
@@ -240,7 +241,6 @@ public class AdminDropCommandExecutor implements CommandExecutor {
 	private void InfoArea(CommandSender sender) {
 		sender.sendMessage("/ad deathdrop - Toggles Death Drops on/off");
 		sender.sendMessage("/ad deathdrop [player] - Toggles other's Death Drops on/off");
-		//	sender.sendMessage("/ad list - Lists users with Toggle on");
 		sender.sendMessage("/ad throwaway - Toggles throwing items");
 		sender.sendMessage("/ad throwaway [player] - Toggles other's throw away items on/off");
 		sender.sendMessage("/ad pickup - Toggles the ability to pick up items on/off");
@@ -256,7 +256,6 @@ public class AdminDropCommandExecutor implements CommandExecutor {
 	private void AlternateInfoArea(CommandSender sender) {
 		sender.sendMessage("/ad dd - Toggles Death Drops on/off");
 		sender.sendMessage("/ad dd [player] - Toggles other's Death Drops on/off");
-		//	sender.sendMessage("/ad list - Lists users with Toggle on");
 		sender.sendMessage("/ad ta - Toggles throwing items");
 		sender.sendMessage("/ad ta [player] - Toggles other's throw away items on/off");
 		sender.sendMessage("/ad pu - Toggles the ability to pick up items on/off");
@@ -278,119 +277,68 @@ public class AdminDropCommandExecutor implements CommandExecutor {
 		boolean protectme = false;
 		if (PlayerToggles.dropaccess.get(sender.getName()) == false
 				&& !alwaysDD) {
-			sender.sendMessage(ChatColor.ITALIC + "Your Death Drops are not safe.");
+			sender.sendMessage(ChatColor.ITALIC + MainConfig.dropdeactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 		}
 
 		if (PlayerToggles.dropaccess.get(sender.getName()) == true) {
-			sender.sendMessage(ChatColor.ITALIC + "Your Death Drops are safe.");
+			sender.sendMessage(ChatColor.ITALIC + MainConfig.dropactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 			protectme = true;
 		}
 
 		if (alwaysDD) {
-			sender.sendMessage(ChatColor.ITALIC + "Your Death Drops are always safe.");
+			sender.sendMessage(ChatColor.ITALIC + MainConfig.dropalwaysactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 			protectme = true;
 		}
 
 		if (PlayerToggles.throwaccess.get(sender.getName()) == true) {
-			sender.sendMessage(ChatColor.ITALIC + "You throws are safe.");
+			sender.sendMessage(ChatColor.ITALIC + MainConfig.throwactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 			protectme = true;
 		}
 
 		if (PlayerToggles.throwaccess.get(sender.getName()) == false
 				&& !alwaysTA) {
-			sender.sendMessage(ChatColor.ITALIC + "You throws are not safe.");
+			sender.sendMessage(ChatColor.ITALIC + MainConfig.throwdeactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 		}
 
 		if (alwaysTA) {
-			sender.sendMessage(ChatColor.ITALIC + "Your throws are always safe.");
+			sender.sendMessage(ChatColor.ITALIC + MainConfig.throwalwaysactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 			protectme = true;
 		}
 
 		if (PlayerToggles.chestaccess.get(sender.getName()) == true) {
-			sender.sendMessage(ChatColor.ITALIC + "You cannot access chests.");
+			sender.sendMessage(ChatColor.ITALIC + MainConfig.chestactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 			protectme = true;
 		}
 
 		if (PlayerToggles.chestaccess.get(sender.getName()) == false
 				&& !alwaysCA) {
-			sender.sendMessage(ChatColor.ITALIC + "You can access chests.");
+			sender.sendMessage(ChatColor.ITALIC + MainConfig.chestdeactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 		}
 
 		if (alwaysCA) {
-			sender.sendMessage(ChatColor.ITALIC + "You cannot ever access chests.");
+			sender.sendMessage(ChatColor.ITALIC + MainConfig.chestalwaysactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 			protectme = true;
 		}
 
 		if (PlayerToggles.pickupaccess.get(sender.getName()) == true) {
-			sender.sendMessage(ChatColor.ITALIC + "You cannot pick up items.");
+			sender.sendMessage(ChatColor.ITALIC + MainConfig.pickupactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 			protectme = true;
 		}
 
 		if (PlayerToggles.pickupaccess.get(sender.getName()) == false
 				&& !alwaysPU) {
-			sender.sendMessage(ChatColor.ITALIC + "You can pick up items.");
+			sender.sendMessage(ChatColor.ITALIC + MainConfig.pickupdeactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 		}
 
 		if (alwaysPU) {
-			sender.sendMessage(ChatColor.ITALIC + "You can never pick up items.");
+			sender.sendMessage(ChatColor.ITALIC + MainConfig.pickupalwaysactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 			protectme = true;
 		}
 		if (!protectme) {
-			sender.sendMessage(ChatColor.ITALIC + "Your actions are not protected.");
+			sender.sendMessage(ChatColor.ITALIC + MainConfig.nothingactiveselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 		}
 
 	}
-
-	/*
-private void ListCommand(CommandSender sender) {
-	for (Player onlineplayer : admindrop.getServer().getOnlinePlayers()) {
-		if (onlineplayer.hasPermission("AdminDrop.alwayson.deathdrop") && !onlineplayer.hasPermission("AdminDrop.ignore.star.deathdrop")) {
-			protectPlayerListDD.add(onlineplayer.getName());
-			dropless.addAll(protectPlayerListDD);
-		} if (onlineplayer.hasPermission("AdminDrop.alwayson.throwaway") && !onlineplayer.hasPermission("AdminDrop.ignore.star.throwaway")) {
-			protectPlayerListTA.add(onlineplayer.getName());
-			throwless.addAll(protectPlayerListTA);
-		} if (onlineplayer.hasPermission("AdminDrop.alwayson.pickup") && !onlineplayer.hasPermission("AdminDrop.ignore.star.pickup")) {
-			protectPlayerListPU.add(onlineplayer.getName());
-			pickupless.addAll(protectPlayerListPU);
-		} if (onlineplayer.hasPermission("AdminDrop.alwayson.chestaccess") && !onlineplayer.hasPermission("AdminDrop.ignore.star.chestaccess")) {
-			protectPlayerListCA.add(onlineplayer.getName());
-			pickupless.addAll(protectPlayerListCA);
-		}
-	}
-	// If the hashmap dropless is not empty it
-	// will display the players on the list
-	if (dropless.isEmpty() && throwless.isEmpty() && pickupless.isEmpty()) {
-		sender.sendMessage(ChatColor.DARK_BLUE + "Not one person is safe.");
-	} if (!dropless.isEmpty()) {
-		// hashmaps and Strings do not mix without this
-		String listdropless = dropless.toString();
-		sender.sendMessage(ChatColor.DARK_BLUE + "Have Death Drops protected:");
-		sender.sendMessage(ChatColor.DARK_BLUE + listdropless);
-		dropless.removeAll(protectPlayerListDD);
-		protectPlayerListDD.clear();
-	} if (!throwless.isEmpty()) {
-		String listthrowless = throwless.toString();
-		sender.sendMessage(ChatColor.DARK_BLUE + "Have throwing of items protected:");
-		sender.sendMessage(ChatColor.DARK_BLUE + listthrowless);
-		throwless.removeAll(protectPlayerListTA);
-		protectPlayerListTA.clear();
-	} if (!pickupless.isEmpty()) {
-		String listpickupless = pickupless.toString();
-		sender.sendMessage(ChatColor.DARK_BLUE + "Have picking up of items protected:");
-		sender.sendMessage(ChatColor.DARK_BLUE + listpickupless);
-		pickupless.removeAll(protectPlayerListPU);
-		protectPlayerListPU.clear();
-	} if (!chestaccess.isEmpty()) {
-		String listchestaccess = chestaccess.toString();
-		sender.sendMessage(ChatColor.DARK_BLUE + "Cannot access chests:");
-		sender.sendMessage(ChatColor.DARK_BLUE + listchestaccess);
-		chestaccess.removeAll(protectPlayerListCA);
-		protectPlayerListCA.clear();
-	}
-
-}
-	 */
 
 
 
@@ -407,17 +355,20 @@ private void ListCommand(CommandSender sender) {
 				DisableDDrops(otherPlayer, sender);
 				sender.sendMessage(ChatColor.ITALIC
 						+ otherPlayer.getDisplayName() + ChatColor.ITALIC
-						+ "'s Death Drops are safe.");
+						+ " "
+						+ MainConfig.dropactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 			}
 		} else if (alwaysDD) {
 			sender.sendMessage(ChatColor.ITALIC
 					+ otherPlayer.getDisplayName()
-					+ " always has protected Death Drops.");
+					+ " "
+					+ MainConfig.dropalwaysactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 		} else {
 			EnableDDrops(otherPlayer, sender);
 			sender.sendMessage(ChatColor.ITALIC
 					+ otherPlayer.getDisplayName() + ChatColor.ITALIC
-					+ "'s Death Drops are not safe.");
+					+ " "
+					+ MainConfig.dropdeactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 		}
 
 	}
@@ -429,12 +380,14 @@ private void ListCommand(CommandSender sender) {
 				DisablePUs(otherPlayer, sender);
 				sender.sendMessage(ChatColor.ITALIC
 						+ otherPlayer.getDisplayName() + ChatColor.ITALIC
-						+ "'s cannot pick up items.");
+						+ " "
+						+ MainConfig.pickupactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 			}
 		} else if (alwaysPU) {
 			sender.sendMessage(ChatColor.ITALIC
 					+ otherPlayer.getDisplayName()
-					+ " can never pick up items.");
+					+ " "
+					+ MainConfig.pickupalwaysactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 		} else {
 			EnablePUs(otherPlayer, sender);
 			sender.sendMessage(ChatColor.ITALIC
@@ -451,17 +404,20 @@ private void ListCommand(CommandSender sender) {
 				DisableThrows(otherPlayer, sender);
 				sender.sendMessage(ChatColor.ITALIC
 						+ otherPlayer.getDisplayName() + ChatColor.ITALIC
-						+ "'s throws are safe.");
+						+ " "
+						+ MainConfig.throwactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 			}
 		} else if (alwaysTA) {
 			sender.sendMessage(ChatColor.ITALIC
 					+ otherPlayer.getDisplayName()
-					+ " can never throw away items.");
+					+ " "
+					+ MainConfig.throwalwaysactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 		} else {
 			EnableThrows(otherPlayer, sender);
 			sender.sendMessage(ChatColor.ITALIC
 					+ otherPlayer.getDisplayName() + ChatColor.ITALIC
-					+ "'s throws are not safe.");
+					+ " "
+					+ MainConfig.throwdeactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 		}
 
 	}
@@ -473,17 +429,20 @@ private void ListCommand(CommandSender sender) {
 				DisableChestAccess(otherPlayer, sender);
 				sender.sendMessage(ChatColor.ITALIC
 						+ otherPlayer.getDisplayName() + ChatColor.ITALIC
-						+ " cannot access chests");
+						+ " "
+						+ MainConfig.chestactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 			}
 		} else if (alwaysCA) {
 			sender.sendMessage(ChatColor.ITALIC
 					+ otherPlayer.getDisplayName()
-					+ " can never open chests.");
+					+ " "
+					+ MainConfig.chestalwaysactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 		} else {
 			EnableChestAccess(otherPlayer, sender);
 			sender.sendMessage(ChatColor.ITALIC
 					+ otherPlayer.getDisplayName() + ChatColor.ITALIC
-					+ " can open chests");
+					+ " "
+					+ MainConfig.chestdeactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 		}
 
 	}
@@ -500,14 +459,14 @@ private void ListCommand(CommandSender sender) {
 
 	private void DisableChestAccess(Player player, CommandSender sender) {
 		if (MainConfig.announcechangetoother || player.getName() == sender.getName()) {
-		player.sendMessage(ChatColor.ITALIC + "Accessing chests has been disabled.");
+		player.sendMessage(ChatColor.ITALIC + MainConfig.chestactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 		}
 		PlayerToggles.setChestAccess(player.getName(), true);
 	}
 
 	private void EnableChestAccess(Player player, CommandSender sender) {
 		if (MainConfig.announcechangetoother || player.getName() == sender.getName()) {
-		player.sendMessage(ChatColor.ITALIC + "Accessing chests has been enabled.");
+		player.sendMessage(ChatColor.ITALIC + MainConfig.chestdeactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 		}
 		PlayerToggles.setChestAccess(player.getName(), false);
 	}
@@ -524,14 +483,14 @@ private void ListCommand(CommandSender sender) {
 
 	private void DisableThrows(Player player, CommandSender sender) {
 		if (MainConfig.announcechangetoother || player.getName() == sender.getName()) {
-		player.sendMessage(ChatColor.ITALIC + "Throwing away your items has been disabled.");
+		player.sendMessage(ChatColor.ITALIC + MainConfig.throwactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 		}
 		PlayerToggles.setThrowAccess(player.getName(), true);
 	}
 
 	private void EnableThrows(Player player, CommandSender sender) {
 		if (MainConfig.announcechangetoother || player.getName() == sender.getName()) {
-		player.sendMessage(ChatColor.ITALIC + "Throwing away your items has been enabled.");
+		player.sendMessage(ChatColor.ITALIC + MainConfig.throwdeactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 		}
 		PlayerToggles.setThrowAccess(player.getName(), false);
 	}
@@ -558,7 +517,7 @@ private void ListCommand(CommandSender sender) {
 	 */
 	private void DisableDDrops(Player player, CommandSender sender) {
 		if (MainConfig.announcechangetoother || player.getName() == sender.getName()) {
-		player.sendMessage(ChatColor.ITALIC + "Your Death Drops are safe.");
+		player.sendMessage(ChatColor.ITALIC + MainConfig.dropactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 		}
 		PlayerToggles.setDropAccess(player.getName(), true);
 
@@ -571,7 +530,7 @@ private void ListCommand(CommandSender sender) {
 	 */
 	private void EnableDDrops(Player player, CommandSender sender) {
 		if (MainConfig.announcechangetoother || player.getName() == sender.getName()) {
-		player.sendMessage(ChatColor.ITALIC + "Your Death Drops are not safe.");
+		player.sendMessage(ChatColor.ITALIC + MainConfig.dropdeactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 		}
 		PlayerToggles.setDropAccess(player.getName(), false);
 	}
@@ -588,7 +547,7 @@ private void ListCommand(CommandSender sender) {
 
 	private void DisablePUs(Player player, CommandSender sender) {
 		if (MainConfig.announcechangetoother || player.getName() == sender.getName()) {
-		player.sendMessage(ChatColor.ITALIC + "You wont pick up items.");
+		player.sendMessage(ChatColor.ITALIC + MainConfig.pickupactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 		}
 		PlayerToggles.setPickUpAccess(player.getName(), true);
 
@@ -596,8 +555,13 @@ private void ListCommand(CommandSender sender) {
 
 	private void EnablePUs(Player player, CommandSender sender) {
 		if (MainConfig.announcechangetoother || player.getName() == sender.getName()) {
-		player.sendMessage(ChatColor.ITALIC + "You can now pick up items.");
+		player.sendMessage(ChatColor.ITALIC + MainConfig.pickupdeactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 		}
 		PlayerToggles.setPickUpAccess(player.getName(), false);
 	}
+
+	private void playerNotFound(CommandSender sender) {
+		sender.sendMessage(MainConfig.playernotfoundmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+	}
+	
 }

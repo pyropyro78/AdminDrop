@@ -166,7 +166,7 @@ public final class AdminDrop extends JavaPlugin implements Listener {
 			
 			if (MainConfig.pickupmessagetoggle) {
 				
-				p.sendMessage(MainConfig.pickupmessage);
+				p.sendMessage(MainConfig.pickupmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 			}
 		}
 	}
