@@ -48,7 +48,7 @@ public class PlayerToggles {
 	}
 	
 	public static void setBlockPlace(String player, boolean toggle) {
-		blockbreak.put(player,  toggle);
+		blockplace.put(player,  toggle);
 	}
 
 

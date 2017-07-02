@@ -17,7 +17,7 @@ public class MainConfig {
 	
 	public static long SaveTimer = 200;
 	public static boolean enderchestitem, announcechangetoother, brewingitem, dropperitem, hopperitem, dispenseritem, chestitem, pickupmessagetoggle, throwmessagetoggle, chestmessagetoggle, dropmessagetoggle, blockplacemessagetoggle, blockbreakmessagetoggle;
-	public static String dropmessage, chestmessage, throwmessage, pickupmessage, nothingactiveselfmessage, pickupalwaysactivatedselfmessage, pickupdeactivatedselfmessage, pickupactivatedselfmessage, throwalwaysactivatedselfmessage, throwdeactivatedselfmessage, throwactivatedselfmessage, chestalwaysactivatedselfmessage, chestdeactivatedselfmessage, chestactivatedselfmessage, dropalwaysactivatedselfmessage, dropdeactivatedselfmessage, dropactivatedselfmessage, nothingactiveothermessage, playernotfoundmessage, pickupalwaysactivatedothermessage, throwalwaysactivatedothermessage, chestalwaysactivatedothermessage, dropalwaysactivatedothermessage, pickupactivatedothermessage, pickupdeactivatedothermessage, throwactivatedothermessage, throwdeactivatedothermessage, chestactivatedothermessage, chestdeactivatedothermessage, dropactivatedothermessage, dropdeactivatedothermessage, blockbreakactivatedothermessage, blockbreakdeactivatedothermessage, blockbreakalwaysactivatedothermessage, blockplaceactivatedothermessage, blockplacedeactivatedothermessage, blockplacealwaysactivatedothermessage, blockbreakactivatedselfmessage, blockbreakdeactivatedselfmessage, blockbreakalwaysactivatedselfmessage, blockplaceactivatedselfmessage, blockplacedeactivatedselfmessage, blockplacealwaysactivatedselfmessage, blockplacemessage, blockbreakmessage;
+	public static String dropmessage = "AdminDrop Error - MCSL20", chestmessage = "AdminDrop Error - MCSL20", throwmessage = "AdminDrop Error - MCSL20", pickupmessage = "AdminDrop Error - MCSL20", nothingactiveselfmessage = "AdminDrop Error - MCSL20", pickupalwaysactivatedselfmessage = "AdminDrop Error - MCSL20", pickupdeactivatedselfmessage = "AdminDrop Error - MCSL20", pickupactivatedselfmessage = "AdminDrop Error - MCSL20", throwalwaysactivatedselfmessage = "AdminDrop Error - MCSL20", throwdeactivatedselfmessage = "AdminDrop Error - MCSL20", throwactivatedselfmessage = "AdminDrop Error - MCSL20", chestalwaysactivatedselfmessage = "AdminDrop Error - MCSL20", chestdeactivatedselfmessage = "AdminDrop Error - MCSL20", chestactivatedselfmessage = "AdminDrop Error - MCSL20", dropalwaysactivatedselfmessage = "AdminDrop Error - MCSL20", dropdeactivatedselfmessage = "AdminDrop Error - MCSL20", dropactivatedselfmessage = "AdminDrop Error - MCSL20", nothingactiveothermessage = "AdminDrop Error - MCSL20", playernotfoundmessage = "AdminDrop Error - MCSL20", pickupalwaysactivatedothermessage = "AdminDrop Error - MCSL20", throwalwaysactivatedothermessage = "AdminDrop Error - MCSL20", chestalwaysactivatedothermessage = "AdminDrop Error - MCSL20", dropalwaysactivatedothermessage = "AdminDrop Error - MCSL20", pickupactivatedothermessage = "AdminDrop Error - MCSL20", pickupdeactivatedothermessage = "AdminDrop Error - MCSL20", throwactivatedothermessage = "AdminDrop Error - MCSL20", throwdeactivatedothermessage = "AdminDrop Error - MCSL20", chestactivatedothermessage = "AdminDrop Error - MCSL20", chestdeactivatedothermessage = "AdminDrop Error - MCSL20", dropactivatedothermessage = "AdminDrop Error - MCSL20", dropdeactivatedothermessage = "AdminDrop Error - MCSL20", blockbreakactivatedothermessage = "AdminDrop Error - MCSL20", blockbreakdeactivatedothermessage = "AdminDrop Error - MCSL20", blockbreakalwaysactivatedothermessage = "AdminDrop Error - MCSL20", blockplaceactivatedothermessage = "AdminDrop Error - MCSL20", blockplacedeactivatedothermessage = "AdminDrop Error - MCSL20", blockplacealwaysactivatedothermessage = "AdminDrop Error - MCSL20", blockbreakactivatedselfmessage = "AdminDrop Error - MCSL20", blockbreakdeactivatedselfmessage = "AdminDrop Error - MCSL20", blockbreakalwaysactivatedselfmessage = "AdminDrop Error - MCSL20", blockplaceactivatedselfmessage = "AdminDrop Error - MCSL20", blockplacedeactivatedselfmessage = "AdminDrop Error - MCSL20", blockplacealwaysactivatedselfmessage = "AdminDrop Error - MCSL20", blockplacemessage = "AdminDrop Error - MCSL20", blockbreakmessage = "AdminDrop Error - MCSL20";
 	
 	public static void GetMainValues() {
 		
@@ -36,6 +36,8 @@ public class MainConfig {
 		blockplacemessagetoggle = plugin.getConfig().getBoolean("BlockPlacMessageToggle");
 		enderchestitem = plugin.getConfig().getBoolean("EnderChest");
 		
+		
+		
 		dropmessage = plugin.getConfig().getString("DropMessage");
 		chestmessage = plugin.getConfig().getString("ChestMessage");
 		throwmessage = plugin.getConfig().getString("ThrowMessage");
@@ -44,44 +46,60 @@ public class MainConfig {
 		blockplacemessage = plugin.getConfig().getString("BlockPlaceMessage");
 		playernotfoundmessage = plugin.getConfig().getString("PlayerNotFoundMessage");
 		
+		
+		
 		dropactivatedothermessage = plugin.getConfig().getString("DropActivatedOtherMessage");
 		dropdeactivatedothermessage = plugin.getConfig().getString("DropDeactivatedOtherMessage");
 		dropalwaysactivatedothermessage = plugin.getConfig().getString("DropAlwaysActiveOtherMessage");
+		
 		chestactivatedothermessage = plugin.getConfig().getString("ChestActivatedOtherMessage");
 		chestdeactivatedothermessage = plugin.getConfig().getString("ChestDeactivatedOtherMessage");
 		chestalwaysactivatedothermessage = plugin.getConfig().getString("DropAlwaysActiveOtherMessage");
+		
 		throwactivatedothermessage = plugin.getConfig().getString("ThrowActivatedOtherMessage");
 		throwdeactivatedothermessage = plugin.getConfig().getString("ThrowDeactivatedOtherMessage");
 		throwalwaysactivatedothermessage = plugin.getConfig().getString("DropAlwaysActiveOtherMessage");
-		pickupactivatedothermessage = plugin.getConfig().getString("PickupActivatedOtherMessage");
-		pickupdeactivatedothermessage = plugin.getConfig().getString("PickupDeactivatedOtherMessage");
-		pickupalwaysactivatedothermessage = plugin.getConfig().getString("PickupAlwaysActiveOtherMessage");
+		
+		pickupactivatedothermessage = plugin.getConfig().getString("PickUpActivatedOtherMessage");
+		pickupdeactivatedothermessage = plugin.getConfig().getString("PickUpDeactivatedOtherMessage");
+		pickupalwaysactivatedothermessage = plugin.getConfig().getString("PickUpAlwaysActiveOtherMessage");
+		
 		nothingactiveothermessage = plugin.getConfig().getString("NothingIsActveOtherMessage");
+		
 		blockbreakactivatedothermessage = plugin.getConfig().getString("BlockBreakActivatedOtherMessage");
 		blockbreakdeactivatedothermessage = plugin.getConfig().getString("BlockBreakDeactivatedOtherMessage");
 		blockbreakalwaysactivatedothermessage = plugin.getConfig().getString("BlockBreakAlwaysActiveOtherMessage");
+		
 		blockplaceactivatedothermessage = plugin.getConfig().getString("BlockPlaceActivatedOtherMessage");
 		blockplacedeactivatedothermessage = plugin.getConfig().getString("BlockPlaceDeactivatedOtherMessage");
 		blockplacealwaysactivatedothermessage = plugin.getConfig().getString("BlockPlaceAlwaysActiveOtherMessage");
 		
+		
+		
 		dropactivatedselfmessage = plugin.getConfig().getString("DropActivatedSelfMessage");
 		dropdeactivatedselfmessage = plugin.getConfig().getString("DropDeactivatedSelfMessage");
 		dropalwaysactivatedselfmessage = plugin.getConfig().getString("DropAlwaysActiveSelfMessage");
+		
 		chestactivatedselfmessage = plugin.getConfig().getString("ChestActivatedSelfMessage");
 		chestdeactivatedselfmessage = plugin.getConfig().getString("ChestDeactivatedSelfMessage");
 		chestalwaysactivatedselfmessage = plugin.getConfig().getString("DropAlwaysActiveSelfMessage");
+		
 		throwactivatedselfmessage = plugin.getConfig().getString("ThrowActivatedSelfMessage");
 		throwdeactivatedselfmessage = plugin.getConfig().getString("ThrowDeactivatedSelfMessage");
 		throwalwaysactivatedselfmessage = plugin.getConfig().getString("DropAlwaysActiveSelfMessage");
-		pickupactivatedselfmessage = plugin.getConfig().getString("PickupActivatedSelfMessage");
-		pickupdeactivatedselfmessage = plugin.getConfig().getString("PickupDeactivatedSelfMessage");
-		pickupalwaysactivatedselfmessage = plugin.getConfig().getString("PickupAlwaysActiveSelfMessage");
+		
+		pickupactivatedselfmessage = plugin.getConfig().getString("PickUpActivatedSelfMessage");
+		pickupdeactivatedselfmessage = plugin.getConfig().getString("PickUpDeactivatedSelfMessage");
+		pickupalwaysactivatedselfmessage = plugin.getConfig().getString("PickUpAlwaysActiveSelfMessage");
+		
 		blockbreakactivatedselfmessage = plugin.getConfig().getString("BlockBreakActivatedSelfMessage");
 		blockbreakdeactivatedselfmessage = plugin.getConfig().getString("BlockBreakDeactivatedSelfMessage");
 		blockbreakalwaysactivatedselfmessage = plugin.getConfig().getString("BlockBreakAlwaysActiveSelfMessage");
+		
 		blockplaceactivatedselfmessage = plugin.getConfig().getString("BlockPlaceActivatedSelfMessage");
 		blockplacedeactivatedselfmessage = plugin.getConfig().getString("BlockPlaceDeactivatedSelfMessage");
 		blockplacealwaysactivatedselfmessage = plugin.getConfig().getString("BlockPlaceAlwaysActiveSelfMessage");
+		
 		nothingactiveselfmessage = plugin.getConfig().getString("NothingIsActveSelfMessage");
 	}
 

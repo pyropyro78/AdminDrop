@@ -121,6 +121,32 @@ public final class AdminDrop extends JavaPlugin implements Listener {
 			}
 
 		}
+		if (!PlayerToggles.listedBlockBreak(p)) {
+
+			if (e.getPlayer().hasPermission("AdminDrop.alwayson.blockbreak") && !e.getPlayer().hasPermission("AdminDrop.ignore.star.blockbreak")) {
+				
+				PlayerToggles.blockbreak.put(p, true);
+
+			} else {
+				
+				PlayerToggles.blockbreak.put(p, false);
+				
+			}
+
+		}
+		if (!PlayerToggles.listedBlockPlace(p)) {
+
+			if (e.getPlayer().hasPermission("AdminDrop.alwayson.blockplace") && !e.getPlayer().hasPermission("AdminDrop.ignore.star.blockplace")) {
+				
+				PlayerToggles.blockplace.put(p, true);
+
+			} else {
+				
+				PlayerToggles.blockplace.put(p, false);
+				
+			}
+
+		}
 	}
 
 	@EventHandler(priority = EventPriority.HIGHEST)

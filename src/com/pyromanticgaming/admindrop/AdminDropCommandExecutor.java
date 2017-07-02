@@ -23,7 +23,7 @@ public class AdminDropCommandExecutor implements CommandExecutor {
 
 	// DD = Death Drop, PU = PickUp, TA = ThrowAway, BP = Block Placement, BB = Block Break
 	boolean alwaysDD, alwaysPU, alwaysTA, alwaysCA, alwaysBP, alwaysBB;
-	
+
 	@Override
 	@SuppressWarnings("deprecation")
 	public boolean onCommand(CommandSender sender, Command cmd, String label,
@@ -91,14 +91,16 @@ public class AdminDropCommandExecutor implements CommandExecutor {
 					} else if ((args[0].equalsIgnoreCase("ca") || args[0].equalsIgnoreCase("chestaccess")) && canCA) {
 						CACommand(sender);
 						return true;
+					}  else if ((args[0].equalsIgnoreCase("bp") || args[0].equalsIgnoreCase("blockplace")) && canBP) {
+						BPCommand(sender);
+						return true;
+					} else if ((args[0].equalsIgnoreCase("bb") || args[0].equalsIgnoreCase("blockbreak")) && canBB) {
+						BBCommand(sender);
+						return true;
 					} else if (args[0].equalsIgnoreCase("status")
 							&& canS) {
 						StatusCommand(sender);
 						return true;
-					} else if ((args[0].equalsIgnoreCase("bp") || args[0].equalsIgnoreCase("blockplace")) && canBP) {
-						BPCommand(sender);
-					} else if ((args[0].equalsIgnoreCase("bb") || args[0].equalsIgnoreCase("blockbreak")) && canBB) {
-						BBCommand(sender);
 					}
 				} 
 				if (args[0].equalsIgnoreCase("help")) {
@@ -258,7 +260,7 @@ public class AdminDropCommandExecutor implements CommandExecutor {
 			sender.sendMessage(message + MainConfig.pickupalwaysactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 			protectme = true;
 		}
-		
+
 		if (PlayerToggles.blockbreak.get(otherPlayer.getName()) == true) {
 			sender.sendMessage(message + MainConfig.blockbreakactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 			protectme = true;
@@ -268,7 +270,7 @@ public class AdminDropCommandExecutor implements CommandExecutor {
 			sender.sendMessage(message + MainConfig.blockbreakalwaysactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 			protectme = true;
 		}
-		
+
 		if (PlayerToggles.blockplace.get(otherPlayer.getName()) == true) {
 			sender.sendMessage(message + MainConfig.blockplaceactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 			protectme = true;
@@ -393,7 +395,7 @@ public class AdminDropCommandExecutor implements CommandExecutor {
 			sender.sendMessage(ChatColor.ITALIC + MainConfig.pickupalwaysactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 			protectme = true;
 		}
-		
+
 		if (PlayerToggles.blockbreak.get(sender.getName()) == true) {
 			sender.sendMessage(ChatColor.ITALIC + MainConfig.blockbreakactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 			protectme = true;
@@ -408,7 +410,7 @@ public class AdminDropCommandExecutor implements CommandExecutor {
 			sender.sendMessage(ChatColor.ITALIC + MainConfig.blockbreakalwaysactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 			protectme = true;
 		}
-		
+
 		if (PlayerToggles.blockplace.get(sender.getName()) == true) {
 			sender.sendMessage(ChatColor.ITALIC + MainConfig.blockplaceactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 			protectme = true;
@@ -461,7 +463,7 @@ public class AdminDropCommandExecutor implements CommandExecutor {
 		}
 
 	}
-	
+
 	private void ModifyOtherBB(Player otherPlayer, CommandSender sender) {
 		if (PlayerToggles.blockbreak.get(otherPlayer.getName()) == false) {
 			if (!otherPlayer.hasPermission("AdminDrop.alwayson.block.break")
@@ -486,7 +488,7 @@ public class AdminDropCommandExecutor implements CommandExecutor {
 		}
 
 	}
-	
+
 	private void ModifyOtherBP(Player otherPlayer, CommandSender sender) {
 		if (PlayerToggles.blockplace.get(otherPlayer.getName()) == false) {
 			if (!otherPlayer.hasPermission("AdminDrop.alwayson.block.palce")
@@ -598,14 +600,14 @@ public class AdminDropCommandExecutor implements CommandExecutor {
 
 	private void DisableChestAccess(Player player, CommandSender sender) {
 		if (MainConfig.announcechangetoother || player.getName() == sender.getName()) {
-		player.sendMessage(ChatColor.ITALIC + MainConfig.chestactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+			player.sendMessage(ChatColor.ITALIC + MainConfig.chestactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 		}
 		PlayerToggles.setChestAccess(player.getName(), true);
 	}
 
 	private void EnableChestAccess(Player player, CommandSender sender) {
 		if (MainConfig.announcechangetoother || player.getName() == sender.getName()) {
-		player.sendMessage(ChatColor.ITALIC + MainConfig.chestdeactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+			player.sendMessage(ChatColor.ITALIC + MainConfig.chestdeactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 		}
 		PlayerToggles.setChestAccess(player.getName(), false);
 	}
@@ -622,14 +624,14 @@ public class AdminDropCommandExecutor implements CommandExecutor {
 
 	private void DisableThrows(Player player, CommandSender sender) {
 		if (MainConfig.announcechangetoother || player.getName() == sender.getName()) {
-		player.sendMessage(ChatColor.ITALIC + MainConfig.throwactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+			player.sendMessage(ChatColor.ITALIC + MainConfig.throwactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 		}
 		PlayerToggles.setThrowAccess(player.getName(), true);
 	}
 
 	private void EnableThrows(Player player, CommandSender sender) {
 		if (MainConfig.announcechangetoother || player.getName() == sender.getName()) {
-		player.sendMessage(ChatColor.ITALIC + MainConfig.throwdeactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+			player.sendMessage(ChatColor.ITALIC + MainConfig.throwdeactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 		}
 		PlayerToggles.setThrowAccess(player.getName(), false);
 	}
@@ -648,17 +650,17 @@ public class AdminDropCommandExecutor implements CommandExecutor {
 			EnableDDrops(player, sender);
 		}
 	}
-	
+
 	private void DisableBP(Player player, CommandSender sender) {
 		if (MainConfig.announcechangetoother || player.getName() == sender.getName()) {
-		player.sendMessage(ChatColor.ITALIC + MainConfig.blockplaceactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+			player.sendMessage(ChatColor.ITALIC + MainConfig.blockplaceactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 		}
 		PlayerToggles.setBlockPlace(player.getName(), true);
 	}
 
 	private void EnableBP(Player player, CommandSender sender) {
 		if (MainConfig.announcechangetoother || player.getName() == sender.getName()) {
-		player.sendMessage(ChatColor.ITALIC + MainConfig.blockplacedeactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+			player.sendMessage(ChatColor.ITALIC + MainConfig.blockplacedeactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 		}
 		PlayerToggles.setBlockPlace(player.getName(), false);
 	}
@@ -677,17 +679,17 @@ public class AdminDropCommandExecutor implements CommandExecutor {
 			EnableBP(player, sender);
 		}
 	}
-	
+
 	private void DisableBB(Player player, CommandSender sender) {
 		if (MainConfig.announcechangetoother || player.getName() == sender.getName()) {
-		player.sendMessage(ChatColor.ITALIC + MainConfig.blockbreakactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+			player.sendMessage(ChatColor.ITALIC + MainConfig.blockbreakactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 		}
 		PlayerToggles.setBlockBreak(player.getName(), true);
 	}
 
 	private void EnableBB(Player player, CommandSender sender) {
 		if (MainConfig.announcechangetoother || player.getName() == sender.getName()) {
-		player.sendMessage(ChatColor.ITALIC + MainConfig.blockbreakdeactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+			player.sendMessage(ChatColor.ITALIC + MainConfig.blockbreakdeactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 		}
 		PlayerToggles.setBlockBreak(player.getName(), false);
 	}
@@ -714,7 +716,7 @@ public class AdminDropCommandExecutor implements CommandExecutor {
 	 */
 	private void DisableDDrops(Player player, CommandSender sender) {
 		if (MainConfig.announcechangetoother || player.getName() == sender.getName()) {
-		player.sendMessage(ChatColor.ITALIC + MainConfig.dropactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+			player.sendMessage(ChatColor.ITALIC + MainConfig.dropactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 		}
 		PlayerToggles.setDropAccess(player.getName(), true);
 
@@ -727,7 +729,7 @@ public class AdminDropCommandExecutor implements CommandExecutor {
 	 */
 	private void EnableDDrops(Player player, CommandSender sender) {
 		if (MainConfig.announcechangetoother || player.getName() == sender.getName()) {
-		player.sendMessage(ChatColor.ITALIC + MainConfig.dropdeactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+			player.sendMessage(ChatColor.ITALIC + MainConfig.dropdeactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 		}
 		PlayerToggles.setDropAccess(player.getName(), false);
 	}
@@ -744,7 +746,7 @@ public class AdminDropCommandExecutor implements CommandExecutor {
 
 	private void DisablePUs(Player player, CommandSender sender) {
 		if (MainConfig.announcechangetoother || player.getName() == sender.getName()) {
-		player.sendMessage(ChatColor.ITALIC + MainConfig.pickupactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+			player.sendMessage(ChatColor.ITALIC + MainConfig.pickupactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 		}
 		PlayerToggles.setPickUpAccess(player.getName(), true);
 
@@ -752,7 +754,7 @@ public class AdminDropCommandExecutor implements CommandExecutor {
 
 	private void EnablePUs(Player player, CommandSender sender) {
 		if (MainConfig.announcechangetoother || player.getName() == sender.getName()) {
-		player.sendMessage(ChatColor.ITALIC + MainConfig.pickupdeactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+			player.sendMessage(ChatColor.ITALIC + MainConfig.pickupdeactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 		}
 		PlayerToggles.setPickUpAccess(player.getName(), false);
 	}
@@ -760,5 +762,5 @@ public class AdminDropCommandExecutor implements CommandExecutor {
 	private void playerNotFound(CommandSender sender) {
 		sender.sendMessage(MainConfig.playernotfoundmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 	}
-	
+
 }

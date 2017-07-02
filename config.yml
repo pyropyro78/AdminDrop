@@ -71,29 +71,29 @@ DropAlwaysActiveSelfMessage: You can never drop items at death.
 
 #What is said to a player when this action is prevented and if the message is displayed.
 #The toggle defaults to: false
-BloclBreakMessage: You cannot pickup items.
-BloclBreakMessageToggle: false
+BlockBreakMessage: You cannot pickup items.
+BlockBreakMessageToggle: false
 
 #Messages sent to a player when settings are changed or checked.
-BloclBreakDeactivatedOtherMessage: can break blocks.
-BloclBreakActivatedOtherMessage: cannot break blocks.
-BloclBreakAlwaysActiveOtherMessage: can never break blocks.
-BloclBreakDeactivatedSelfMessage: You can break blocks.
-BloclBreakActivatedSelfMessage: You cannot break blocks.
-BloclBreakAlwaysActiveSelfMessage: You can never break blocks.
+BlockBreakDeactivatedOtherMessage: can break blocks.
+BlockBreakActivatedOtherMessage: cannot break blocks.
+BlockBreakAlwaysActiveOtherMessage: can never break blocks.
+BlockBreakDeactivatedSelfMessage: You can break blocks.
+BlockBreakActivatedSelfMessage: You cannot break blocks.
+BlockBreakAlwaysActiveSelfMessage: You can never break blocks.
 
 #What is said to a player when this action is prevented and if the message is displayed.
 #The toggle defaults to: false
-BloclPlaceMessage: You cannot pickup items.
-BloclPlaceMessageToggle: false
+BlockPlaceMessage: You cannot pickup items.
+BlockPlaceMessageToggle: false
 
 #Messages sent to a player when settings are changed or checked.
-BloclPlaceDeactivatedOtherMessage: can place blocks.
-BloclPlaceActivatedOtherMessage: cannot place blocks.
-BloclPlaceAlwaysActiveOtherMessage: can never place blocks.
-BloclPlaceDeactivatedSelfMessage: You can place blocks.
-BloclPlaceActivatedSelfMessage: You cannot place blocks.
-BloclPlaceAlwaysActiveSelfMessage: You can never place blocks.
+BlockPlaceDeactivatedOtherMessage: can place blocks.
+BlockPlaceActivatedOtherMessage: cannot place blocks.
+BlockPlaceAlwaysActiveOtherMessage: can never place blocks.
+BlockPlaceDeactivatedSelfMessage: You can place blocks.
+BlockPlaceActivatedSelfMessage: You cannot place blocks.
+BlockPlaceAlwaysActiveSelfMessage: You can never place blocks.
 
 #What is said to a player when a player name is incorrect or not found.
 PlayerNotFoundMessage: Player not found or incorrectly spelled.
