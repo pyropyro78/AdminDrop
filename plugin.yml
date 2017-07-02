@@ -1,5 +1,5 @@
 name: AdminDrop
-version: 2.0.0.0
+version: 3.0.0.0
 description: Restricts item interactions.
 author: pyropyro78
 main: com.pyromanticgaming.admindrop.AdminDrop
@@ -15,6 +15,10 @@ commands:
         /ad pickup [player] - Toggles other's ability to pick up items on/off
         /ad chestaccess - Toggles the ability to open chests on/off
         /ad chestaccess [player] - Toggles other's ability to open chests on/off
+        /ad blockbreak - Toggles the restriction to break blocks on/off
+        /ad blockbreak [player] - Toggles other's restriction to break blocks on/off
+        /ad blockplace - Toggles the restriction to place blocks on/off
+        /ad blockplace [player] - Toggles other's restriction to place blocks on/off
         /ad status - Gets current status
         /ad status [player] - Gets players current status
         /ad help - Displays commands
