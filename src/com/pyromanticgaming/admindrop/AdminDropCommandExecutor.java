@@ -448,12 +448,14 @@ public class AdminDropCommandExecutor implements CommandExecutor {
 						+ otherPlayer.getDisplayName() + ChatColor.ITALIC
 						+ " "
 						+ MainConfig.dropactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+				return;
 			}
 		} else if (alwaysDD) {
 			sender.sendMessage(ChatColor.ITALIC
 					+ otherPlayer.getDisplayName()
 					+ " "
 					+ MainConfig.dropalwaysactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+			return;
 		} else {
 			EnableDDrops(otherPlayer, sender);
 			sender.sendMessage(ChatColor.ITALIC
@@ -473,18 +475,20 @@ public class AdminDropCommandExecutor implements CommandExecutor {
 						+ otherPlayer.getDisplayName() + ChatColor.ITALIC
 						+ " "
 						+ MainConfig.blockbreakactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+				return;
 			}
 		} else if (alwaysBB) {
 			sender.sendMessage(ChatColor.ITALIC
 					+ otherPlayer.getDisplayName()
 					+ " "
 					+ MainConfig.blockbreakalwaysactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+			return;
 		} else {
-			EnableDDrops(otherPlayer, sender);
+			EnableBB(otherPlayer, sender);
 			sender.sendMessage(ChatColor.ITALIC
 					+ otherPlayer.getDisplayName() + ChatColor.ITALIC
 					+ " "
-					+ MainConfig.blockbreakactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+					+ MainConfig.blockbreakdeactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 		}
 
 	}
@@ -498,18 +502,20 @@ public class AdminDropCommandExecutor implements CommandExecutor {
 						+ otherPlayer.getDisplayName() + ChatColor.ITALIC
 						+ " "
 						+ MainConfig.blockplaceactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+				return;
 			}
-		} else if (alwaysBB) {
+		} else if (alwaysBP) {
 			sender.sendMessage(ChatColor.ITALIC
 					+ otherPlayer.getDisplayName()
 					+ " "
 					+ MainConfig.blockplacealwaysactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+			return;
 		} else {
-			EnableDDrops(otherPlayer, sender);
+			EnableBP(otherPlayer, sender);
 			sender.sendMessage(ChatColor.ITALIC
 					+ otherPlayer.getDisplayName() + ChatColor.ITALIC
 					+ " "
-					+ MainConfig.blockplaceactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+					+ MainConfig.blockplacedeactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 		}
 
 	}
@@ -523,17 +529,20 @@ public class AdminDropCommandExecutor implements CommandExecutor {
 						+ otherPlayer.getDisplayName() + ChatColor.ITALIC
 						+ " "
 						+ MainConfig.pickupactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+				return;
 			}
 		} else if (alwaysPU) {
 			sender.sendMessage(ChatColor.ITALIC
 					+ otherPlayer.getDisplayName()
 					+ " "
 					+ MainConfig.pickupalwaysactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+			return;
 		} else {
 			EnablePUs(otherPlayer, sender);
 			sender.sendMessage(ChatColor.ITALIC
 					+ otherPlayer.getDisplayName() + ChatColor.ITALIC
-					+ "'s can pick up items.");
+					+ " "
+					+ MainConfig.pickupdeactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 		}
 
 	}
@@ -547,12 +556,14 @@ public class AdminDropCommandExecutor implements CommandExecutor {
 						+ otherPlayer.getDisplayName() + ChatColor.ITALIC
 						+ " "
 						+ MainConfig.throwactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+				return;
 			}
 		} else if (alwaysTA) {
 			sender.sendMessage(ChatColor.ITALIC
 					+ otherPlayer.getDisplayName()
 					+ " "
 					+ MainConfig.throwalwaysactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+			return;
 		} else {
 			EnableThrows(otherPlayer, sender);
 			sender.sendMessage(ChatColor.ITALIC
@@ -572,12 +583,14 @@ public class AdminDropCommandExecutor implements CommandExecutor {
 						+ otherPlayer.getDisplayName() + ChatColor.ITALIC
 						+ " "
 						+ MainConfig.chestactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+				return;
 			}
 		} else if (alwaysCA) {
 			sender.sendMessage(ChatColor.ITALIC
 					+ otherPlayer.getDisplayName()
 					+ " "
 					+ MainConfig.chestalwaysactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+			return;
 		} else {
 			EnableChestAccess(otherPlayer, sender);
 			sender.sendMessage(ChatColor.ITALIC
