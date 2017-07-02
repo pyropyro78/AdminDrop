@@ -12,6 +12,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.inventory.InventoryType;
@@ -30,12 +32,14 @@ public final class AdminDrop extends JavaPlugin implements Listener {
 	@Override
 	public void onEnable() {
 		
+		//Save Default Configs
 		this.saveDefaultConfig();
 		new MainConfig(this);
-		MainConfig.GetMainValues();
+		MainConfig.GetMainValues(); //Get base values from config
 		new PlayerToggles(this);
-		PlayerTogglesConfig.loadtoggles();
+		PlayerTogglesConfig.loadtoggles(); //Load player settings
 		
+		//Save player settings at set ticks from main config
 		BukkitScheduler scheduler = getServer().getScheduler();
 		scheduler.scheduleSyncRepeatingTask(this, new Runnable() {
 			@Override
@@ -167,6 +171,32 @@ public final class AdminDrop extends JavaPlugin implements Listener {
 			if (MainConfig.pickupmessagetoggle) {
 				
 				p.sendMessage(MainConfig.pickupmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+			}
+		}
+	}
+	
+	@EventHandler
+	public void onBlockBreak(BlockBreakEvent e) {
+		Player p = e.getPlayer();
+		if (PlayerToggles.blockbreak.get(p.getName())) {
+			e.setCancelled(true);
+			
+			if (MainConfig.blockbreakmessagetoggle) {
+				
+				p.sendMessage(MainConfig.blockbreakmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+			}
+		}
+	}
+
+	@EventHandler
+	public void onBlockPlace(BlockPlaceEvent e) {
+		Player p = e.getPlayer();
+		if (PlayerToggles.blockplace.get(p.getName())) {
+			e.setCancelled(true);
+			
+			if (MainConfig.blockplacemessagetoggle) {
+				
+				p.sendMessage(MainConfig.blockplacemessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 			}
 		}
 	}

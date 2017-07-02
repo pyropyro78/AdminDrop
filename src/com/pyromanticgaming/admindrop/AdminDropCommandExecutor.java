@@ -18,15 +18,14 @@ public class AdminDropCommandExecutor implements CommandExecutor {
 
 
 
-	private AdminDrop admindrop;
-
 	public AdminDropCommandExecutor(AdminDrop admindrop) {
-		this.admindrop = admindrop;
 	}
 
-	boolean alwaysDD, alwaysPU, alwaysTA, alwaysCA;
+	// DD = Death Drop, PU = PickUp, TA = ThrowAway, BP = Block Placement, BB = Block Break
+	boolean alwaysDD, alwaysPU, alwaysTA, alwaysCA, alwaysBP, alwaysBB;
 	
 	@Override
+	@SuppressWarnings("deprecation")
 	public boolean onCommand(CommandSender sender, Command cmd, String label,
 			String[] args) {
 		if (cmd.getName().equalsIgnoreCase("ad") || cmd.getName().equalsIgnoreCase("admindrop")) {
@@ -57,10 +56,20 @@ public class AdminDropCommandExecutor implements CommandExecutor {
 					|| sender.isOp();
 			boolean canPU = sender.hasPermission("AdminDrop.self.pickup")
 					|| sender.isOp();
+			boolean canBP = sender.hasPermission("AdminDrop.self.block.place")
+					|| sender.isOp();
+			boolean canBB = sender.hasPermission("AdminDrop.self.block.break")
+					|| sender.isOp();
+			boolean canMoBP = sender.hasPermission("AdminDrop.other.block.place")
+					|| sender.isOp();
+			boolean canMoBB = sender.hasPermission("AdminDrop.other.block.break")
+					|| sender.isOp();
 			alwaysDD = (sender.hasPermission("AdminDrop.alwayson.deathdrop") && !sender.hasPermission("AdminDrop.ignore.star.deathdrop"));
 			alwaysCA = (sender.hasPermission("AdminDrop.alwayson.chestaccess") && !sender.hasPermission("AdminDrop.ignore.star.chestaccess"));
 			alwaysTA = (sender.hasPermission("AdminDrop.alwayson.throwaway") && !sender.hasPermission("AdminDrop.ignore.star.throwaway"));
 			alwaysPU = (sender.hasPermission("AdminDrop.alwayson.pickup") && !sender.hasPermission("AdminDrop.ignore.star.pickup"));
+			alwaysBP = (sender.hasPermission("AdminDrop.alwayson.block.place") && !sender.hasPermission("AdminDrop.ignore.star.block.place"));
+			alwaysBB = (sender.hasPermission("AdminDrop.alwayson.block.break") && !sender.hasPermission("AdminDrop.ignore.star.block.break"));
 
 
 
@@ -86,6 +95,10 @@ public class AdminDropCommandExecutor implements CommandExecutor {
 							&& canS) {
 						StatusCommand(sender);
 						return true;
+					} else if ((args[0].equalsIgnoreCase("bp") || args[0].equalsIgnoreCase("blockplace")) && canBP) {
+						BPCommand(sender);
+					} else if ((args[0].equalsIgnoreCase("bb") || args[0].equalsIgnoreCase("blockbreak")) && canBB) {
+						BBCommand(sender);
 					}
 				} 
 				if (args[0].equalsIgnoreCase("help")) {
@@ -104,6 +117,8 @@ public class AdminDropCommandExecutor implements CommandExecutor {
 					alwaysCA = (otherPlayer.hasPermission("AdminDrop.alwayson.chestaccess") && !otherPlayer.hasPermission("AdminDrop.ignore.star.chestaccess"));
 					alwaysTA = (otherPlayer.hasPermission("AdminDrop.alwayson.throwaway") && !otherPlayer.hasPermission("AdminDrop.ignore.star.throwaway"));
 					alwaysPU = (otherPlayer.hasPermission("AdminDrop.alwayson.pickup") && !otherPlayer.hasPermission("AdminDrop.ignore.star.pickup"));
+					alwaysBP = (otherPlayer.hasPermission("AdminDrop.alwayson.block.place") && !sender.hasPermission("AdminDrop.ignore.star.block.place"));
+					alwaysBB = (otherPlayer.hasPermission("AdminDrop.alwayson.block.break") && !sender.hasPermission("AdminDrop.ignore.star.block.break"));
 				}
 				if (args[0].equalsIgnoreCase("status") && canSo) {
 					if (Bukkit.getPlayer(args[1]) instanceof Player) {
@@ -141,6 +156,22 @@ public class AdminDropCommandExecutor implements CommandExecutor {
 					if (Bukkit.getPlayer(args[1]) instanceof Player) {
 						otherPlayer = Bukkit.getPlayer(args[1]);
 						ModifyOtherDD(otherPlayer, sender);
+						return true;
+					}
+					playerNotFound(sender);
+					return true;
+				} else if ((args[0].equalsIgnoreCase("bb") || args[0].equalsIgnoreCase("blockbreak")) && canMoBB) {
+					if (Bukkit.getPlayer(args[1]) instanceof Player) {
+						otherPlayer = Bukkit.getPlayer(args[1]);
+						ModifyOtherBB(otherPlayer, sender);
+						return true;
+					}
+					playerNotFound(sender);
+					return true;
+				} else if ((args[0].equalsIgnoreCase("bp") || args[0].equalsIgnoreCase("blockplace")) && canMoBP) {
+					if (Bukkit.getPlayer(args[1]) instanceof Player) {
+						otherPlayer = Bukkit.getPlayer(args[1]);
+						ModifyOtherBP(otherPlayer, sender);
 						return true;
 					}
 					playerNotFound(sender);
@@ -227,6 +258,26 @@ public class AdminDropCommandExecutor implements CommandExecutor {
 			sender.sendMessage(message + MainConfig.pickupalwaysactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 			protectme = true;
 		}
+		
+		if (PlayerToggles.blockbreak.get(otherPlayer.getName()) == true) {
+			sender.sendMessage(message + MainConfig.blockbreakactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+			protectme = true;
+		}
+
+		if (alwaysDD) {
+			sender.sendMessage(message + MainConfig.blockbreakalwaysactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+			protectme = true;
+		}
+		
+		if (PlayerToggles.blockplace.get(otherPlayer.getName()) == true) {
+			sender.sendMessage(message + MainConfig.blockplaceactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+			protectme = true;
+		}
+
+		if (alwaysDD) {
+			sender.sendMessage(message + MainConfig.blockplacealwaysactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+			protectme = true;
+		}
 		if (!protectme) {
 			sender.sendMessage(message + MainConfig.nothingactiveothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 		}
@@ -247,6 +298,10 @@ public class AdminDropCommandExecutor implements CommandExecutor {
 		sender.sendMessage("/ad pickup [player] - Toggles other's ability to pick up items on/off");
 		sender.sendMessage("/ad chestaccess - Toggles the ability to open chests on/off");
 		sender.sendMessage("/ad chestaccess [player] - Toggles other's ability to open chests on/off");
+		sender.sendMessage("/ad blockbreak - Toggles the restriction to break blocks on/off");
+		sender.sendMessage("/ad blockbreak [player] - Toggles other's restriction to break blocks on/off");
+		sender.sendMessage("/ad blockplace - Toggles the restriction to place blocks on/off");
+		sender.sendMessage("/ad blockplace [player] - Toggles other's restriction to place blocks on/off");
 		sender.sendMessage("/ad status - Gets current status");
 		sender.sendMessage("/ad help - Displays commands");
 		sender.sendMessage("/ad status [player] - Gets players current status");
@@ -262,6 +317,10 @@ public class AdminDropCommandExecutor implements CommandExecutor {
 		sender.sendMessage("/ad pu [player] - Toggles other's ability to pick up items on/off");
 		sender.sendMessage("/ad ca - Toggles the ability to open chests on/off");
 		sender.sendMessage("/ad ca [player] - Toggles other's ability to open chests on/off");
+		sender.sendMessage("/ad bb - Toggles the restriction to break blocks on/off");
+		sender.sendMessage("/ad bb [player] - Toggles other's restriction to break blocks on/off");
+		sender.sendMessage("/ad bp - Toggles the restriction to place blocks on/off");
+		sender.sendMessage("/ad bp [player] - Toggles other's restriction to place blocks on/off");
 		sender.sendMessage("/ad status - Gets current status");
 		sender.sendMessage("/ad help - Displays commands");
 		sender.sendMessage("/ad status [player] - Gets players current status");
@@ -334,6 +393,36 @@ public class AdminDropCommandExecutor implements CommandExecutor {
 			sender.sendMessage(ChatColor.ITALIC + MainConfig.pickupalwaysactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 			protectme = true;
 		}
+		
+		if (PlayerToggles.blockbreak.get(sender.getName()) == true) {
+			sender.sendMessage(ChatColor.ITALIC + MainConfig.blockbreakactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+			protectme = true;
+		}
+
+		if (PlayerToggles.blockbreak.get(sender.getName()) == false
+				&& !alwaysBB) {
+			sender.sendMessage(ChatColor.ITALIC + MainConfig.blockbreakdeactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+		}
+
+		if (alwaysBB) {
+			sender.sendMessage(ChatColor.ITALIC + MainConfig.blockbreakalwaysactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+			protectme = true;
+		}
+		
+		if (PlayerToggles.blockplace.get(sender.getName()) == true) {
+			sender.sendMessage(ChatColor.ITALIC + MainConfig.blockplaceactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+			protectme = true;
+		}
+
+		if (PlayerToggles.blockbreak.get(sender.getName()) == false
+				&& !alwaysBP) {
+			sender.sendMessage(ChatColor.ITALIC + MainConfig.blockplacedeactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+		}
+
+		if (alwaysBP) {
+			sender.sendMessage(ChatColor.ITALIC + MainConfig.blockplacealwaysactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+			protectme = true;
+		}
 		if (!protectme) {
 			sender.sendMessage(ChatColor.ITALIC + MainConfig.nothingactiveselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 		}
@@ -369,6 +458,56 @@ public class AdminDropCommandExecutor implements CommandExecutor {
 					+ otherPlayer.getDisplayName() + ChatColor.ITALIC
 					+ " "
 					+ MainConfig.dropdeactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+		}
+
+	}
+	
+	private void ModifyOtherBB(Player otherPlayer, CommandSender sender) {
+		if (PlayerToggles.blockbreak.get(otherPlayer.getName()) == false) {
+			if (!otherPlayer.hasPermission("AdminDrop.alwayson.block.break")
+					|| otherPlayer.hasPermission("AdminDrop.ignore.star.block.break")) {
+				DisableBB(otherPlayer, sender);
+				sender.sendMessage(ChatColor.ITALIC
+						+ otherPlayer.getDisplayName() + ChatColor.ITALIC
+						+ " "
+						+ MainConfig.blockbreakactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+			}
+		} else if (alwaysBB) {
+			sender.sendMessage(ChatColor.ITALIC
+					+ otherPlayer.getDisplayName()
+					+ " "
+					+ MainConfig.blockbreakalwaysactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+		} else {
+			EnableDDrops(otherPlayer, sender);
+			sender.sendMessage(ChatColor.ITALIC
+					+ otherPlayer.getDisplayName() + ChatColor.ITALIC
+					+ " "
+					+ MainConfig.blockbreakactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+		}
+
+	}
+	
+	private void ModifyOtherBP(Player otherPlayer, CommandSender sender) {
+		if (PlayerToggles.blockplace.get(otherPlayer.getName()) == false) {
+			if (!otherPlayer.hasPermission("AdminDrop.alwayson.block.palce")
+					|| otherPlayer.hasPermission("AdminDrop.ignore.star.block.place")) {
+				DisableBP(otherPlayer, sender);
+				sender.sendMessage(ChatColor.ITALIC
+						+ otherPlayer.getDisplayName() + ChatColor.ITALIC
+						+ " "
+						+ MainConfig.blockplaceactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+			}
+		} else if (alwaysBB) {
+			sender.sendMessage(ChatColor.ITALIC
+					+ otherPlayer.getDisplayName()
+					+ " "
+					+ MainConfig.blockplacealwaysactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+		} else {
+			EnableDDrops(otherPlayer, sender);
+			sender.sendMessage(ChatColor.ITALIC
+					+ otherPlayer.getDisplayName() + ChatColor.ITALIC
+					+ " "
+					+ MainConfig.blockplaceactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 		}
 
 	}
@@ -507,6 +646,64 @@ public class AdminDropCommandExecutor implements CommandExecutor {
 			// Otherwise it will run this function to allow drops to take
 			// place again on death
 			EnableDDrops(player, sender);
+		}
+	}
+	
+	private void DisableBP(Player player, CommandSender sender) {
+		if (MainConfig.announcechangetoother || player.getName() == sender.getName()) {
+		player.sendMessage(ChatColor.ITALIC + MainConfig.blockplaceactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+		}
+		PlayerToggles.setBlockPlace(player.getName(), true);
+	}
+
+	private void EnableBP(Player player, CommandSender sender) {
+		if (MainConfig.announcechangetoother || player.getName() == sender.getName()) {
+		player.sendMessage(ChatColor.ITALIC + MainConfig.blockplacedeactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+		}
+		PlayerToggles.setBlockPlace(player.getName(), false);
+	}
+
+	private void BPCommand(CommandSender sender) {
+		// Reason for the conversion here is to use Player in a later function
+		// instead of CommandSender
+		Player player = (Player) sender;
+		// If the players name is not in the hashmap it
+		// will stop drops on death
+		if (PlayerToggles.blockplace.get(player.getName()) == false) {
+			DisableBP(player, sender);
+		} else {
+			// Otherwise it will run this function to allow drops to take
+			// place again on death
+			EnableBP(player, sender);
+		}
+	}
+	
+	private void DisableBB(Player player, CommandSender sender) {
+		if (MainConfig.announcechangetoother || player.getName() == sender.getName()) {
+		player.sendMessage(ChatColor.ITALIC + MainConfig.blockbreakactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+		}
+		PlayerToggles.setBlockBreak(player.getName(), true);
+	}
+
+	private void EnableBB(Player player, CommandSender sender) {
+		if (MainConfig.announcechangetoother || player.getName() == sender.getName()) {
+		player.sendMessage(ChatColor.ITALIC + MainConfig.blockbreakdeactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+		}
+		PlayerToggles.setBlockBreak(player.getName(), false);
+	}
+
+	private void BBCommand(CommandSender sender) {
+		// Reason for the conversion here is to use Player in a later function
+		// instead of CommandSender
+		Player player = (Player) sender;
+		// If the players name is not in the hashmap it
+		// will stop drops on death
+		if (PlayerToggles.blockbreak.get(player.getName()) == false) {
+			DisableBB(player, sender);
+		} else {
+			// Otherwise it will run this function to allow drops to take
+			// place again on death
+			EnableBB(player, sender);
 		}
 	}
 

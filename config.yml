@@ -69,8 +69,34 @@ DropDeactivatedSelfMessage: You drop items at death.
 DropActivatedSelfMessage: You are safe from dropping items at death.
 DropAlwaysActiveSelfMessage: You can never drop items at death.
 
+#What is said to a player when this action is prevented and if the message is displayed.
+#The toggle defaults to: false
+BloclBreakMessage: You cannot pickup items.
+BloclBreakMessageToggle: false
+
+#Messages sent to a player when settings are changed or checked.
+BloclBreakDeactivatedOtherMessage: can break blocks.
+BloclBreakActivatedOtherMessage: cannot break blocks.
+BloclBreakAlwaysActiveOtherMessage: can never break blocks.
+BloclBreakDeactivatedSelfMessage: You can break blocks.
+BloclBreakActivatedSelfMessage: You cannot break blocks.
+BloclBreakAlwaysActiveSelfMessage: You can never break blocks.
+
+#What is said to a player when this action is prevented and if the message is displayed.
+#The toggle defaults to: false
+BloclPlaceMessage: You cannot pickup items.
+BloclPlaceMessageToggle: false
+
+#Messages sent to a player when settings are changed or checked.
+BloclPlaceDeactivatedOtherMessage: can place blocks.
+BloclPlaceActivatedOtherMessage: cannot place blocks.
+BloclPlaceAlwaysActiveOtherMessage: can never place blocks.
+BloclPlaceDeactivatedSelfMessage: You can place blocks.
+BloclPlaceActivatedSelfMessage: You cannot place blocks.
+BloclPlaceAlwaysActiveSelfMessage: You can never place blocks.
+
 #What is said to a player when a player name is incorrect or not found.
-PlayerNotFoundMessage: Player not found or incorrectly spelt.
+PlayerNotFoundMessage: Player not found or incorrectly spelled.
 
 #What is said to a player when checking the settings of a player/self and has no restrictions.
 NothingIsActveOtherMessage: has no restrictions at this time.

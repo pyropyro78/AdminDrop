@@ -28,6 +28,14 @@ public class PlayerTogglesConfig {
 			plugin.getConfig().set("Players." + p + ".PickUpAccess", PlayerToggles.getPickUpAccessMap().get(p));
 		}
 		
+		for(String p : PlayerToggles.getBlockBreakMap().keySet()) {
+			plugin.getConfig().set("Players." + p + ".BlockBreak", PlayerToggles.getBlockBreakMap().get(p));
+		}
+		
+		for(String p : PlayerToggles.getBlockPlaceMap().keySet()) {
+			plugin.getConfig().set("Players." + p + ".BlockPlace", PlayerToggles.getBlockPlaceMap().get(p));
+		}
+		
 		plugin.saveConfig();
 	}
 
@@ -50,6 +58,14 @@ public class PlayerTogglesConfig {
 		
 		for(String s : plugin.getConfig().getConfigurationSection("Players").getKeys(false)) {
 			PlayerToggles.setThrowAccess(s, plugin.getConfig().getBoolean("Players." + s + ".ThrowAccess"));
+		}
+		
+		for(String s : plugin.getConfig().getConfigurationSection("Players").getKeys(false)) {
+			PlayerToggles.setBlockBreak(s, plugin.getConfig().getBoolean("Players." + s + ".BlockBreak"));
+		}
+		
+		for(String s : plugin.getConfig().getConfigurationSection("Players").getKeys(false)) {
+			PlayerToggles.setBlockPlace(s, plugin.getConfig().getBoolean("Players." + s + ".BlockPlace"));
 		}
 
 	}
