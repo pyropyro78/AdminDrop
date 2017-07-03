@@ -123,7 +123,7 @@ public final class AdminDrop extends JavaPlugin implements Listener {
 		}
 		if (!PlayerToggles.listedBlockBreak(p)) {
 
-			if (e.getPlayer().hasPermission("AdminDrop.alwayson.blockbreak") && !e.getPlayer().hasPermission("AdminDrop.ignore.star.blockbreak")) {
+			if (e.getPlayer().hasPermission("AdminDrop.alwayson.block.break") && !e.getPlayer().hasPermission("AdminDrop.ignore.star.block.break")) {
 				
 				PlayerToggles.blockbreak.put(p, true);
 
@@ -136,7 +136,7 @@ public final class AdminDrop extends JavaPlugin implements Listener {
 		}
 		if (!PlayerToggles.listedBlockPlace(p)) {
 
-			if (e.getPlayer().hasPermission("AdminDrop.alwayson.blockplace") && !e.getPlayer().hasPermission("AdminDrop.ignore.star.blockplace")) {
+			if (e.getPlayer().hasPermission("AdminDrop.alwayson.block.place") && !e.getPlayer().hasPermission("AdminDrop.ignore.star.block.place")) {
 				
 				PlayerToggles.blockplace.put(p, true);
 
