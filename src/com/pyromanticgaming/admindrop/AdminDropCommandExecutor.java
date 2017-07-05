@@ -107,7 +107,7 @@ public class AdminDropCommandExecutor implements CommandExecutor {
 					sender.sendMessage("AdminDrop Help Information.");
 					InfoArea(sender);
 					return true;
-				} else if ((args[0].equalsIgnoreCase("alt") ||args[0].equalsIgnoreCase("ac"))) {
+				} else if (args[0].equalsIgnoreCase("alt") ||args[0].equalsIgnoreCase("ac")) {
 					sender.sendMessage("AdminDrop Alternate Help Information.");
 					AlternateInfoArea(sender);
 					return true;

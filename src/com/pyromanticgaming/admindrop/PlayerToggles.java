@@ -23,30 +23,30 @@ public class PlayerToggles {
 	public static HashMap<String, Boolean> chestaccess = new HashMap<>();
 	public static HashMap<String, Boolean> blockbreak = new HashMap<>();
 	public static HashMap<String, Boolean> blockplace = new HashMap<>();
-	
-	
-	
+
+
+
 
 	public static void setDropAccess(String player, boolean toggle) {
 		dropaccess.put(player,  toggle);
 	}
-	
+
 	public static void setPickUpAccess(String player, boolean toggle) {
 		pickupaccess.put(player,  toggle);
 	}
-	
+
 	public static void setThrowAccess(String player, boolean toggle) {
 		throwaccess.put(player,  toggle);
 	}
-	
+
 	public static void setChestAccess(String player, boolean toggle) {
 		chestaccess.put(player,  toggle);
 	}
-	
+
 	public static void setBlockBreak(String player, boolean toggle) {
 		blockbreak.put(player,  toggle);
 	}
-	
+
 	public static void setBlockPlace(String player, boolean toggle) {
 		blockplace.put(player,  toggle);
 	}
@@ -72,12 +72,12 @@ public class PlayerToggles {
 
 		return dropaccess.containsKey(player);
 	}
-	
+
 	public static boolean listedBlockBreak(String player) {
 
 		return blockbreak.containsKey(player);
 	}
-	
+
 	public static boolean listedBlockPlace(String player) {
 
 		return blockplace.containsKey(player);
@@ -104,12 +104,12 @@ public class PlayerToggles {
 
 		return pickupaccess;
 	}
-	
+
 	public static HashMap<String, Boolean> getBlockBreakMap() {
 
 		return blockbreak;
 	}
-	
+
 	public static HashMap<String, Boolean> getBlockPlaceMap() {
 
 		return blockplace;

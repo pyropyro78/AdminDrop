@@ -23,6 +23,7 @@ PickUpMessage: You cannot pickup items.
 PickUpMessageToggle: false
 
 #Messages sent to a player when settings are changed or checked.
+#Includes Player name and a space before the custom text for all 'OtherMesage' statements.
 PickUpDeactivatedOtherMessage: can pick up items.
 PickUpActivatedOtherMessage: cannot pick up items.
 PickUpAlwaysActiveOtherMessage: can never pick up items.
@@ -36,6 +37,7 @@ ThrowMessage: You cannot throw items.
 ThrowMessageToggle: true
 
 #Messages sent to a player when settings are changed or checked.
+#Includes Player name and a space before the custom text for all 'OtherMesage' statements.
 ThrowDeactivatedOtherMessage: can throw items.
 ThrowActivatedOtherMessage: cannot throw items.
 ThrowAlwaysActiveOtherMessage: can never throw items.
@@ -49,6 +51,7 @@ ChestMessage: You cannot open this.
 ChestMessageToggle: true
 
 #Messages sent to a player when settings are changed or checked.
+#Includes Player name and a space before the custom text for all 'OtherMesage' statements.
 ChestDeactivatedOtherMessage: can access chests.
 ChestActivatedOtherMessage: cannot access chests.
 ChestAlwaysActiveOtherMessage: can never access chests.
@@ -62,6 +65,7 @@ DropMessage: Your items have vanished upon your death.
 DropMessageToggle: true
 
 #Messages sent to a player when settings are changed or checked.
+#Includes Player name and a space before the custom text for all 'OtherMesage' statements.
 DropDeactivatedOtherMessage: can drop items at death.
 DropActivatedOtherMessage: is safe from dropping items at death.
 DropAlwaysActiveOtherMessage: can never drop items at death.
@@ -75,6 +79,7 @@ BlockBreakMessage: You cannot pickup items.
 BlockBreakMessageToggle: false
 
 #Messages sent to a player when settings are changed or checked.
+#Includes Player name and a space before the custom text for all 'OtherMesage' statements.
 BlockBreakDeactivatedOtherMessage: can break blocks.
 BlockBreakActivatedOtherMessage: cannot break blocks.
 BlockBreakAlwaysActiveOtherMessage: can never break blocks.
@@ -88,6 +93,7 @@ BlockPlaceMessage: You cannot pickup items.
 BlockPlaceMessageToggle: false
 
 #Messages sent to a player when settings are changed or checked.
+#Includes Player name and a space before the custom text for all 'OtherMesage' statements.
 BlockPlaceDeactivatedOtherMessage: can place blocks.
 BlockPlaceActivatedOtherMessage: cannot place blocks.
 BlockPlaceAlwaysActiveOtherMessage: can never place blocks.
@@ -99,5 +105,6 @@ BlockPlaceAlwaysActiveSelfMessage: You can never place blocks.
 PlayerNotFoundMessage: Player not found or incorrectly spelled.
 
 #What is said to a player when checking the settings of a player/self and has no restrictions.
+#Includes Player name and a space before the custom text for all 'OtherMesage' statements.
 NothingIsActveOtherMessage: has no restrictions at this time.
 NothingIsActveSelfMessage: You have no restrictions at this time.

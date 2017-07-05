@@ -31,14 +31,14 @@ public final class AdminDrop extends JavaPlugin implements Listener {
 
 	@Override
 	public void onEnable() {
-		
+
 		//Save Default Configs
 		this.saveDefaultConfig();
 		new MainConfig(this);
 		MainConfig.GetMainValues(); //Get base values from config
 		new PlayerToggles(this);
 		PlayerTogglesConfig.loadtoggles(); //Load player settings
-		
+
 		//Save player settings at set ticks from main config
 		BukkitScheduler scheduler = getServer().getScheduler();
 		scheduler.scheduleSyncRepeatingTask(this, new Runnable() {
@@ -48,11 +48,11 @@ public final class AdminDrop extends JavaPlugin implements Listener {
 
 			}
 		}, MainConfig.SaveTimer, MainConfig.SaveTimer);
-		
+
 		getServer().getPluginManager().registerEvents(this, this);
 
 		getCommand("ad").setExecutor(new AdminDropCommandExecutor(this));
-		
+
 		getLogger().info("AdminDrop has been enabled.");
 	}
 
@@ -60,11 +60,11 @@ public final class AdminDrop extends JavaPlugin implements Listener {
 	public void onDisable() {
 
 		PlayerTogglesConfig.savetoggles();
-		
+
 		getLogger().info("AdminDrop has been disabled.");
-		
+
 	}
-	
+
 	@EventHandler
 	public void onJoin(PlayerJoinEvent e) {
 		String p = e.getPlayer().getName();
@@ -75,75 +75,75 @@ public final class AdminDrop extends JavaPlugin implements Listener {
 			if (e.getPlayer().hasPermission("AdminDrop.alwayson.deathdrop") && !e.getPlayer().hasPermission("AdminDrop.ignore.star.deathdrop")) {
 
 				PlayerToggles.dropaccess.put(p, true);
-				
+
 			} else {
-			
-			PlayerToggles.dropaccess.put(p, false);
-			
+
+				PlayerToggles.dropaccess.put(p, false);
+
 			}
 		}
 		if (!PlayerToggles.listedThrowAccess(p)) {
 
 			if (e.getPlayer().hasPermission("AdminDrop.alwayson.throwaway") && !e.getPlayer().hasPermission("AdminDrop.ignore.star.throwaway")) {
-			
+
 				PlayerToggles.throwaccess.put(p, true);
-				
+
 			} else {
-				
+
 				PlayerToggles.throwaccess.put(p, false);
-			
+
 			}
 
 		}
 		if (!PlayerToggles.listedPickUpAccess(p)) {
 
 			if (e.getPlayer().hasPermission("AdminDrop.alwayson.pickup") && !e.getPlayer().hasPermission("AdminDrop.ignore.star.pickup")) {
-			
+
 				PlayerToggles.pickupaccess.put(p, true);
 
 			} else {
-				
+
 				PlayerToggles.pickupaccess.put(p, false);
 
 			}
-			
+
 		}
 		if (!PlayerToggles.listedChestAccess(p)) {
 
 			if (e.getPlayer().hasPermission("AdminDrop.alwayson.chestaccess") && !e.getPlayer().hasPermission("AdminDrop.ignore.star.chestaccess")) {
-				
+
 				PlayerToggles.chestaccess.put(p, true);
 
 			} else {
-				
+
 				PlayerToggles.chestaccess.put(p, false);
-				
+
 			}
 
 		}
 		if (!PlayerToggles.listedBlockBreak(p)) {
 
 			if (e.getPlayer().hasPermission("AdminDrop.alwayson.block.break") && !e.getPlayer().hasPermission("AdminDrop.ignore.star.block.break")) {
-				
+
 				PlayerToggles.blockbreak.put(p, true);
 
 			} else {
-				
+
 				PlayerToggles.blockbreak.put(p, false);
-				
+
 			}
 
 		}
 		if (!PlayerToggles.listedBlockPlace(p)) {
 
 			if (e.getPlayer().hasPermission("AdminDrop.alwayson.block.place") && !e.getPlayer().hasPermission("AdminDrop.ignore.star.block.place")) {
-				
+
 				PlayerToggles.blockplace.put(p, true);
 
 			} else {
-				
+
 				PlayerToggles.blockplace.put(p, false);
-				
+
 			}
 
 		}
@@ -153,9 +153,9 @@ public final class AdminDrop extends JavaPlugin implements Listener {
 	public void onPlayerDeath(PlayerDeathEvent event) {
 		if (PlayerToggles.dropaccess.get(event.getEntity().getName())) {
 			event.getDrops().clear();
-			
+
 			if (MainConfig.dropmessagetoggle) {
-				
+
 				event.getEntity().sendMessage(MainConfig.dropmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 			}
 		}
@@ -165,9 +165,9 @@ public final class AdminDrop extends JavaPlugin implements Listener {
 	public void onPlayerDropItemEvent(PlayerDropItemEvent e) {
 		if (PlayerToggles.throwaccess.get(e.getPlayer().getName())) {
 			e.setCancelled(true);
-			
+
 			if (MainConfig.throwmessagetoggle) {
-				
+
 				e.getPlayer().sendMessage(MainConfig.throwmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2")); 
 			}
 		}
@@ -175,40 +175,40 @@ public final class AdminDrop extends JavaPlugin implements Listener {
 
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onInventoryOpenEvent(InventoryOpenEvent e){
-        e.getInventory().getType();
+		e.getInventory().getType();
 		if ((e.getInventory().getType() == InventoryType.CHEST && MainConfig.chestitem) || (e.getInventory().getType() == InventoryType.ENDER_CHEST && MainConfig.enderchestitem) || (e.getInventory().getType() == InventoryType.HOPPER && MainConfig.hopperitem) || (e.getInventory().getType() == InventoryType.DROPPER && MainConfig.dropperitem) || (e.getInventory().getType() == InventoryType.DISPENSER && MainConfig.dispenseritem) || (e.getInventory().getType() == InventoryType.BREWING && MainConfig.brewingitem)){
-        	Player player = (Player) e.getPlayer();
-    		if (PlayerToggles.chestaccess.get(e.getPlayer().getName())) {
-    			e.setCancelled(true);
-    			
-    			if (MainConfig.chestmessagetoggle) {
-    				player.sendMessage(MainConfig.chestmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
-    			}
-    		}
-        }
-    }
-	
+			Player player = (Player) e.getPlayer();
+			if (PlayerToggles.chestaccess.get(e.getPlayer().getName())) {
+				e.setCancelled(true);
+
+				if (MainConfig.chestmessagetoggle) {
+					player.sendMessage(MainConfig.chestmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+				}
+			}
+		}
+	}
+
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onPlayerPickupItemEvent(PlayerPickupItemEvent e) {
 		Player p = e.getPlayer();
 		if (PlayerToggles.pickupaccess.get(p.getName())) {
 			e.setCancelled(true);
-			
+
 			if (MainConfig.pickupmessagetoggle) {
-				
+
 				p.sendMessage(MainConfig.pickupmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 			}
 		}
 	}
-	
+
 	@EventHandler
 	public void onBlockBreak(BlockBreakEvent e) {
 		Player p = e.getPlayer();
 		if (PlayerToggles.blockbreak.get(p.getName())) {
 			e.setCancelled(true);
-			
+
 			if (MainConfig.blockbreakmessagetoggle) {
-				
+
 				p.sendMessage(MainConfig.blockbreakmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 			}
 		}
@@ -219,9 +219,9 @@ public final class AdminDrop extends JavaPlugin implements Listener {
 		Player p = e.getPlayer();
 		if (PlayerToggles.blockplace.get(p.getName())) {
 			e.setCancelled(true);
-			
+
 			if (MainConfig.blockplacemessagetoggle) {
-				
+
 				p.sendMessage(MainConfig.blockplacemessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 			}
 		}
