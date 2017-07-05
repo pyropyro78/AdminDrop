@@ -39,6 +39,7 @@ public final class AdminDrop extends JavaPlugin implements Listener {
 		new PlayerToggles(this);
 		PlayerTogglesConfig.loadtoggles(); //Load player settings
 
+		
 		//Save player settings at set ticks from main config
 		BukkitScheduler scheduler = getServer().getScheduler();
 		scheduler.scheduleSyncRepeatingTask(this, new Runnable() {
@@ -49,9 +50,10 @@ public final class AdminDrop extends JavaPlugin implements Listener {
 			}
 		}, MainConfig.SaveTimer, MainConfig.SaveTimer);
 
+		
 		getServer().getPluginManager().registerEvents(this, this);
 
-		getCommand("ad").setExecutor(new AdminDropCommandExecutor(this));
+		getCommand("ad").setExecutor(new CommandHandler(this));
 
 		getLogger().info("AdminDrop has been enabled.");
 	}
@@ -65,6 +67,7 @@ public final class AdminDrop extends JavaPlugin implements Listener {
 
 	}
 
+	//If plays is not listed for any of the toggles this adds them to the list
 	@EventHandler
 	public void onJoin(PlayerJoinEvent e) {
 		String p = e.getPlayer().getName();
@@ -149,6 +152,8 @@ public final class AdminDrop extends JavaPlugin implements Listener {
 		}
 	}
 
+	
+	//DeathDrop
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onPlayerDeath(PlayerDeathEvent event) {
 		if (PlayerToggles.dropaccess.get(event.getEntity().getName())) {
@@ -161,6 +166,8 @@ public final class AdminDrop extends JavaPlugin implements Listener {
 		}
 	}
 
+	
+	//ThrowAway
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onPlayerDropItemEvent(PlayerDropItemEvent e) {
 		if (PlayerToggles.throwaccess.get(e.getPlayer().getName())) {
@@ -173,6 +180,8 @@ public final class AdminDrop extends JavaPlugin implements Listener {
 		}
 	}
 
+	
+	//ChestAccess
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onInventoryOpenEvent(InventoryOpenEvent e){
 		e.getInventory().getType();
@@ -188,6 +197,8 @@ public final class AdminDrop extends JavaPlugin implements Listener {
 		}
 	}
 
+	
+	//PickUp
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onPlayerPickupItemEvent(PlayerPickupItemEvent e) {
 		Player p = e.getPlayer();
@@ -201,6 +212,8 @@ public final class AdminDrop extends JavaPlugin implements Listener {
 		}
 	}
 
+	
+	//BlockBreak
 	@EventHandler
 	public void onBlockBreak(BlockBreakEvent e) {
 		Player p = e.getPlayer();
@@ -214,6 +227,8 @@ public final class AdminDrop extends JavaPlugin implements Listener {
 		}
 	}
 
+	
+	//BlockPlace
 	@EventHandler
 	public void onBlockPlace(BlockPlaceEvent e) {
 		Player p = e.getPlayer();
