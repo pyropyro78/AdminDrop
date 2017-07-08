@@ -37,7 +37,7 @@ public final class AdminDrop extends JavaPlugin implements Listener {
 		new MainConfig(this);
 		MainConfig.GetMainValues(); //Get base values from config
 		new PlayerToggles(this);
-		PlayerTogglesConfig.loadtoggles(); //Load player settings
+		PlayerTogglesConfig.loadToggles(); //Load player settings
 
 		
 		//Save player settings at set ticks from main config
@@ -45,7 +45,7 @@ public final class AdminDrop extends JavaPlugin implements Listener {
 		scheduler.scheduleSyncRepeatingTask(this, new Runnable() {
 			@Override
 			public void run() {
-				PlayerTogglesConfig.savetoggles();
+				PlayerTogglesConfig.saveToggles();
 
 			}
 		}, MainConfig.SaveTimer, MainConfig.SaveTimer);
@@ -61,7 +61,7 @@ public final class AdminDrop extends JavaPlugin implements Listener {
 	@Override
 	public void onDisable() {
 
-		PlayerTogglesConfig.savetoggles();
+		PlayerTogglesConfig.saveToggles();
 
 		getLogger().info("AdminDrop has been disabled.");
 

@@ -69,40 +69,40 @@ public class CommandHandler implements CommandExecutor {
 			alwaysBB = (sender.hasPermission("AdminDrop.alwayson.block.break") && !sender.hasPermission("AdminDrop.ignore.star.block.break"));
 
 
-
+			//Main command filter
 			if (args.length == 1) {
 				if (sender instanceof Player) {
 					if ((args[0].equalsIgnoreCase("dd") || args[0].equalsIgnoreCase("deathdrop")) && canDD) {
-						DeathDrop.Command(sender);
+						DeathDrop.command(sender);
 						return true;
 					} else if ((args[0].equalsIgnoreCase("ta") || args[0].equalsIgnoreCase("throwaway")) && canTa) {
-						ThrowAway.Command(sender);
+						ThrowAway.command(sender);
 						return true;
 					} else if ((args[0].equalsIgnoreCase("pu") || args[0].equalsIgnoreCase("pickup")) && canPU) {
-						PickUp.Command(sender);
+						PickUp.command(sender);
 						return true;
 					} else if ((args[0].equalsIgnoreCase("ca") || args[0].equalsIgnoreCase("chestaccess")) && canCA) {
-						ChestAccess.Command(sender);
+						ChestAccess.command(sender);
 						return true;
 					}  else if ((args[0].equalsIgnoreCase("bp") || args[0].equalsIgnoreCase("blockplace")) && canBP) {
-						BlockPlace.Command(sender);
+						BlockPlace.modifySelf(sender);
 						return true;
 					} else if ((args[0].equalsIgnoreCase("bb") || args[0].equalsIgnoreCase("blockbreak")) && canBB) {
-						BlockBreak.Command(sender);
+						BlockBreak.command(sender);
 						return true;
 					} else if (args[0].equalsIgnoreCase("status")
 							&& canS) {
-						Status.SelfCommand(sender);
+						Status.selfCommand(sender);
 						return true;
 					}
 				} 
 				if (args[0].equalsIgnoreCase("help")) {
 					sender.sendMessage("AdminDrop Help Information.");
-					InfoDisplays.CommadInfo(sender);
+					InfoDisplays.commadInfo(sender);
 					return true;
 				} else if (args[0].equalsIgnoreCase("alt") ||args[0].equalsIgnoreCase("ac")) {
 					sender.sendMessage("AdminDrop Alternate Help Information.");
-					InfoDisplays.AltCommandInfo(sender);
+					InfoDisplays.altCommandInfo(sender);
 					return true;
 				}
 			} else if (args.length == 2) {
@@ -116,35 +116,35 @@ public class CommandHandler implements CommandExecutor {
 					alwaysBB = (otherPlayer.hasPermission("AdminDrop.alwayson.block.break") && !sender.hasPermission("AdminDrop.ignore.star.block.break"));
 
 					if (args[0].equalsIgnoreCase("status") && canSo) {
-						Status.OtherCommand(otherPlayer, sender);
+						Status.otherCommand(otherPlayer, sender);
 						return true;
 					} else if ((args[0].equalsIgnoreCase("ta") || args[0].equalsIgnoreCase("throwaway")) && canMoTA) {
-						ThrowAway.ModifyOther(otherPlayer, sender, alwaysTA);
+						ThrowAway.modifyOther(otherPlayer, sender, alwaysTA);
 						return true;
 					} else if ((args[0].equalsIgnoreCase("pu") || args[0].equalsIgnoreCase("pickup")) && canMoPU) {
-						PickUp.ModifyOther(otherPlayer, sender, alwaysPU);
+						PickUp.modifyOther(otherPlayer, sender, alwaysPU);
 						return true;
 					} else if ((args[0].equalsIgnoreCase("ca") || args[0].equalsIgnoreCase("chestaccess")) && canMoCA) {
-						ChestAccess.ModifyOther(otherPlayer, sender, alwaysCA);
+						ChestAccess.modifyOther(otherPlayer, sender, alwaysCA);
 						return true;
 					} else if ((args[0].equalsIgnoreCase("dd") || args[0].equalsIgnoreCase("deathdrop")) && canMoDD) {
-						DeathDrop.ModifyOther(otherPlayer, sender, alwaysDD);
+						DeathDrop.modifyOther(otherPlayer, sender, alwaysDD);
 						return true;
 					} else if ((args[0].equalsIgnoreCase("bb") || args[0].equalsIgnoreCase("blockbreak")) && canMoBB) {
-						BlockBreak.ModifyOther(otherPlayer, sender, alwaysBB);
+						BlockBreak.modifyOther(otherPlayer, sender, alwaysBB);
 						return true;
 					} else if ((args[0].equalsIgnoreCase("bp") || args[0].equalsIgnoreCase("blockplace")) && canMoBP) {
-						BlockPlace.ModifyOther(otherPlayer, sender, alwaysBP);
+						BlockPlace.modifyOther(otherPlayer, sender, alwaysBP);
 						return true;
 					} else {
-						InfoDisplays.PlayerNotFound(sender);
+						InfoDisplays.playerNotFound(sender);
 						return true;
 					}
 				}
 
 			} else if (args.length > 2) {
 				sender.sendMessage("AdminDrop - Too many arguments!");
-				InfoDisplays.CommadInfo(sender);
+				InfoDisplays.commadInfo(sender);
 				return true;
 			}
 		}

@@ -10,7 +10,7 @@ package com.pyromanticgaming.admindrop;
 public class PlayerTogglesConfig {
 
 	private static AdminDrop plugin = PlayerToggles.getPlugin();
-	public static void savetoggles() {
+	public static void saveToggles() {
 
 		for(String p : PlayerToggles.getChestAccessMap().keySet()) {
 			plugin.getConfig().set("Players." + p + ".ChestAccess", PlayerToggles.getChestAccessMap().get(p));
@@ -39,7 +39,7 @@ public class PlayerTogglesConfig {
 		plugin.saveConfig();
 	}
 
-	public static void loadtoggles() {
+	public static void loadToggles() {
 		if(!plugin.getConfig().contains("Players")) {
 			return;
 		}

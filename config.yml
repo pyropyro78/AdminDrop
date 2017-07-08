@@ -1,6 +1,7 @@
 #How often players should save to the config.
 #20 = 1 sec
-SaveTimer: 200
+#Default is 400
+SaveTimer: 400
 
 #The following options are as follows:
 #True: When user has restricted chest access this option will stop them from opening said item.

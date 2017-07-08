@@ -4,7 +4,7 @@ import org.bukkit.command.CommandSender;
 
 public class InfoDisplays {
 
-	static void CommadInfo(CommandSender sender) {
+	static void commadInfo(CommandSender sender) {
 		sender.sendMessage("/ad deathdrop - Toggles Death Drops on/off");
 		sender.sendMessage("/ad deathdrop [player] - Toggles other's Death Drops on/off");
 		sender.sendMessage("/ad throwaway - Toggles throwing items");
@@ -23,7 +23,7 @@ public class InfoDisplays {
 		sender.sendMessage("/ad alt - Shows alternate commands");
 	}
 
-	static void AltCommandInfo(CommandSender sender) {
+	static void altCommandInfo(CommandSender sender) {
 		sender.sendMessage("/ad dd - Toggles Death Drops on/off");
 		sender.sendMessage("/ad dd [player] - Toggles other's Death Drops on/off");
 		sender.sendMessage("/ad ta - Toggles throwing items");
@@ -42,7 +42,7 @@ public class InfoDisplays {
 		sender.sendMessage("/ad ac - Shows alternate commands");
 	}
 
-	static void PlayerNotFound(CommandSender sender) {
+	static void playerNotFound(CommandSender sender) {
 		sender.sendMessage(MainConfig.playernotfoundmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 	}
 	

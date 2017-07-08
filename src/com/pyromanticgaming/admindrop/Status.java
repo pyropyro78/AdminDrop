@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 
 public class Status {
 	
-	static void SelfCommand(CommandSender sender) {
+	static void selfCommand(CommandSender sender) {
 		
 		Boolean alwaysDD = (sender.hasPermission("AdminDrop.alwayson.deathdrop") && !sender.hasPermission("AdminDrop.ignore.star.deathdrop"));
 		Boolean alwaysCA = (sender.hasPermission("AdminDrop.alwayson.chestaccess") && !sender.hasPermission("AdminDrop.ignore.star.chestaccess"));
@@ -112,7 +112,7 @@ public class Status {
 
 	}
 
-	static void OtherCommand(Player otherPlayer, CommandSender sender) {
+	static void otherCommand(Player otherPlayer, CommandSender sender) {
 		
 		Boolean alwaysDD = (otherPlayer.hasPermission("AdminDrop.alwayson.deathdrop") && !otherPlayer.hasPermission("AdminDrop.ignore.star.deathdrop"));
 		Boolean alwaysCA = (otherPlayer.hasPermission("AdminDrop.alwayson.chestaccess") && !otherPlayer.hasPermission("AdminDrop.ignore.star.chestaccess"));
