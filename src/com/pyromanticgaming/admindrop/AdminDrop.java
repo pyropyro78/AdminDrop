@@ -23,8 +23,10 @@ import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
 
-import com.pyromanticgaming.admindrop.MainConfig;
 import com.pyromanticgaming.admindrop.PlayerToggles;
+import com.pyromanticgaming.admindrop.Config.ConfigManager;
+import com.pyromanticgaming.admindrop.Config.MainConfig;
+import com.pyromanticgaming.admindrop.Config.PlayerTogglesConfig;
 
 public final class AdminDrop extends JavaPlugin implements Listener {
 

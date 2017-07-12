@@ -73,22 +73,22 @@ public class CommandHandler implements CommandExecutor {
 			if (args.length == 1) {
 				if (sender instanceof Player) {
 					if ((args[0].equalsIgnoreCase("dd") || args[0].equalsIgnoreCase("deathdrop")) && canDD) {
-						DeathDrop.command(sender);
+						DeathDrop.modifySelf(sender);
 						return true;
 					} else if ((args[0].equalsIgnoreCase("ta") || args[0].equalsIgnoreCase("throwaway")) && canTa) {
-						ThrowAway.command(sender);
+						ThrowAway.modifySelf(sender);
 						return true;
 					} else if ((args[0].equalsIgnoreCase("pu") || args[0].equalsIgnoreCase("pickup")) && canPU) {
-						PickUp.command(sender);
+						PickUp.modifySelf(sender);
 						return true;
 					} else if ((args[0].equalsIgnoreCase("ca") || args[0].equalsIgnoreCase("chestaccess")) && canCA) {
-						ChestAccess.command(sender);
+						ChestAccess.modifySelf(sender);
 						return true;
 					}  else if ((args[0].equalsIgnoreCase("bp") || args[0].equalsIgnoreCase("blockplace")) && canBP) {
 						BlockPlace.modifySelf(sender);
 						return true;
 					} else if ((args[0].equalsIgnoreCase("bb") || args[0].equalsIgnoreCase("blockbreak")) && canBB) {
-						BlockBreak.command(sender);
+						BlockBreak.modifySelf(sender);
 						return true;
 					} else if (args[0].equalsIgnoreCase("status")
 							&& canS) {
@@ -105,7 +105,7 @@ public class CommandHandler implements CommandExecutor {
 					InfoDisplays.altCommandInfo(sender);
 					return true;
 				}
-			} else if (args.length == 2) {
+			} else if (args.length == 2 || args.length == 3) {
 				if (Bukkit.getPlayer(args[1]) instanceof Player) {
 					otherPlayer = Bukkit.getPlayer(args[1]);
 					alwaysDD = (otherPlayer.hasPermission("AdminDrop.alwayson.deathdrop") && !otherPlayer.hasPermission("AdminDrop.ignore.star.deathdrop"));
@@ -116,33 +116,33 @@ public class CommandHandler implements CommandExecutor {
 					alwaysBB = (otherPlayer.hasPermission("AdminDrop.alwayson.block.break") && !sender.hasPermission("AdminDrop.ignore.star.block.break"));
 
 					if (args[0].equalsIgnoreCase("status") && canSo) {
-						Status.otherCommand(otherPlayer, sender);
+						Status.otherCommand(otherPlayer, sender, args);
 						return true;
 					} else if ((args[0].equalsIgnoreCase("ta") || args[0].equalsIgnoreCase("throwaway")) && canMoTA) {
-						ThrowAway.modifyOther(otherPlayer, sender, alwaysTA);
+						ThrowAway.modifyOther(otherPlayer, sender, alwaysTA, args);
 						return true;
 					} else if ((args[0].equalsIgnoreCase("pu") || args[0].equalsIgnoreCase("pickup")) && canMoPU) {
-						PickUp.modifyOther(otherPlayer, sender, alwaysPU);
+						PickUp.modifyOther(otherPlayer, sender, alwaysPU, args);
 						return true;
 					} else if ((args[0].equalsIgnoreCase("ca") || args[0].equalsIgnoreCase("chestaccess")) && canMoCA) {
-						ChestAccess.modifyOther(otherPlayer, sender, alwaysCA);
+						ChestAccess.modifyOther(otherPlayer, sender, alwaysCA, args);
 						return true;
 					} else if ((args[0].equalsIgnoreCase("dd") || args[0].equalsIgnoreCase("deathdrop")) && canMoDD) {
-						DeathDrop.modifyOther(otherPlayer, sender, alwaysDD);
+						DeathDrop.modifyOther(otherPlayer, sender, alwaysDD, args);
 						return true;
 					} else if ((args[0].equalsIgnoreCase("bb") || args[0].equalsIgnoreCase("blockbreak")) && canMoBB) {
-						BlockBreak.modifyOther(otherPlayer, sender, alwaysBB);
+						BlockBreak.modifyOther(otherPlayer, sender, alwaysBB, args);
 						return true;
 					} else if ((args[0].equalsIgnoreCase("bp") || args[0].equalsIgnoreCase("blockplace")) && canMoBP) {
-						BlockPlace.modifyOther(otherPlayer, sender, alwaysBP);
+						BlockPlace.modifyOther(otherPlayer, sender, alwaysBP, args);
 						return true;
 					} else {
-						InfoDisplays.playerNotFound(sender);
+						InfoDisplays.playerNotFoundInfo(sender);
 						return true;
 					}
 				}
 
-			} else if (args.length > 2) {
+			} else if (args.length > 3) {
 				sender.sendMessage("AdminDrop - Too many arguments!");
 				InfoDisplays.commadInfo(sender);
 				return true;

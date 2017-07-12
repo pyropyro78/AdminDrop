@@ -4,13 +4,6 @@ import org.bukkit.entity.Player;
 
 public class JoinToggles {
 
-	@SuppressWarnings("unused")
-	private static AdminDrop plugin;
-
-	public JoinToggles(AdminDrop instance) {
-		plugin = instance;
-	}
-
 	public static void runCheck(Player playerjoined) {
 		String p = playerjoined.getName();
 		if (!PlayerToggles.listedDropAccess(p)) {

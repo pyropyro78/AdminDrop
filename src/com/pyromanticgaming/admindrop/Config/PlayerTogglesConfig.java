@@ -1,4 +1,6 @@
-package com.pyromanticgaming.admindrop;
+package com.pyromanticgaming.admindrop.Config;
+
+import com.pyromanticgaming.admindrop.PlayerToggles;
 
 /*
  *Copyright (c) <2013-2017>, <pyropyro78>, <pyropyro78@gmail.com>

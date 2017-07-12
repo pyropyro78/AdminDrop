@@ -1,4 +1,4 @@
-package com.pyromanticgaming.admindrop;
+package com.pyromanticgaming.admindrop.Config;
 
 import java.io.File;
 import java.io.IOException;
@@ -7,6 +7,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+
+import com.pyromanticgaming.admindrop.AdminDrop;
+import com.pyromanticgaming.admindrop.JoinToggles;
 
 public class ConfigManager {
 
@@ -44,13 +47,14 @@ public class ConfigManager {
 
 		if (!playerfile.exists()) playerfile.createNewFile();
 
-		saveDefaultMainConfig();
+		saveDefaultMainConfig(); //Check & save defaults as needed
 		
 		mianconfig = YamlConfiguration.loadConfiguration(mainconfigfile);
 		playerconfig = YamlConfiguration.loadConfiguration(playerfile);
 
 	}
 	
+	//Check for config, if it is not there save the default
 	public static void saveDefaultMainConfig() {
 	    if (mainconfigfile == null) {
 	    	mainconfigfile = new File(plugin.getDataFolder(), "config.yml");

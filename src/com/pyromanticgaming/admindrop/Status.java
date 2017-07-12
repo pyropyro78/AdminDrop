@@ -4,9 +4,11 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import com.pyromanticgaming.admindrop.Config.MainConfig;
+
 public class Status {
 	
-	static void selfCommand(CommandSender sender) {
+	public static void selfCommand(CommandSender sender) {
 		
 		Boolean alwaysDD = (sender.hasPermission("AdminDrop.alwayson.deathdrop") && !sender.hasPermission("AdminDrop.ignore.star.deathdrop"));
 		Boolean alwaysCA = (sender.hasPermission("AdminDrop.alwayson.chestaccess") && !sender.hasPermission("AdminDrop.ignore.star.chestaccess"));
@@ -112,7 +114,7 @@ public class Status {
 
 	}
 
-	static void otherCommand(Player otherPlayer, CommandSender sender) {
+	public static void otherCommand(Player otherPlayer, CommandSender sender, String[] args) {
 		
 		Boolean alwaysDD = (otherPlayer.hasPermission("AdminDrop.alwayson.deathdrop") && !otherPlayer.hasPermission("AdminDrop.ignore.star.deathdrop"));
 		Boolean alwaysCA = (otherPlayer.hasPermission("AdminDrop.alwayson.chestaccess") && !otherPlayer.hasPermission("AdminDrop.ignore.star.chestaccess"));
