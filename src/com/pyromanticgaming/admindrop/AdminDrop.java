@@ -32,25 +32,23 @@ public final class AdminDrop extends JavaPlugin implements Listener {
 	@Override
 	public void onEnable() {
 
-		//Save Default Configs
-		this.saveDefaultConfig();
+		new ConfigManager(this);
 		new MainConfig(this);
-		MainConfig.GetMainValues(); //Get base values from config
 		new PlayerToggles(this);
-		PlayerTogglesConfig.loadToggles(); //Load player settings
+		ConfigManager.onServerEnable(); //Run basic Configuration functions on enable
 
-		
 		//Save player settings at set ticks from main config
 		BukkitScheduler scheduler = getServer().getScheduler();
 		scheduler.scheduleSyncRepeatingTask(this, new Runnable() {
 			@Override
 			public void run() {
-				PlayerTogglesConfig.saveToggles();
+				
+				ConfigManager.saveAllConfigs();
 
 			}
 		}, MainConfig.SaveTimer, MainConfig.SaveTimer);
 
-		
+
 		getServer().getPluginManager().registerEvents(this, this);
 
 		getCommand("ad").setExecutor(new CommandHandler(this));
@@ -61,22 +59,24 @@ public final class AdminDrop extends JavaPlugin implements Listener {
 	@Override
 	public void onDisable() {
 
+		//Save settings upon disable
 		PlayerTogglesConfig.saveToggles();
 
 		getLogger().info("AdminDrop has been disabled.");
 
 	}
 
-	//If plays is not listed for any of the toggles this adds them to the list
+	//Run things for the first time a player joins
 	@EventHandler
 	public void onJoin(PlayerJoinEvent e) {
-		String p = e.getPlayer().getName();
-JoinToggles.main(p);
-
+		Player playerjoined = e.getPlayer(); //Set Player for use in Join functions
 		
+		JoinToggles.runCheck(playerjoined); //Run first time config checks
+
+
 	}
 
-	
+
 	//DeathDrop
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onPlayerDeath(PlayerDeathEvent event) {
@@ -90,7 +90,7 @@ JoinToggles.main(p);
 		}
 	}
 
-	
+
 	//ThrowAway
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onPlayerDropItemEvent(PlayerDropItemEvent e) {
@@ -104,7 +104,7 @@ JoinToggles.main(p);
 		}
 	}
 
-	
+
 	//ChestAccess
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onInventoryOpenEvent(InventoryOpenEvent e){
@@ -121,7 +121,7 @@ JoinToggles.main(p);
 		}
 	}
 
-	
+
 	//PickUp
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onPlayerPickupItemEvent(PlayerPickupItemEvent e) {
@@ -136,7 +136,7 @@ JoinToggles.main(p);
 		}
 	}
 
-	
+
 	//BlockBreak
 	@EventHandler
 	public void onBlockBreak(BlockBreakEvent e) {
@@ -151,7 +151,7 @@ JoinToggles.main(p);
 		}
 	}
 
-	
+
 	//BlockPlace
 	@EventHandler
 	public void onBlockPlace(BlockPlaceEvent e) {

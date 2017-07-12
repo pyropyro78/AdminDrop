@@ -9,63 +9,62 @@ package com.pyromanticgaming.admindrop;
 
 public class PlayerTogglesConfig {
 
-	private static AdminDrop plugin = PlayerToggles.getPlugin();
 	public static void saveToggles() {
 
 		for(String p : PlayerToggles.getChestAccessMap().keySet()) {
-			plugin.getConfig().set("Players." + p + ".ChestAccess", PlayerToggles.getChestAccessMap().get(p));
+			ConfigManager.setValue(ConfigManager.playerconfig, "Players." + p + ".ChestAccess", PlayerToggles.getChestAccessMap().get(p));
 		}
 
 		for(String p : PlayerToggles.getDropAccessMap().keySet()) {
-			plugin.getConfig().set("Players." + p + ".DropAccess", PlayerToggles.getDropAccessMap().get(p));
+			ConfigManager.setValue(ConfigManager.playerconfig, "Players." + p + ".DropAccess", PlayerToggles.getDropAccessMap().get(p));
 		}
 
 		for(String p : PlayerToggles.getThrowAccessMap().keySet()) {
-			plugin.getConfig().set("Players." + p + ".ThrowAccess", PlayerToggles.getThrowAccessMap().get(p));
+			ConfigManager.setValue(ConfigManager.playerconfig, "Players." + p + ".ThrowAccess", PlayerToggles.getThrowAccessMap().get(p));
 		}
 
 		for(String p : PlayerToggles.getPickUpAccessMap().keySet()) {
-			plugin.getConfig().set("Players." + p + ".PickUpAccess", PlayerToggles.getPickUpAccessMap().get(p));
+			ConfigManager.setValue(ConfigManager.playerconfig, "Players." + p + ".PickUpAccess", PlayerToggles.getPickUpAccessMap().get(p));
 		}
 
 		for(String p : PlayerToggles.getBlockBreakMap().keySet()) {
-			plugin.getConfig().set("Players." + p + ".BlockBreak", PlayerToggles.getBlockBreakMap().get(p));
+			ConfigManager.setValue(ConfigManager.playerconfig, "Players." + p + ".BlockBreak", PlayerToggles.getBlockBreakMap().get(p));
 		}
 
 		for(String p : PlayerToggles.getBlockPlaceMap().keySet()) {
-			plugin.getConfig().set("Players." + p + ".BlockPlace", PlayerToggles.getBlockPlaceMap().get(p));
+			ConfigManager.setValue(ConfigManager.playerconfig, "Players." + p + ".BlockPlace", PlayerToggles.getBlockPlaceMap().get(p));
 		}
 
-		plugin.saveConfig();
+		ConfigManager.trySave(ConfigManager.playerconfig);
 	}
 
 	public static void loadToggles() {
-		if(!plugin.getConfig().contains("Players")) {
+		if(!ConfigManager.playerconfig.contains("Players")) {
 			return;
 		}
 
-		for(String s : plugin.getConfig().getConfigurationSection("Players").getKeys(false)) {
-			PlayerToggles.setChestAccess(s, plugin.getConfig().getBoolean("Players." + s + ".ChestAccess"));
+		for(String s : ConfigManager.playerconfig.getConfigurationSection("Players").getKeys(false)) {
+			PlayerToggles.setChestAccess(s, ConfigManager.playerconfig.getBoolean("Players." + s + ".ChestAccess"));
 		}
 
-		for(String s : plugin.getConfig().getConfigurationSection("Players").getKeys(false)) {
-			PlayerToggles.setDropAccess(s, plugin.getConfig().getBoolean("Players." + s + ".DropAccess"));
+		for(String s : ConfigManager.playerconfig.getConfigurationSection("Players").getKeys(false)) {
+			PlayerToggles.setDropAccess(s, ConfigManager.playerconfig.getBoolean("Players." + s + ".DropAccess"));
 		}
 
-		for(String s : plugin.getConfig().getConfigurationSection("Players").getKeys(false)) {
-			PlayerToggles.setPickUpAccess(s, plugin.getConfig().getBoolean("Players." + s + ".PickUpAccess"));
+		for(String s : ConfigManager.playerconfig.getConfigurationSection("Players").getKeys(false)) {
+			PlayerToggles.setPickUpAccess(s, ConfigManager.playerconfig.getBoolean("Players." + s + ".PickUpAccess"));
 		}
 
-		for(String s : plugin.getConfig().getConfigurationSection("Players").getKeys(false)) {
-			PlayerToggles.setThrowAccess(s, plugin.getConfig().getBoolean("Players." + s + ".ThrowAccess"));
+		for(String s : ConfigManager.playerconfig.getConfigurationSection("Players").getKeys(false)) {
+			PlayerToggles.setThrowAccess(s, ConfigManager.playerconfig.getBoolean("Players." + s + ".ThrowAccess"));
 		}
 
-		for(String s : plugin.getConfig().getConfigurationSection("Players").getKeys(false)) {
-			PlayerToggles.setBlockBreak(s, plugin.getConfig().getBoolean("Players." + s + ".BlockBreak"));
+		for(String s : ConfigManager.playerconfig.getConfigurationSection("Players").getKeys(false)) {
+			PlayerToggles.setBlockBreak(s, ConfigManager.playerconfig.getBoolean("Players." + s + ".BlockBreak"));
 		}
 
-		for(String s : plugin.getConfig().getConfigurationSection("Players").getKeys(false)) {
-			PlayerToggles.setBlockPlace(s, plugin.getConfig().getBoolean("Players." + s + ".BlockPlace"));
+		for(String s : ConfigManager.playerconfig.getConfigurationSection("Players").getKeys(false)) {
+			PlayerToggles.setBlockPlace(s, ConfigManager.playerconfig.getBoolean("Players." + s + ".BlockPlace"));
 		}
 
 	}

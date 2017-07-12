@@ -1,17 +1,21 @@
 package com.pyromanticgaming.admindrop;
 
+import org.bukkit.entity.Player;
+
 public class JoinToggles {
 
-private static AdminDrop plugin;
+	@SuppressWarnings("unused")
+	private static AdminDrop plugin;
 
-	public MainConfig(AdminDrop instance) {
+	public JoinToggles(AdminDrop instance) {
 		plugin = instance;
 	}
 
-public void main(String p) {
-if (!PlayerToggles.listedDropAccess(p)) {
+	public static void runCheck(Player playerjoined) {
+		String p = playerjoined.getName();
+		if (!PlayerToggles.listedDropAccess(p)) {
 
-			if (e.getPlayer().hasPermission("AdminDrop.alwayson.deathdrop") && !e.getPlayer().hasPermission("AdminDrop.ignore.star.deathdrop")) {
+			if (playerjoined.hasPermission("AdminDrop.alwayson.deathdrop") && !playerjoined.hasPermission("AdminDrop.ignore.star.deathdrop")) {
 
 				PlayerToggles.dropaccess.put(p, true);
 
@@ -23,7 +27,7 @@ if (!PlayerToggles.listedDropAccess(p)) {
 		}
 		if (!PlayerToggles.listedThrowAccess(p)) {
 
-			if (e.getPlayer().hasPermission("AdminDrop.alwayson.throwaway") && !e.getPlayer().hasPermission("AdminDrop.ignore.star.throwaway")) {
+			if (playerjoined.hasPermission("AdminDrop.alwayson.throwaway") && !playerjoined.hasPermission("AdminDrop.ignore.star.throwaway")) {
 
 				PlayerToggles.throwaccess.put(p, true);
 
@@ -36,7 +40,7 @@ if (!PlayerToggles.listedDropAccess(p)) {
 		}
 		if (!PlayerToggles.listedPickUpAccess(p)) {
 
-			if (e.getPlayer().hasPermission("AdminDrop.alwayson.pickup") && !e.getPlayer().hasPermission("AdminDrop.ignore.star.pickup")) {
+			if (playerjoined.hasPermission("AdminDrop.alwayson.pickup") && !playerjoined.hasPermission("AdminDrop.ignore.star.pickup")) {
 
 				PlayerToggles.pickupaccess.put(p, true);
 
@@ -49,7 +53,7 @@ if (!PlayerToggles.listedDropAccess(p)) {
 		}
 		if (!PlayerToggles.listedChestAccess(p)) {
 
-			if (e.getPlayer().hasPermission("AdminDrop.alwayson.chestaccess") && !e.getPlayer().hasPermission("AdminDrop.ignore.star.chestaccess")) {
+			if (playerjoined.hasPermission("AdminDrop.alwayson.chestaccess") && !playerjoined.hasPermission("AdminDrop.ignore.star.chestaccess")) {
 
 				PlayerToggles.chestaccess.put(p, true);
 
@@ -62,7 +66,7 @@ if (!PlayerToggles.listedDropAccess(p)) {
 		}
 		if (!PlayerToggles.listedBlockBreak(p)) {
 
-			if (e.getPlayer().hasPermission("AdminDrop.alwayson.block.break") && !e.getPlayer().hasPermission("AdminDrop.ignore.star.block.break")) {
+			if (playerjoined.hasPermission("AdminDrop.alwayson.block.break") && !playerjoined.hasPermission("AdminDrop.ignore.star.block.break")) {
 
 				PlayerToggles.blockbreak.put(p, true);
 
@@ -75,7 +79,7 @@ if (!PlayerToggles.listedDropAccess(p)) {
 		}
 		if (!PlayerToggles.listedBlockPlace(p)) {
 
-			if (e.getPlayer().hasPermission("AdminDrop.alwayson.block.place") && !e.getPlayer().hasPermission("AdminDrop.ignore.star.block.place")) {
+			if (playerjoined.hasPermission("AdminDrop.alwayson.block.place") && !playerjoined.hasPermission("AdminDrop.ignore.star.block.place")) {
 
 				PlayerToggles.blockplace.put(p, true);
 
@@ -86,6 +90,6 @@ if (!PlayerToggles.listedDropAccess(p)) {
 			}
 
 		}
-}
+	}
 
 }
