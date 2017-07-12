@@ -31,7 +31,7 @@ public class ThrowAway {
 					sender.sendMessage(ChatColor.ITALIC
 							+ otherPlayer.getDisplayName()
 							+ " "
-							+ MainConfig.throwdeactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+							+ MainConfig.throwactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 				}
 			} else if (args[2].equalsIgnoreCase("OFF")) {
 				if (PlayerToggles.throwaccess.get(sender.getName()) == false) {
@@ -40,7 +40,7 @@ public class ThrowAway {
 						sender.sendMessage(ChatColor.ITALIC
 								+ otherPlayer.getDisplayName()
 								+ " "
-								+ MainConfig.throwactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+								+ MainConfig.throwdeactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 						return;
 					}
 				} else if (alwaysOn) {

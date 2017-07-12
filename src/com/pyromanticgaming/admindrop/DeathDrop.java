@@ -31,7 +31,7 @@ public class DeathDrop {
 					sender.sendMessage(ChatColor.ITALIC
 							+ otherPlayer.getDisplayName()
 							+ " "
-							+ MainConfig.dropdeactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+							+ MainConfig.dropactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 				}
 			} else if (args[2].equalsIgnoreCase("OFF")) {
 				if (PlayerToggles.dropaccess.get(otherPlayer.getName()) == false) {
@@ -40,7 +40,7 @@ public class DeathDrop {
 						sender.sendMessage(ChatColor.ITALIC
 								+ otherPlayer.getDisplayName()
 								+ " "
-								+ MainConfig.dropactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+								+ MainConfig.dropdeactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 						return;
 					}
 				} else if (alwaysOn) {

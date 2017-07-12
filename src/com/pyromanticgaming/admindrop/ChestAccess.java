@@ -31,7 +31,7 @@ public class ChestAccess {
 					sender.sendMessage(ChatColor.ITALIC
 							+ otherPlayer.getDisplayName()
 							+ " "
-							+ MainConfig.chestdeactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+							+ MainConfig.chestactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 				}
 			} else if (args[2].equalsIgnoreCase("OFF")) {
 				if (PlayerToggles.chestaccess.get(sender.getName()) == false) {
@@ -40,7 +40,7 @@ public class ChestAccess {
 						sender.sendMessage(ChatColor.ITALIC
 								+ otherPlayer.getDisplayName()
 								+ " "
-								+ MainConfig.chestactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+								+ MainConfig.chestdeactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 						return;
 					}
 				} else if (alwaysOn) {

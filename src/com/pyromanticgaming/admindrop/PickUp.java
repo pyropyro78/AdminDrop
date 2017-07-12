@@ -31,7 +31,7 @@ public class PickUp {
 					sender.sendMessage(ChatColor.ITALIC
 							+ otherPlayer.getDisplayName()
 							+ " "
-							+ MainConfig.pickupdeactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+							+ MainConfig.pickupactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 				}
 			} else if (args[2].equalsIgnoreCase("OFF")) {
 				if (PlayerToggles.pickupaccess.get(sender.getName()) == false) {
@@ -40,7 +40,7 @@ public class PickUp {
 						sender.sendMessage(ChatColor.ITALIC
 								+ otherPlayer.getDisplayName()
 								+ " "
-								+ MainConfig.pickupactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+								+ MainConfig.pickupdeactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 						return;
 					}
 				} else if (alwaysOn) {
@@ -54,7 +54,7 @@ public class PickUp {
 					sender.sendMessage(ChatColor.ITALIC
 							+ otherPlayer.getDisplayName()
 							+ " "
-							+ MainConfig.pickupdeactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+							+ MainConfig.pickupdeactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 				}
 			}
 		} else 
