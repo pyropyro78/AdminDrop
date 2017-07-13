@@ -87,17 +87,6 @@ public class PickUp {
 
 	}
 	
-	public static void ModifyAll(CommandSender sender, Boolean alwaysOn, String[] args) {
-		for (Player player : Bukkit.getServer().getOnlinePlayers()) {
-			if (args[2].equalsIgnoreCase("ON")) {
-				disable(player, sender);
-			} else
-				if (args[2].equalsIgnoreCase("OFF")) {
-					enable(player, sender);
-				}
-		}
-	}
-
 	public static void modifySelf(CommandSender sender) {
 		Player player = (Player) sender;
 		if (PlayerToggles.pickupaccess.get(player.getName()) == false) {

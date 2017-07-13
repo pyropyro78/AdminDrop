@@ -86,17 +86,6 @@ public class ChestAccess {
 			}
 	}
 	
-	public static void ModifyAll(CommandSender sender, Boolean alwaysOn, String[] args) {
-		for (Player player : Bukkit.getServer().getOnlinePlayers()) {
-			if (args[2].equalsIgnoreCase("ON")) {
-				disable(player, sender);
-			} else
-				if (args[2].equalsIgnoreCase("OFF")) {
-					enable(player, sender);
-				}
-		}
-	}
-
 	private static void disable(Player player, CommandSender sender) {
 		if (MainConfig.announcechangetoother || player.getName() == sender.getName()) {
 			player.sendMessage(ChatColor.ITALIC + MainConfig.chestactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
