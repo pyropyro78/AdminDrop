@@ -1,5 +1,6 @@
 package com.pyromanticgaming.admindrop;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -32,6 +33,7 @@ public class PickUp {
 							+ otherPlayer.getDisplayName()
 							+ " "
 							+ MainConfig.pickupactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+					return;
 				}
 			} else if (args[2].equalsIgnoreCase("OFF")) {
 				if (PlayerToggles.pickupaccess.get(sender.getName()) == false) {
@@ -55,6 +57,7 @@ public class PickUp {
 							+ otherPlayer.getDisplayName()
 							+ " "
 							+ MainConfig.pickupdeactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+					return;
 				}
 			}
 		} else 
@@ -82,6 +85,17 @@ public class PickUp {
 						+ MainConfig.pickupdeactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 			}
 
+	}
+	
+	public static void ModifyAll(CommandSender sender, Boolean alwaysOn, String[] args) {
+		for (Player player : Bukkit.getServer().getOnlinePlayers()) {
+			if (args[2].equalsIgnoreCase("ON")) {
+				disable(player, sender);
+			} else
+				if (args[2].equalsIgnoreCase("OFF")) {
+					enable(player, sender);
+				}
+		}
 	}
 
 	public static void modifySelf(CommandSender sender) {

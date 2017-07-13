@@ -1,5 +1,6 @@
 package com.pyromanticgaming.admindrop;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -32,6 +33,7 @@ public class ChestAccess {
 							+ otherPlayer.getDisplayName()
 							+ " "
 							+ MainConfig.chestactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+					return;
 				}
 			} else if (args[2].equalsIgnoreCase("OFF")) {
 				if (PlayerToggles.chestaccess.get(sender.getName()) == false) {
@@ -55,6 +57,7 @@ public class ChestAccess {
 							+ otherPlayer.getDisplayName()
 							+ " "
 							+ MainConfig.chestdeactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+					return;
 				}
 			}
 		} else 
@@ -81,6 +84,17 @@ public class ChestAccess {
 						+ " "
 						+ MainConfig.chestdeactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 			}
+	}
+	
+	public static void ModifyAll(CommandSender sender, Boolean alwaysOn, String[] args) {
+		for (Player player : Bukkit.getServer().getOnlinePlayers()) {
+			if (args[2].equalsIgnoreCase("ON")) {
+				disable(player, sender);
+			} else
+				if (args[2].equalsIgnoreCase("OFF")) {
+					enable(player, sender);
+				}
+		}
 	}
 
 	private static void disable(Player player, CommandSender sender) {

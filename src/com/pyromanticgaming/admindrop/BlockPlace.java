@@ -32,6 +32,7 @@ public class BlockPlace {
 							+ otherPlayer.getDisplayName()
 							+ " "
 							+ MainConfig.blockplaceactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+					return;
 				}
 			} else if (args[2].equalsIgnoreCase("OFF")) {
 				if (PlayerToggles.blockplace.get(otherPlayer.getName()) == false) {
@@ -55,6 +56,7 @@ public class BlockPlace {
 							+ otherPlayer.getDisplayName()
 							+ " "
 							+ MainConfig.blockplacedeactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+					return;
 				}
 			}
 		} else 

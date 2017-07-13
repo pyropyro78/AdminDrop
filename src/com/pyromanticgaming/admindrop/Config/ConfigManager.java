@@ -15,8 +15,8 @@ public class ConfigManager {
 
 	public static File mainconfigfile;
 	public static FileConfiguration mianconfig;
-	public static File playerfile;
-	public static FileConfiguration playerconfig;
+	public static File playerdatafile;
+	public static FileConfiguration playerdataconfig;
 
 	private static AdminDrop plugin;
 
@@ -31,7 +31,7 @@ public class ConfigManager {
 		} catch (IOException e) {
 			return;
 		}
-		
+
 		MainConfig.GetMainValues(); //Get base values from config
 		PlayerTogglesConfig.loadToggles(); //Load player settings
 
@@ -43,31 +43,31 @@ public class ConfigManager {
 
 	public static void fileGenerator() throws IOException {
 		if (!plugin.getDataFolder().exists()) plugin.getDataFolder().mkdir();
-		playerfile = new File(plugin.getDataFolder(), "players.yml");
+		playerdatafile = new File(plugin.getDataFolder(), "playerdata.yml");
 
-		if (!playerfile.exists()) playerfile.createNewFile();
+		if (!playerdatafile.exists()) playerdatafile.createNewFile();
 
 		saveDefaultMainConfig(); //Check & save defaults as needed
-		
+
 		mianconfig = YamlConfiguration.loadConfiguration(mainconfigfile);
-		playerconfig = YamlConfiguration.loadConfiguration(playerfile);
+		playerdataconfig = YamlConfiguration.loadConfiguration(playerdatafile);
 
 	}
-	
+
 	//Check for config, if it is not there save the default
 	public static void saveDefaultMainConfig() {
-	    if (mainconfigfile == null) {
-	    	mainconfigfile = new File(plugin.getDataFolder(), "config.yml");
-	    }
-	    if (!mainconfigfile.exists()) {            
-	         plugin.saveResource("config.yml", true);
-	     }
+		if (mainconfigfile == null) {
+			mainconfigfile = new File(plugin.getDataFolder(), "config.yml");
+		}
+		if (!mainconfigfile.exists()) {            
+			plugin.saveResource("config.yml", true);
+		}
 	}
 
 	public static void setValue(FileConfiguration c, String path, Object value) {
 		c.set(path, value);
 	}
-	
+
 	public static void saveAllConfigs() {
 		PlayerTogglesConfig.saveToggles();
 	}
@@ -80,6 +80,6 @@ public class ConfigManager {
 		}
 	}
 	public static File file(FileConfiguration c) {
-		return c.getKeys(false) == YamlConfiguration.loadConfiguration(mainconfigfile) ? mainconfigfile : playerfile;
+		return c.getKeys(false) == YamlConfiguration.loadConfiguration(mainconfigfile) ? mainconfigfile : playerdatafile;
 	}
 }

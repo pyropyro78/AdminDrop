@@ -25,8 +25,7 @@ public class CommandHandler implements CommandExecutor {
 
 	@Override
 	@SuppressWarnings("deprecation")
-	public boolean onCommand(CommandSender sender, Command cmd, String label,
-			String[] args) {
+	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (cmd.getName().equalsIgnoreCase("ad") || cmd.getName().equalsIgnoreCase("admindrop")) {
 
 			//Declared now for use in later sections
@@ -39,7 +38,7 @@ public class CommandHandler implements CommandExecutor {
 					|| sender.isOp();
 			boolean canMoDD = sender.hasPermission("AdminDrop.other.deathdrop")
 					|| sender.isOp();
-			boolean canTa = sender.hasPermission("AdminDrop.self.throwaway")
+			boolean canTA = sender.hasPermission("AdminDrop.self.throwaway")
 					|| sender.isOp();
 			boolean canS = sender.hasPermission("AdminDrop.self.status")
 					|| sender.isOp();
@@ -61,6 +60,18 @@ public class CommandHandler implements CommandExecutor {
 					|| sender.isOp();
 			boolean canMoBB = sender.hasPermission("AdminDrop.other.block.break")
 					|| sender.isOp();
+			boolean canMaDD = sender.hasPermission("AdminDrop.all.deathdrop")
+					|| sender.isOp();
+			boolean canMaTA = sender.hasPermission("AdminDrop.all.throwaway")
+					|| sender.isOp();
+			boolean canMaCA = sender.hasPermission("AdminDrop.all.chestaccess")
+					|| sender.isOp();
+			boolean canMaPU = sender.hasPermission("AdminDrop.all.pickup")
+					|| sender.isOp();
+			boolean canMaBB = sender.hasPermission("AdminDrop.all.block.break")
+					|| sender.isOp();
+			boolean canMaBP = sender.hasPermission("AdminDrop.all.block.place")
+					|| sender.isOp();
 			alwaysDD = (sender.hasPermission("AdminDrop.alwayson.deathdrop") && !sender.hasPermission("AdminDrop.ignore.star.deathdrop"));
 			alwaysCA = (sender.hasPermission("AdminDrop.alwayson.chestaccess") && !sender.hasPermission("AdminDrop.ignore.star.chestaccess"));
 			alwaysTA = (sender.hasPermission("AdminDrop.alwayson.throwaway") && !sender.hasPermission("AdminDrop.ignore.star.throwaway"));
@@ -75,7 +86,7 @@ public class CommandHandler implements CommandExecutor {
 					if ((args[0].equalsIgnoreCase("dd") || args[0].equalsIgnoreCase("deathdrop")) && canDD) {
 						DeathDrop.modifySelf(sender);
 						return true;
-					} else if ((args[0].equalsIgnoreCase("ta") || args[0].equalsIgnoreCase("throwaway")) && canTa) {
+					} else if ((args[0].equalsIgnoreCase("ta") || args[0].equalsIgnoreCase("throwaway")) && canTA) {
 						ThrowAway.modifySelf(sender);
 						return true;
 					} else if ((args[0].equalsIgnoreCase("pu") || args[0].equalsIgnoreCase("pickup")) && canPU) {
@@ -140,17 +151,49 @@ public class CommandHandler implements CommandExecutor {
 						InfoDisplays.playerNotFoundInfo(sender);
 						return true;
 					}
-				}
+				} else
+					if (args[1].equalsIgnoreCase("ALL")) {
+						for (Player AllPlayers : Bukkit.getServer().getOnlinePlayers()) {
+							alwaysDD = (AllPlayers.hasPermission("AdminDrop.alwayson.deathdrop") && !AllPlayers.hasPermission("AdminDrop.ignore.star.deathdrop"));
+							alwaysCA = (AllPlayers.hasPermission("AdminDrop.alwayson.chestaccess") && !AllPlayers.hasPermission("AdminDrop.ignore.star.chestaccess"));
+							alwaysTA = (AllPlayers.hasPermission("AdminDrop.alwayson.throwaway") && !AllPlayers.hasPermission("AdminDrop.ignore.star.throwaway"));
+							alwaysPU = (AllPlayers.hasPermission("AdminDrop.alwayson.pickup") && !AllPlayers.hasPermission("AdminDrop.ignore.star.pickup"));
+							alwaysBP = (AllPlayers.hasPermission("AdminDrop.alwayson.block.place") && !sender.hasPermission("AdminDrop.ignore.star.block.place"));
+							alwaysBB = (AllPlayers.hasPermission("AdminDrop.alwayson.block.break") && !sender.hasPermission("AdminDrop.ignore.star.block.break"));
 
-			} else if (args.length > 3) {
-				sender.sendMessage("AdminDrop - Too many arguments!");
-				InfoDisplays.commadInfo(sender);
-				return true;
+							if ((args[0].equalsIgnoreCase("ta") || args[0].equalsIgnoreCase("throwaway")) && canMaTA) {
+								ThrowAway.modifyOther(AllPlayers, sender, alwaysTA, args);
+								return true;
+							} else if ((args[0].equalsIgnoreCase("pu") || args[0].equalsIgnoreCase("pickup")) && canMaPU) {
+								PickUp.modifyOther(AllPlayers, sender, alwaysPU, args);
+								return true;
+							} else if ((args[0].equalsIgnoreCase("ca") || args[0].equalsIgnoreCase("chestaccess")) && canMaCA) {
+								ChestAccess.modifyOther(AllPlayers, sender, alwaysCA, args);
+								return true;
+							} else if ((args[0].equalsIgnoreCase("dd") || args[0].equalsIgnoreCase("deathdrop")) && canMaDD) {
+								DeathDrop.modifyOther(AllPlayers, sender, alwaysDD, args);
+								return true;
+							} else if ((args[0].equalsIgnoreCase("bb") || args[0].equalsIgnoreCase("blockbreak")) && canMaBB) {
+								BlockBreak.modifyOther(AllPlayers, sender, alwaysBB, args);
+								return true;
+							} else if ((args[0].equalsIgnoreCase("bp") || args[0].equalsIgnoreCase("blockplace")) && canMaBP) {
+								BlockPlace.modifyOther(AllPlayers, sender, alwaysBP, args);
+								return true;
+							} else {
+								return true;
+							}
+						}
+
+					} else
+						if (args.length > 3) {
+							sender.sendMessage("AdminDrop - Too many arguments!");
+							InfoDisplays.commadInfo(sender);
+							return true;
+						}
 			}
 		}
 		return false;
 	}
-
 
 }
 
