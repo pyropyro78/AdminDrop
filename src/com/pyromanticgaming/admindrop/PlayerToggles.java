@@ -29,6 +29,7 @@ public class PlayerToggles {
 
 	public static void setDropAccess(String player, boolean toggle) {
 		dropaccess.put(player,  toggle);
+		//dropaccess.entrySet().iterator().hasNext() TODO
 	}
 
 	public static void setPickUpAccess(String player, boolean toggle) {
