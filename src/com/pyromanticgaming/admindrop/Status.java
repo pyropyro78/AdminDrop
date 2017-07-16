@@ -193,7 +193,7 @@ public class Status {
 			protectme = true;
 		}
 
-		if (alwaysDD) {
+		if (alwaysBB) {
 			sender.sendMessage(message + MainConfig.blockbreakalwaysactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 			protectme = true;
 		}
@@ -203,38 +203,8 @@ public class Status {
 			protectme = true;
 		}
 
-		if (alwaysDD) {
-			sender.sendMessage(message + MainConfig.blockplacealwaysactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
-			protectme = true;
-		}
-		
-		if (PlayerToggles.blockbreak.get(otherPlayer.getName()) == true) {
-			sender.sendMessage(ChatColor.ITALIC + MainConfig.blockbreakactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
-			protectme = true;
-		}
-
-		if (PlayerToggles.blockbreak.get(otherPlayer.getName()) == false
-				&& !alwaysBB) {
-			sender.sendMessage(ChatColor.ITALIC + MainConfig.blockbreakdeactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
-		}
-
-		if (alwaysBB) {
-			sender.sendMessage(ChatColor.ITALIC + MainConfig.blockbreakalwaysactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
-			protectme = true;
-		}
-
-		if (PlayerToggles.blockplace.get(otherPlayer.getName()) == true) {
-			sender.sendMessage(ChatColor.ITALIC + MainConfig.blockplaceactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
-			protectme = true;
-		}
-
-		if (PlayerToggles.blockbreak.get(otherPlayer.getName()) == false
-				&& !alwaysBP) {
-			sender.sendMessage(ChatColor.ITALIC + MainConfig.blockplacedeactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
-		}
-
 		if (alwaysBP) {
-			sender.sendMessage(ChatColor.ITALIC + MainConfig.blockplacealwaysactivatedselfmessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
+			sender.sendMessage(message + MainConfig.blockplacealwaysactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 			protectme = true;
 		}
 		if (!protectme) {
