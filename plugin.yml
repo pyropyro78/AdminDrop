@@ -8,17 +8,23 @@ commands:
       description: The goal of this plugin is to handle all item actions (Dropping, Throwing, Picking Up, etc.).
       usage: |
         /ad deathdrop - Toggles Death Drops on/off
-        /ad deathdrop [player] - Toggles other's Death Drops on/off
+        /ad deathdrop [player/online] - Toggles other's Death Drops on/off
+        /ad deathdrop [player/online/all] [ON/OFF] - Toggles other's Death Drops on/off
         /ad throwaway - Toggles the ability to throw away items on/off
-        /ad throwaway [player] - Toggles other's throw away items on/off
+        /ad throwaway [player/online] - Toggles other's throw away items on/off
+        /ad throwaway [player/online/all] [ON/OFF] - Toggles other's throw away items on/off
         /ad pickup - Toggles the ability to pick up items on/off
-        /ad pickup [player] - Toggles other's ability to pick up items on/off
+        /ad pickup [player/online] - Toggles other's ability to pick up items on/off
+        /ad pickup [player/online/all] [ON/OFF] - Toggles other's ability to pick up items on/off
         /ad chestaccess - Toggles the ability to open chests on/off
-        /ad chestaccess [player] - Toggles other's ability to open chests on/off
+        /ad chestaccess [player/online] - Toggles other's ability to open chests on/off
+        /ad chestaccess [player/online/all] [ON/OFF] - Toggles other's ability to open chests on/off
         /ad blockbreak - Toggles the restriction to break blocks on/off
-        /ad blockbreak [player] - Toggles other's restriction to break blocks on/off
+        /ad blockbreak [player/online] - Toggles other's restriction to break blocks on/off
+        /ad blockbreak [player/online/all] [ON/OFF] - Toggles other's restriction to break blocks on/off
         /ad blockplace - Toggles the restriction to place blocks on/off
-        /ad blockplace [player] - Toggles other's restriction to place blocks on/off
+        /ad blockplace [player/online] - Toggles other's restriction to place blocks on/off
+        /ad blockplace [player/online/all] [ON/OFF] - Toggles other's restriction to place blocks on/off
         /ad status - Gets current status
         /ad status [player] - Gets players current status
         /ad help - Displays commands

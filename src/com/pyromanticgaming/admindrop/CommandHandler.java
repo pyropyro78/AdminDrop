@@ -13,6 +13,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import com.pyromanticgaming.admindrop.Config.ConfigManager;
+
 public class CommandHandler implements CommandExecutor {
 
 
@@ -23,6 +25,8 @@ public class CommandHandler implements CommandExecutor {
 	// DD = Death Drop, PU = PickUp, TA = ThrowAway, BP = Block Placement, BB = Block Break
 	boolean alwaysDD, alwaysPU, alwaysTA, alwaysCA, alwaysBP, alwaysBB;
 
+	boolean valueSetting;
+	
 	@Override
 	@SuppressWarnings("deprecation")
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -85,21 +89,27 @@ public class CommandHandler implements CommandExecutor {
 				if (sender instanceof Player) {
 					if ((args[0].equalsIgnoreCase("dd") || args[0].equalsIgnoreCase("deathdrop")) && canDD) {
 						DeathDrop.modifySelf(sender);
+						ConfigManager.saveAllConfigs();
 						return true;
 					} else if ((args[0].equalsIgnoreCase("ta") || args[0].equalsIgnoreCase("throwaway")) && canTA) {
 						ThrowAway.modifySelf(sender);
+						ConfigManager.saveAllConfigs();
 						return true;
 					} else if ((args[0].equalsIgnoreCase("pu") || args[0].equalsIgnoreCase("pickup")) && canPU) {
 						PickUp.modifySelf(sender);
+						ConfigManager.saveAllConfigs();
 						return true;
 					} else if ((args[0].equalsIgnoreCase("ca") || args[0].equalsIgnoreCase("chestaccess")) && canCA) {
 						ChestAccess.modifySelf(sender);
+						ConfigManager.saveAllConfigs();
 						return true;
 					}  else if ((args[0].equalsIgnoreCase("bp") || args[0].equalsIgnoreCase("blockplace")) && canBP) {
 						BlockPlace.modifySelf(sender);
+						ConfigManager.saveAllConfigs();
 						return true;
 					} else if ((args[0].equalsIgnoreCase("bb") || args[0].equalsIgnoreCase("blockbreak")) && canBB) {
 						BlockBreak.modifySelf(sender);
+						ConfigManager.saveAllConfigs();
 						return true;
 					} else if (args[0].equalsIgnoreCase("status")
 							&& canS) {
@@ -125,33 +135,39 @@ public class CommandHandler implements CommandExecutor {
 						return true;
 					} else if ((args[0].equalsIgnoreCase("ta") || args[0].equalsIgnoreCase("throwaway")) && canMoTA) {
 						alwaysTA = (otherPlayer.hasPermission("AdminDrop.alwayson.throwaway") && !otherPlayer.hasPermission("AdminDrop.ignore.star.throwaway"));
-						
+
 						ThrowAway.modifyOther(otherPlayer, sender, alwaysTA, args);
+						ConfigManager.saveAllConfigs();
 						return true;
 					} else if ((args[0].equalsIgnoreCase("pu") || args[0].equalsIgnoreCase("pickup")) && canMoPU) {
 						alwaysPU = (otherPlayer.hasPermission("AdminDrop.alwayson.pickup") && !otherPlayer.hasPermission("AdminDrop.ignore.star.pickup"));
-						
+
 						PickUp.modifyOther(otherPlayer, sender, alwaysPU, args);
+						ConfigManager.saveAllConfigs();
 						return true;
 					} else if ((args[0].equalsIgnoreCase("ca") || args[0].equalsIgnoreCase("chestaccess")) && canMoCA) {
 						alwaysCA = (otherPlayer.hasPermission("AdminDrop.alwayson.chestaccess") && !otherPlayer.hasPermission("AdminDrop.ignore.star.chestaccess"));
-						
+
 						ChestAccess.modifyOther(otherPlayer, sender, alwaysCA, args);
+						ConfigManager.saveAllConfigs();
 						return true;
 					} else if ((args[0].equalsIgnoreCase("dd") || args[0].equalsIgnoreCase("deathdrop")) && canMoDD) {
 						alwaysDD = (otherPlayer.hasPermission("AdminDrop.alwayson.deathdrop") && !otherPlayer.hasPermission("AdminDrop.ignore.star.deathdrop"));
-						
+
 						DeathDrop.modifyOther(otherPlayer, sender, alwaysDD, args);
+						ConfigManager.saveAllConfigs();
 						return true;
 					} else if ((args[0].equalsIgnoreCase("bb") || args[0].equalsIgnoreCase("blockbreak")) && canMoBB) {
 						alwaysBB = (otherPlayer.hasPermission("AdminDrop.alwayson.block.break") && !sender.hasPermission("AdminDrop.ignore.star.block.break"));
-						
+
 						BlockBreak.modifyOther(otherPlayer, sender, alwaysBB, args);
+						ConfigManager.saveAllConfigs();
 						return true;
 					} else if ((args[0].equalsIgnoreCase("bp") || args[0].equalsIgnoreCase("blockplace")) && canMoBP) {
 						alwaysBP = (otherPlayer.hasPermission("AdminDrop.alwayson.block.place") && !sender.hasPermission("AdminDrop.ignore.star.block.place"));
-						
+
 						BlockPlace.modifyOther(otherPlayer, sender, alwaysBP, args);
+						ConfigManager.saveAllConfigs();
 						return true;
 					} else {
 						InfoDisplays.playerNotFoundInfo(sender);
@@ -159,61 +175,130 @@ public class CommandHandler implements CommandExecutor {
 					}
 				} else
 					if (args[1].equalsIgnoreCase("ONLINE")) {
-						
 
-							if ((args[0].equalsIgnoreCase("ta") || args[0].equalsIgnoreCase("throwaway")) && canMaTA) {
-								for (Player onlinePlayers : Bukkit.getServer().getOnlinePlayers()) {
-									alwaysTA = (onlinePlayers.hasPermission("AdminDrop.alwayson.throwaway") && !onlinePlayers.hasPermission("AdminDrop.ignore.star.throwaway"));
-								
-									ThrowAway.modifyOther(onlinePlayers, sender, alwaysTA, args);
-								}
-								return true;
-							} else if ((args[0].equalsIgnoreCase("pu") || args[0].equalsIgnoreCase("pickup")) && canMaPU) {
-								for (Player AllPlayers : Bukkit.getServer().getOnlinePlayers()) {
-									alwaysPU = (AllPlayers.hasPermission("AdminDrop.alwayson.pickup") && !AllPlayers.hasPermission("AdminDrop.ignore.star.pickup"));
-								
-									PickUp.modifyOther(AllPlayers, sender, alwaysPU, args);
-								}
-								return true;
-							} else if ((args[0].equalsIgnoreCase("ca") || args[0].equalsIgnoreCase("chestaccess")) && canMaCA) {
-								for (Player AllPlayers : Bukkit.getServer().getOnlinePlayers()) {
-									alwaysCA = (AllPlayers.hasPermission("AdminDrop.alwayson.chestaccess") && !AllPlayers.hasPermission("AdminDrop.ignore.star.chestaccess"));
-								
-									ChestAccess.modifyOther(AllPlayers, sender, alwaysCA, args);
-								}
-								return true;
-							} else if ((args[0].equalsIgnoreCase("dd") || args[0].equalsIgnoreCase("deathdrop")) && canMaDD) {
-								for (Player AllPlayers : Bukkit.getServer().getOnlinePlayers()) {
-									alwaysDD = (AllPlayers.hasPermission("AdminDrop.alwayson.deathdrop") && !AllPlayers.hasPermission("AdminDrop.ignore.star.deathdrop"));
-								
-									DeathDrop.modifyOther(AllPlayers, sender, alwaysDD, args);
-								}
-								return true;
-							} else if ((args[0].equalsIgnoreCase("bb") || args[0].equalsIgnoreCase("blockbreak")) && canMaBB) {
-								for (Player AllPlayers : Bukkit.getServer().getOnlinePlayers()) {
-									alwaysBB = (AllPlayers.hasPermission("AdminDrop.alwayson.block.break") && !AllPlayers.hasPermission("AdminDrop.ignore.star.block.break"));
-								
-									BlockBreak.modifyOther(AllPlayers, sender, alwaysBB, args);
-								}
-								return true;
-							} else if ((args[0].equalsIgnoreCase("bp") || args[0].equalsIgnoreCase("blockplace")) && canMaBP) {
-								for (Player AllPlayers : Bukkit.getServer().getOnlinePlayers()) {
-									alwaysBP = (AllPlayers.hasPermission("AdminDrop.alwayson.block.place") && !AllPlayers.hasPermission("AdminDrop.ignore.star.block.place"));
-								
-									BlockPlace.modifyOther(AllPlayers, sender, alwaysBP, args);
-								}
-								return true;
-							} else {
-								return true;
+
+						if ((args[0].equalsIgnoreCase("ta") || args[0].equalsIgnoreCase("throwaway")) && canMaTA) {
+							for (Player onlinePlayers : Bukkit.getServer().getOnlinePlayers()) {
+								alwaysTA = (onlinePlayers.hasPermission("AdminDrop.alwayson.throwaway") && !onlinePlayers.hasPermission("AdminDrop.ignore.star.throwaway"));
+
+								ThrowAway.modifyOther(onlinePlayers, sender, alwaysTA, args);
 							}
-							
+							ConfigManager.saveAllConfigs();
+							return true;
+						} else if ((args[0].equalsIgnoreCase("pu") || args[0].equalsIgnoreCase("pickup")) && canMaPU) {
+							for (Player AllPlayers : Bukkit.getServer().getOnlinePlayers()) {
+								alwaysPU = (AllPlayers.hasPermission("AdminDrop.alwayson.pickup") && !AllPlayers.hasPermission("AdminDrop.ignore.star.pickup"));
 
-					} else
-						if (args.length > 3) {
-							sender.sendMessage("AdminDrop - Too many arguments!");
-							InfoDisplays.commadInfo(sender);
+								PickUp.modifyOther(AllPlayers, sender, alwaysPU, args);
+							}
+							ConfigManager.saveAllConfigs();
+							return true;
+						} else if ((args[0].equalsIgnoreCase("ca") || args[0].equalsIgnoreCase("chestaccess")) && canMaCA) {
+							for (Player AllPlayers : Bukkit.getServer().getOnlinePlayers()) {
+								alwaysCA = (AllPlayers.hasPermission("AdminDrop.alwayson.chestaccess") && !AllPlayers.hasPermission("AdminDrop.ignore.star.chestaccess"));
+
+								ChestAccess.modifyOther(AllPlayers, sender, alwaysCA, args);
+							}
+							ConfigManager.saveAllConfigs();
+							return true;
+						} else if ((args[0].equalsIgnoreCase("dd") || args[0].equalsIgnoreCase("deathdrop")) && canMaDD) {
+							for (Player AllPlayers : Bukkit.getServer().getOnlinePlayers()) {
+								alwaysDD = (AllPlayers.hasPermission("AdminDrop.alwayson.deathdrop") && !AllPlayers.hasPermission("AdminDrop.ignore.star.deathdrop"));
+
+								DeathDrop.modifyOther(AllPlayers, sender, alwaysDD, args);
+							}
+							ConfigManager.saveAllConfigs();
+							return true;
+						} else if ((args[0].equalsIgnoreCase("bb") || args[0].equalsIgnoreCase("blockbreak")) && canMaBB) {
+							for (Player AllPlayers : Bukkit.getServer().getOnlinePlayers()) {
+								alwaysBB = (AllPlayers.hasPermission("AdminDrop.alwayson.block.break") && !AllPlayers.hasPermission("AdminDrop.ignore.star.block.break"));
+
+								BlockBreak.modifyOther(AllPlayers, sender, alwaysBB, args);
+							}
+							ConfigManager.saveAllConfigs();
+							return true;
+						} else if ((args[0].equalsIgnoreCase("bp") || args[0].equalsIgnoreCase("blockplace")) && canMaBP) {
+							for (Player AllPlayers : Bukkit.getServer().getOnlinePlayers()) {
+								alwaysBP = (AllPlayers.hasPermission("AdminDrop.alwayson.block.place") && !AllPlayers.hasPermission("AdminDrop.ignore.star.block.place"));
+
+								BlockPlace.modifyOther(AllPlayers, sender, alwaysBP, args);
+							}
+							ConfigManager.saveAllConfigs();
+							return true;
+						} else {
 							return true;
 						}
+
+
+					} else
+						if (args[1].equalsIgnoreCase("ALL") && (args[2].equalsIgnoreCase("ON") || args[2].equalsIgnoreCase("OFF"))) {
+							if ((args[0].equalsIgnoreCase("ta") || args[0].equalsIgnoreCase("throwaway")) && canMaTA) {
+								if (args[2].equalsIgnoreCase("ON")) {
+									valueSetting = true;
+								} else
+									if (args[2].equalsIgnoreCase("OFF")) {
+										valueSetting = false;
+									}
+								ThrowAway.modifyAll(valueSetting);
+								return true;
+							} else if ((args[0].equalsIgnoreCase("pu") || args[0].equalsIgnoreCase("pickup")) && canMaPU) {
+								if (args[2].equalsIgnoreCase("ON")) {
+									valueSetting = true;
+								} else
+									if (args[2].equalsIgnoreCase("OFF")) {
+										valueSetting = false;
+									}
+								ThrowAway.modifyAll(valueSetting);
+								return true;
+							} else if ((args[0].equalsIgnoreCase("ca") || args[0].equalsIgnoreCase("chestaccess")) && canMaCA) {
+								if (args[2].equalsIgnoreCase("ON")) {
+									valueSetting = true;
+								} else
+									if (args[2].equalsIgnoreCase("OFF")) {
+										valueSetting = false;
+									}
+								ThrowAway.modifyAll(valueSetting);
+								return true;
+							} else if ((args[0].equalsIgnoreCase("dd") || args[0].equalsIgnoreCase("deathdrop")) && canMaDD) {
+								if (args[2].equalsIgnoreCase("ON")) {
+									valueSetting = true;
+								} else
+									if (args[2].equalsIgnoreCase("OFF")) {
+										valueSetting = false;
+									}
+								ThrowAway.modifyAll(valueSetting);
+								return true;
+							} else if ((args[0].equalsIgnoreCase("bb") || args[0].equalsIgnoreCase("blockbreak")) && canMaBB) {
+								if (args[2].equalsIgnoreCase("ON")) {
+									valueSetting = true;
+								} else
+									if (args[2].equalsIgnoreCase("OFF")) {
+										valueSetting = false;
+									}
+								ThrowAway.modifyAll(valueSetting);
+								return true;
+							} else if ((args[0].equalsIgnoreCase("bp") || args[0].equalsIgnoreCase("blockplace")) && canMaBP) {
+								if (args[2].equalsIgnoreCase("ON")) {
+									valueSetting = true;
+								} else
+									if (args[2].equalsIgnoreCase("OFF")) {
+										valueSetting = false;
+									}
+								ThrowAway.modifyAll(valueSetting);
+								return true;
+							} else {
+								sender.sendMessage("AdminDrop - Incorrect arguments for command.");
+								InfoDisplays.commadInfo(sender);
+								return true;
+							}
+
+
+						}else
+							if (args.length > 3) {
+								sender.sendMessage("AdminDrop - Too many arguments!");
+								InfoDisplays.commadInfo(sender);
+								return true;
+							}
 			}
 		}
 		return false;

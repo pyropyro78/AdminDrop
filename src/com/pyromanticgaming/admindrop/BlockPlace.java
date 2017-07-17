@@ -1,9 +1,12 @@
 package com.pyromanticgaming.admindrop;
 
+import java.util.Map;
+
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import com.pyromanticgaming.admindrop.Config.ConfigManager;
 import com.pyromanticgaming.admindrop.Config.MainConfig;
 
 public class BlockPlace {
@@ -84,6 +87,13 @@ public class BlockPlace {
 						+ MainConfig.blockplacedeactivatedothermessage.replaceAll("(&([a-f0-9]))", "\u00A7$2"));
 			}
 
+	}
+	
+	public static void modifyAll(Boolean valueSetting) {
+		for (Map.Entry<String, Boolean> toggleEntry : PlayerToggles.blockplace.entrySet()) {
+			toggleEntry.setValue(valueSetting);
+		}
+		ConfigManager.saveAllConfigs();
 	}
 
 	public static void modifySelf(CommandSender sender) {

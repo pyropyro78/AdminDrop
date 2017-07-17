@@ -21,7 +21,6 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitScheduler;
 
 import com.pyromanticgaming.admindrop.PlayerToggles;
 import com.pyromanticgaming.admindrop.Config.ConfigManager;
@@ -39,23 +38,12 @@ public final class AdminDrop extends JavaPlugin implements Listener {
 		new PlayerToggles(this);
 		ConfigManager.onServerEnable(); //Run basic Configuration functions on enable
 
-		//Save player settings at set ticks from main config
-		BukkitScheduler scheduler = getServer().getScheduler();
-		scheduler.scheduleSyncRepeatingTask(this, new Runnable() {
-			@Override
-			public void run() {
-				
-				ConfigManager.saveAllConfigs();
-
-			}
-		}, MainConfig.SaveTimer, MainConfig.SaveTimer);
-
-
 		getServer().getPluginManager().registerEvents(this, this);
 
 		getCommand("ad").setExecutor(new CommandHandler(this));
 
 		getLogger().info("AdminDrop has been enabled.");
+		
 	}
 
 	@Override

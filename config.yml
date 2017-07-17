@@ -1,9 +1,4 @@
-#How often players should save to the config.
-#20 = 1 sec
-#Default is 400
-SaveTimer: 400
-
-#The following options are as follows:
+#The following options are related to item based inventory menus:
 #True: When user has restricted chest access this option will stop them from opening said item.
 #False: Allows user to open said chest even with chest access restricted.
 #Default is True.

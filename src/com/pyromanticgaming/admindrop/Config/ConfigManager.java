@@ -38,6 +38,8 @@ public class ConfigManager {
 		for (Player p : Bukkit.getServer().getOnlinePlayers()) {
 			JoinToggles.runCheck(p); //This is ran here to check if player was removed from config during a reload.
 		}
+		
+		saveAllConfigs();
 
 	}
 
