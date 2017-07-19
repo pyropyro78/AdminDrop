@@ -14,7 +14,7 @@ public class JoinToggles {
 
 			} else {
 
-				PlayerToggles.dropaccess.put(p, false);
+				PlayerToggles.dropaccess.put(p, MainConfig.defaultdeathdrop);
 
 			}
 		}
@@ -26,7 +26,7 @@ public class JoinToggles {
 
 			} else {
 
-				PlayerToggles.throwaccess.put(p, false);
+				PlayerToggles.throwaccess.put(p, MainConfig.defaultthrowaway);
 
 			}
 
@@ -39,7 +39,7 @@ public class JoinToggles {
 
 			} else {
 
-				PlayerToggles.pickupaccess.put(p, false);
+				PlayerToggles.pickupaccess.put(p, MainConfig.defaultpickup);
 
 			}
 
@@ -52,7 +52,7 @@ public class JoinToggles {
 
 			} else {
 
-				PlayerToggles.chestaccess.put(p, false);
+				PlayerToggles.chestaccess.put(p, MainConfig.defaultchestaccess);
 
 			}
 
@@ -65,7 +65,7 @@ public class JoinToggles {
 
 			} else {
 
-				PlayerToggles.blockbreak.put(p, false);
+				PlayerToggles.blockbreak.put(p, MainConfig.defaultblockbreak);
 
 			}
 
@@ -78,7 +78,7 @@ public class JoinToggles {
 
 			} else {
 
-				PlayerToggles.blockplace.put(p, false);
+				PlayerToggles.blockplace.put(p, MainConfig.defaultblockplace);
 
 			}
 
