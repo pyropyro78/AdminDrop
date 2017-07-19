@@ -85,31 +85,25 @@ public class CommandHandler implements CommandExecutor {
 
 
 			//Main command filter
-			if (args.length == 1) {
+			if (args.length == 1 || args.length ==2) {
 				if (sender instanceof Player) {
 					if ((args[0].equalsIgnoreCase("dd") || args[0].equalsIgnoreCase("deathdrop")) && canDD) {
-						DeathDrop.modifySelf(sender);
-						ConfigManager.saveAllConfigs();
+						DeathDrop.modifySelf(sender, args);
 						return true;
 					} else if ((args[0].equalsIgnoreCase("ta") || args[0].equalsIgnoreCase("throwaway")) && canTA) {
-						ThrowAway.modifySelf(sender);
-						ConfigManager.saveAllConfigs();
+						ThrowAway.modifySelf(sender, args);
 						return true;
 					} else if ((args[0].equalsIgnoreCase("pu") || args[0].equalsIgnoreCase("pickup")) && canPU) {
-						PickUp.modifySelf(sender);
-						ConfigManager.saveAllConfigs();
+						PickUp.modifySelf(sender, args);
 						return true;
 					} else if ((args[0].equalsIgnoreCase("ca") || args[0].equalsIgnoreCase("chestaccess")) && canCA) {
-						ChestAccess.modifySelf(sender);
-						ConfigManager.saveAllConfigs();
+						ChestAccess.modifySelf(sender, args);
 						return true;
 					}  else if ((args[0].equalsIgnoreCase("bp") || args[0].equalsIgnoreCase("blockplace")) && canBP) {
-						BlockPlace.modifySelf(sender);
-						ConfigManager.saveAllConfigs();
+						BlockPlace.modifySelf(sender, args);
 						return true;
 					} else if ((args[0].equalsIgnoreCase("bb") || args[0].equalsIgnoreCase("blockbreak")) && canBB) {
-						BlockBreak.modifySelf(sender);
-						ConfigManager.saveAllConfigs();
+						BlockBreak.modifySelf(sender, args);
 						return true;
 					} else if (args[0].equalsIgnoreCase("status")
 							&& canS) {
@@ -248,7 +242,7 @@ public class CommandHandler implements CommandExecutor {
 									if (args[2].equalsIgnoreCase("OFF")) {
 										valueSetting = false;
 									}
-								ThrowAway.modifyAll(valueSetting);
+								PickUp.modifyAll(valueSetting);
 								return true;
 							} else if ((args[0].equalsIgnoreCase("ca") || args[0].equalsIgnoreCase("chestaccess")) && canMaCA) {
 								if (args[2].equalsIgnoreCase("ON")) {
@@ -257,7 +251,7 @@ public class CommandHandler implements CommandExecutor {
 									if (args[2].equalsIgnoreCase("OFF")) {
 										valueSetting = false;
 									}
-								ThrowAway.modifyAll(valueSetting);
+								ChestAccess.modifyAll(valueSetting);
 								return true;
 							} else if ((args[0].equalsIgnoreCase("dd") || args[0].equalsIgnoreCase("deathdrop")) && canMaDD) {
 								if (args[2].equalsIgnoreCase("ON")) {
@@ -266,7 +260,7 @@ public class CommandHandler implements CommandExecutor {
 									if (args[2].equalsIgnoreCase("OFF")) {
 										valueSetting = false;
 									}
-								ThrowAway.modifyAll(valueSetting);
+								DeathDrop.modifyAll(valueSetting);
 								return true;
 							} else if ((args[0].equalsIgnoreCase("bb") || args[0].equalsIgnoreCase("blockbreak")) && canMaBB) {
 								if (args[2].equalsIgnoreCase("ON")) {
@@ -275,7 +269,7 @@ public class CommandHandler implements CommandExecutor {
 									if (args[2].equalsIgnoreCase("OFF")) {
 										valueSetting = false;
 									}
-								ThrowAway.modifyAll(valueSetting);
+								BlockBreak.modifyAll(valueSetting);
 								return true;
 							} else if ((args[0].equalsIgnoreCase("bp") || args[0].equalsIgnoreCase("blockplace")) && canMaBP) {
 								if (args[2].equalsIgnoreCase("ON")) {
@@ -284,7 +278,7 @@ public class CommandHandler implements CommandExecutor {
 									if (args[2].equalsIgnoreCase("OFF")) {
 										valueSetting = false;
 									}
-								ThrowAway.modifyAll(valueSetting);
+								BlockPlace.modifyAll(valueSetting);
 								return true;
 							} else {
 								sender.sendMessage("AdminDrop - Incorrect arguments for command.");

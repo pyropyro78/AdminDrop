@@ -88,16 +88,26 @@ public class PickUp {
 			}
 
 	}
-	
+
 	public static void modifyAll(Boolean valueSetting) {
 		for (Map.Entry<String, Boolean> toggleEntry : PlayerToggles.pickupaccess.entrySet()) {
 			toggleEntry.setValue(valueSetting);
 		}
 		ConfigManager.saveAllConfigs();
 	}
-	
-	public static void modifySelf(CommandSender sender) {
+
+	public static void modifySelf(CommandSender sender, String args[]) {
 		Player player = (Player) sender;
+		if (args[1].equalsIgnoreCase("ON")) {
+			disable(player, sender);
+			ConfigManager.saveAllConfigs();
+			return;
+		} else
+			if (args[1].equalsIgnoreCase("OFF")) {
+				enable(player, sender);
+				ConfigManager.saveAllConfigs();
+				return;
+			}
 		if (PlayerToggles.pickupaccess.get(player.getName()) == false) {
 			disable(player, sender);
 		} else {
