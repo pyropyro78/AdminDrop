@@ -43,7 +43,7 @@ public final class AdminDrop extends JavaPlugin implements Listener {
 		getCommand("ad").setExecutor(new CommandHandler(this));
 
 		getLogger().info("AdminDrop has been enabled.");
-		
+
 	}
 
 	@Override
@@ -60,7 +60,7 @@ public final class AdminDrop extends JavaPlugin implements Listener {
 	@EventHandler
 	public void onJoin(PlayerJoinEvent e) {
 		Player playerjoined = e.getPlayer(); //Set Player for use in Join functions
-		
+
 		JoinToggles.runCheck(playerjoined); //Run first time config checks
 
 
@@ -94,14 +94,13 @@ public final class AdminDrop extends JavaPlugin implements Listener {
 		}
 	}
 
-//TODO check toggle before checking inventory type
 	//ChestAccess
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onInventoryOpenEvent(InventoryOpenEvent e){
-		e.getInventory().getType();
-		if ((e.getInventory().getType() == InventoryType.CHEST && MainConfig.chestitem) || (e.getInventory().getType() == InventoryType.ENDER_CHEST && MainConfig.enderchestitem) || (e.getInventory().getType() == InventoryType.HOPPER && MainConfig.hopperitem) || (e.getInventory().getType() == InventoryType.DROPPER && MainConfig.dropperitem) || (e.getInventory().getType() == InventoryType.DISPENSER && MainConfig.dispenseritem) || (e.getInventory().getType() == InventoryType.BREWING && MainConfig.brewingitem)){
-			Player player = (Player) e.getPlayer();
-			if (PlayerToggles.chestaccess.get(e.getPlayer().getName())) {
+		if (PlayerToggles.chestaccess.get(e.getPlayer().getName())) {
+			e.getInventory().getType();
+			if ((e.getInventory().getType() == InventoryType.CHEST && MainConfig.chestitem) || (e.getInventory().getType() == InventoryType.ENDER_CHEST && MainConfig.enderchestitem) || (e.getInventory().getType() == InventoryType.HOPPER && MainConfig.hopperitem) || (e.getInventory().getType() == InventoryType.DROPPER && MainConfig.dropperitem) || (e.getInventory().getType() == InventoryType.DISPENSER && MainConfig.dispenseritem) || (e.getInventory().getType() == InventoryType.BREWING && MainConfig.brewingitem)){
+				Player player = (Player) e.getPlayer();
 				e.setCancelled(true);
 
 				if (MainConfig.chestmessagetoggle) {
