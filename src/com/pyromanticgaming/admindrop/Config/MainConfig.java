@@ -1,13 +1,13 @@
 package com.pyromanticgaming.admindrop.Config;
 
-import com.pyromanticgaming.admindrop.AdminDrop;
-
 /*
- *Copyright (c) <2013-2017>, <pyropyro78>, <pyropyro78@gmail.com>
+ *Copyright (c) <2013-2017>, <pyropyro78 / Bradley Van Dyne>, <pyropyro78@gmail.com>
  *All rights reserved.
  *
  *THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+import com.pyromanticgaming.admindrop.AdminDrop;
 
 public class MainConfig {
 
@@ -20,7 +20,7 @@ public class MainConfig {
 
 
 	public static boolean enderchestitem, defaultblockplace, defaultblockbreak, defaultdeathdrop, defaultchestaccess, defaultpickup, defaultthrowaway, announcechangetoother, brewingitem, dropperitem, hopperitem, dispenseritem, chestitem, pickupmessagetoggle, throwmessagetoggle, chestmessagetoggle, dropmessagetoggle, blockplacemessagetoggle, blockbreakmessagetoggle;
-	public static String dropmessage, chestmessage, throwmessage, pickupmessage, nothingactiveselfmessage, pickupalwaysactivatedselfmessage, pickupdeactivatedselfmessage, pickupactivatedselfmessage, throwalwaysactivatedselfmessage, throwdeactivatedselfmessage, throwactivatedselfmessage, chestalwaysactivatedselfmessage, chestdeactivatedselfmessage, chestactivatedselfmessage, dropalwaysactivatedselfmessage, dropdeactivatedselfmessage, dropactivatedselfmessage, nothingactiveothermessage, playernotfoundmessage, pickupalwaysactivatedothermessage, throwalwaysactivatedothermessage, chestalwaysactivatedothermessage, dropalwaysactivatedothermessage, pickupactivatedothermessage, pickupdeactivatedothermessage, throwactivatedothermessage, throwdeactivatedothermessage, chestactivatedothermessage, chestdeactivatedothermessage, dropactivatedothermessage, dropdeactivatedothermessage, blockbreakactivatedothermessage, blockbreakdeactivatedothermessage, blockbreakalwaysactivatedothermessage, blockplaceactivatedothermessage, blockplacedeactivatedothermessage, blockplacealwaysactivatedothermessage, blockbreakactivatedselfmessage, blockbreakdeactivatedselfmessage, blockbreakalwaysactivatedselfmessage, blockplaceactivatedselfmessage, blockplacedeactivatedselfmessage, blockplacealwaysactivatedselfmessage, blockplacemessage, blockbreakmessage;
+	public static String dropmessage, configreloadmessage, allchangedmessage, chestmessage, throwmessage, pickupmessage, nothingactiveselfmessage, pickupalwaysactivatedselfmessage, pickupdeactivatedselfmessage, pickupactivatedselfmessage, throwalwaysactivatedselfmessage, throwdeactivatedselfmessage, throwactivatedselfmessage, chestalwaysactivatedselfmessage, chestdeactivatedselfmessage, chestactivatedselfmessage, dropalwaysactivatedselfmessage, dropdeactivatedselfmessage, dropactivatedselfmessage, nothingactiveothermessage, playernotfoundmessage, pickupalwaysactivatedothermessage, throwalwaysactivatedothermessage, chestalwaysactivatedothermessage, dropalwaysactivatedothermessage, pickupactivatedothermessage, pickupdeactivatedothermessage, throwactivatedothermessage, throwdeactivatedothermessage, chestactivatedothermessage, chestdeactivatedothermessage, dropactivatedothermessage, dropdeactivatedothermessage, blockbreakactivatedothermessage, blockbreakdeactivatedothermessage, blockbreakalwaysactivatedothermessage, blockplaceactivatedothermessage, blockplacedeactivatedothermessage, blockplacealwaysactivatedothermessage, blockbreakactivatedselfmessage, blockbreakdeactivatedselfmessage, blockbreakalwaysactivatedselfmessage, blockplaceactivatedselfmessage, blockplacedeactivatedselfmessage, blockplacealwaysactivatedselfmessage, blockplacemessage, blockbreakmessage;
 
 	public static void GetMainValues() {
 
@@ -46,6 +46,11 @@ public class MainConfig {
 		defaultblockplace = ConfigManager.mianconfig.getBoolean("DefaultBlockPlace");
 
 
+
+		allchangedmessage = ConfigManager.mianconfig.getString("AllChangedMessage");
+
+		configreloadmessage = ConfigManager.mianconfig.getString("ConfigReloadMessage");
+
 		dropmessage = ConfigManager.mianconfig.getString("DropMessage");
 		chestmessage = ConfigManager.mianconfig.getString("ChestMessage");
 		throwmessage = ConfigManager.mianconfig.getString("ThrowMessage");
@@ -53,8 +58,6 @@ public class MainConfig {
 		blockbreakmessage = ConfigManager.mianconfig.getString("BlockBreakMessage");
 		blockplacemessage = ConfigManager.mianconfig.getString("BlockPlaceMessage");
 		playernotfoundmessage = ConfigManager.mianconfig.getString("PlayerNotFoundMessage");
-
-
 
 		dropactivatedothermessage = ConfigManager.mianconfig.getString("DropActivatedOtherMessage");
 		dropdeactivatedothermessage = ConfigManager.mianconfig.getString("DropDeactivatedOtherMessage");
@@ -81,8 +84,6 @@ public class MainConfig {
 		blockplaceactivatedothermessage = ConfigManager.mianconfig.getString("BlockPlaceActivatedOtherMessage");
 		blockplacedeactivatedothermessage = ConfigManager.mianconfig.getString("BlockPlaceDeactivatedOtherMessage");
 		blockplacealwaysactivatedothermessage = ConfigManager.mianconfig.getString("BlockPlaceAlwaysActiveOtherMessage");
-
-
 
 		dropactivatedselfmessage = ConfigManager.mianconfig.getString("DropActivatedSelfMessage");
 		dropdeactivatedselfmessage = ConfigManager.mianconfig.getString("DropDeactivatedSelfMessage");

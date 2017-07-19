@@ -29,3 +29,5 @@ commands:
         /ad status [player] - Gets players current status
         /ad help - Displays commands
         /ad alt - Shows alternate commands
+aliases:
+    ad: admindrop

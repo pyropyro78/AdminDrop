@@ -1,7 +1,7 @@
 package com.pyromanticgaming.admindrop;
 
 /*
- *Copyright (c) <2013-2017>, <pyropyro78>, <pyropyro78@gmail.com>
+ *Copyright (c) <2013-2017>, <pyropyro78 / Bradley Van Dyne>, <pyropyro78@gmail.com>
  *All rights reserved.
  *
  *THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
@@ -14,6 +14,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.pyromanticgaming.admindrop.Config.ConfigManager;
+import com.pyromanticgaming.admindrop.Config.MainConfig;
 
 public class CommandHandler implements CommandExecutor {
 
@@ -123,6 +124,8 @@ public class CommandHandler implements CommandExecutor {
 					return true;
 				} else if (args[0].equalsIgnoreCase("reload") && canReload) {
 					ConfigManager.reloadConfigs();
+					sender.sendMessage(MainConfig.configreloadmessage);
+					return true;
 				}
 			} else if (args.length == 2 || args.length == 3) {
 				if (Bukkit.getPlayer(args[1]) instanceof Player) {
@@ -238,6 +241,7 @@ public class CommandHandler implements CommandExecutor {
 										valueSetting = false;
 									}
 								ThrowAway.modifyAll(valueSetting);
+								sender.sendMessage(MainConfig.allchangedmessage);
 								return true;
 							} else if ((args[0].equalsIgnoreCase("pu") || args[0].equalsIgnoreCase("pickup")) && canMaPU) {
 								if (args[2].equalsIgnoreCase("ON")) {
@@ -247,6 +251,7 @@ public class CommandHandler implements CommandExecutor {
 										valueSetting = false;
 									}
 								PickUp.modifyAll(valueSetting);
+								sender.sendMessage(MainConfig.allchangedmessage);
 								return true;
 							} else if ((args[0].equalsIgnoreCase("ca") || args[0].equalsIgnoreCase("chestaccess")) && canMaCA) {
 								if (args[2].equalsIgnoreCase("ON")) {
@@ -256,6 +261,7 @@ public class CommandHandler implements CommandExecutor {
 										valueSetting = false;
 									}
 								ChestAccess.modifyAll(valueSetting);
+								sender.sendMessage(MainConfig.allchangedmessage);
 								return true;
 							} else if ((args[0].equalsIgnoreCase("dd") || args[0].equalsIgnoreCase("deathdrop")) && canMaDD) {
 								if (args[2].equalsIgnoreCase("ON")) {
@@ -265,6 +271,7 @@ public class CommandHandler implements CommandExecutor {
 										valueSetting = false;
 									}
 								DeathDrop.modifyAll(valueSetting);
+								sender.sendMessage(MainConfig.allchangedmessage);
 								return true;
 							} else if ((args[0].equalsIgnoreCase("bb") || args[0].equalsIgnoreCase("blockbreak")) && canMaBB) {
 								if (args[2].equalsIgnoreCase("ON")) {
@@ -274,6 +281,7 @@ public class CommandHandler implements CommandExecutor {
 										valueSetting = false;
 									}
 								BlockBreak.modifyAll(valueSetting);
+								sender.sendMessage(MainConfig.allchangedmessage);
 								return true;
 							} else if ((args[0].equalsIgnoreCase("bp") || args[0].equalsIgnoreCase("blockplace")) && canMaBP) {
 								if (args[2].equalsIgnoreCase("ON")) {
@@ -283,6 +291,7 @@ public class CommandHandler implements CommandExecutor {
 										valueSetting = false;
 									}
 								BlockPlace.modifyAll(valueSetting);
+								sender.sendMessage(MainConfig.allchangedmessage);
 								return true;
 							} else {
 								sender.sendMessage("AdminDrop - Incorrect arguments for command.");
