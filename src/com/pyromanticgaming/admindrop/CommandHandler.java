@@ -31,7 +31,7 @@ public class CommandHandler implements CommandExecutor {
 	@Override
 	@SuppressWarnings("deprecation")
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		if (cmd.getName().equalsIgnoreCase("ad") || cmd.getName().equalsIgnoreCase("admindrop")) {
+		if (cmd.getName().equalsIgnoreCase("ad")) {
 
 			//Declared now for use in later sections
 			Player otherPlayer;
