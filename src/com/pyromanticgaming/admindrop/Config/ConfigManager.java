@@ -43,6 +43,25 @@ public class ConfigManager {
 
 	}
 
+	public static void onPluginReloadConfigs() {
+
+		try {
+			fileGenerator();
+		} catch (IOException e) {
+			return;
+		}
+
+		MainConfig.GetMainValues(); //Get base values from config
+		PlayerTogglesConfig.loadToggles(); //Load player settings
+
+		for (Player p : Bukkit.getServer().getOnlinePlayers()) {
+			JoinToggles.runCheck(p); //This is ran here to check if player was removed from config during a reload.
+		}
+		
+		saveAllConfigs();
+
+	}
+
 	public static void fileGenerator() throws IOException {
 		if (!plugin.getDataFolder().exists()) plugin.getDataFolder().mkdir();
 		playerdatafile = new File(plugin.getDataFolder(), "playerdata.yml");
