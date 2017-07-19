@@ -94,7 +94,7 @@ public final class AdminDrop extends JavaPlugin implements Listener {
 		}
 	}
 
-
+//TODO check toggle before checking inventory type
 	//ChestAccess
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onInventoryOpenEvent(InventoryOpenEvent e){
