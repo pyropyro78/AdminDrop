@@ -107,8 +107,6 @@ public class CommandHandler implements CommandExecutor {
 					} else if ((args[0].equalsIgnoreCase("bb") || args[0].equalsIgnoreCase("blockbreak")) && canBB) {
 						BlockBreak.modifySelf(sender, args);
 						return true;
-					} else if (args[0].equalsIgnoreCase("reload") && canReload) {
-						ConfigManager.reloadConfigs();
 					} else if (args[0].equalsIgnoreCase("status")
 							&& canS) {
 						Status.selfCommand(sender);
@@ -123,6 +121,8 @@ public class CommandHandler implements CommandExecutor {
 					sender.sendMessage("AdminDrop Alternate Help Information.");
 					InfoDisplays.altCommandInfo(sender);
 					return true;
+				} else if (args[0].equalsIgnoreCase("reload") && canReload) {
+					ConfigManager.reloadConfigs();
 				}
 			} else if (args.length == 2 || args.length == 3) {
 				if (Bukkit.getPlayer(args[1]) instanceof Player) {

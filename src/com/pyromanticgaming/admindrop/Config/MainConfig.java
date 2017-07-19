@@ -17,8 +17,8 @@ public class MainConfig {
 	public MainConfig(AdminDrop instance) {
 		plugin = instance;
 	}
-	
-	
+
+
 	public static boolean enderchestitem, defaultblockplace, defaultblockbreak, defaultdeathdrop, defaultchestaccess, defaultpickup, defaultthrowaway, announcechangetoother, brewingitem, dropperitem, hopperitem, dispenseritem, chestitem, pickupmessagetoggle, throwmessagetoggle, chestmessagetoggle, dropmessagetoggle, blockplacemessagetoggle, blockbreakmessagetoggle;
 	public static String dropmessage, chestmessage, throwmessage, pickupmessage, nothingactiveselfmessage, pickupalwaysactivatedselfmessage, pickupdeactivatedselfmessage, pickupactivatedselfmessage, throwalwaysactivatedselfmessage, throwdeactivatedselfmessage, throwactivatedselfmessage, chestalwaysactivatedselfmessage, chestdeactivatedselfmessage, chestactivatedselfmessage, dropalwaysactivatedselfmessage, dropdeactivatedselfmessage, dropactivatedselfmessage, nothingactiveothermessage, playernotfoundmessage, pickupalwaysactivatedothermessage, throwalwaysactivatedothermessage, chestalwaysactivatedothermessage, dropalwaysactivatedothermessage, pickupactivatedothermessage, pickupdeactivatedothermessage, throwactivatedothermessage, throwdeactivatedothermessage, chestactivatedothermessage, chestdeactivatedothermessage, dropactivatedothermessage, dropdeactivatedothermessage, blockbreakactivatedothermessage, blockbreakdeactivatedothermessage, blockbreakalwaysactivatedothermessage, blockplaceactivatedothermessage, blockplacedeactivatedothermessage, blockplacealwaysactivatedothermessage, blockbreakactivatedselfmessage, blockbreakdeactivatedselfmessage, blockbreakalwaysactivatedselfmessage, blockplaceactivatedselfmessage, blockplacedeactivatedselfmessage, blockplacealwaysactivatedselfmessage, blockplacemessage, blockbreakmessage;
 

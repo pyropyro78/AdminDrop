@@ -39,7 +39,7 @@ public class ConfigManager {
 		for (Player p : Bukkit.getServer().getOnlinePlayers()) {
 			JoinToggles.runCheck(p); //This is ran here to check if player was removed from config during a reload.
 		}
-		
+
 		saveAllConfigs();
 
 	}
@@ -54,14 +54,14 @@ public class ConfigManager {
 		}
 
 		MainConfig.GetMainValues(); //Get base values from config
-		
+
 		PlayerToggles.clearHashmaps();
 		PlayerTogglesConfig.loadToggles(); //Load player settings
 
 		for (Player p : Bukkit.getServer().getOnlinePlayers()) {
 			JoinToggles.runCheck(p); //This is ran here to check if player was removed from config during a reload.
 		}
-		
+
 		saveAllConfigs();
 		plugin.getLogger().info("AdminDrop reload completed.");
 
