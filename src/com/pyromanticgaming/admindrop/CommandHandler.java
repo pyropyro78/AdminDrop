@@ -26,7 +26,7 @@ public class CommandHandler implements CommandExecutor {
 	boolean alwaysDD, alwaysPU, alwaysTA, alwaysCA, alwaysBP, alwaysBB;
 
 	boolean valueSetting;
-	
+
 	@Override
 	@SuppressWarnings("deprecation")
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -76,6 +76,8 @@ public class CommandHandler implements CommandExecutor {
 					|| sender.isOp();
 			boolean canMaBP = sender.hasPermission("AdminDrop.all.block.place")
 					|| sender.isOp();
+			boolean canReload = sender.hasPermission("AdminDrop.restricted.reload")
+					|| sender.isOp();
 			alwaysDD = (sender.hasPermission("AdminDrop.alwayson.deathdrop") && !sender.hasPermission("AdminDrop.ignore.star.deathdrop"));
 			alwaysCA = (sender.hasPermission("AdminDrop.alwayson.chestaccess") && !sender.hasPermission("AdminDrop.ignore.star.chestaccess"));
 			alwaysTA = (sender.hasPermission("AdminDrop.alwayson.throwaway") && !sender.hasPermission("AdminDrop.ignore.star.throwaway"));
@@ -105,6 +107,8 @@ public class CommandHandler implements CommandExecutor {
 					} else if ((args[0].equalsIgnoreCase("bb") || args[0].equalsIgnoreCase("blockbreak")) && canBB) {
 						BlockBreak.modifySelf(sender, args);
 						return true;
+					} else if (args[0].equalsIgnoreCase("reload") && canReload) {
+						ConfigManager.reloadConfigs();
 					} else if (args[0].equalsIgnoreCase("status")
 							&& canS) {
 						Status.selfCommand(sender);

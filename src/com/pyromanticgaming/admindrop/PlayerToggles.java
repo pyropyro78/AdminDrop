@@ -53,6 +53,17 @@ public class PlayerToggles {
 
 
 
+	public static void clearHashmaps() {
+		PlayerToggles.blockbreak.clear();
+		PlayerToggles.blockplace.clear();
+		PlayerToggles.chestaccess.clear();
+		PlayerToggles.dropaccess.clear();
+		PlayerToggles.throwaccess.clear();
+		PlayerToggles.pickupaccess.clear();
+	}
+
+
+
 	public static boolean listedChestAccess(String player) {
 
 		return chestaccess.containsKey(player);

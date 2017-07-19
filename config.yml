@@ -13,6 +13,15 @@ BrewingStand: true
 #The toggle defaults to: true
 AnnounceChangeToOther: true
 
+#Below indicates what a player starts off with for restrictions upon being added to config.
+#Default is: false
+DefaultThrowAway: false
+DefaultPickUp: false
+DefaultChestAccess: false
+DefaultDeathDrop: false
+DefaultBlockBreak: false
+DefaultBlockPlace: false
+
 #What is said to a player when this action is prevented and if the message is displayed.
 #The toggle defaults to: false
 PickUpMessage: You cannot pickup items.

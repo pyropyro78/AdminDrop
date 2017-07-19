@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 
 import com.pyromanticgaming.admindrop.AdminDrop;
 import com.pyromanticgaming.admindrop.JoinToggles;
+import com.pyromanticgaming.admindrop.PlayerToggles;
 
 public class ConfigManager {
 
@@ -43,8 +44,9 @@ public class ConfigManager {
 
 	}
 
-	public static void onPluginReloadConfigs() {
+	public static void reloadConfigs() {
 
+		plugin.getLogger().info("AdminDrop config reload started.");
 		try {
 			fileGenerator();
 		} catch (IOException e) {
@@ -52,6 +54,8 @@ public class ConfigManager {
 		}
 
 		MainConfig.GetMainValues(); //Get base values from config
+		
+		PlayerToggles.clearHashmaps();
 		PlayerTogglesConfig.loadToggles(); //Load player settings
 
 		for (Player p : Bukkit.getServer().getOnlinePlayers()) {
@@ -59,6 +63,7 @@ public class ConfigManager {
 		}
 		
 		saveAllConfigs();
+		plugin.getLogger().info("AdminDrop reload completed.");
 
 	}
 
