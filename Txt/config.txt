@@ -1,0 +1,122 @@
+#The following options are related to item based inventory menus:
+#True: When user has restricted chest access this option will stop them from opening said item.
+#False: Allows user to open said chest even with chest access restricted.
+#Default is True.
+Chest: true
+EnderChest: true
+Hopper: true 
+Dropper: true 
+Dispenser: true 
+BrewingStand: true
+
+#When true other player will be notified when toggles change.
+#The toggle defaults to: true
+AnnounceChangeToOther: true
+
+#Message displays when the command to modify all players at once is used
+#This only displays to the sender.
+AllChangedMessage: All players have been successfully modified.
+
+#Message displayed to user who reloads the config files for AdminDrop.
+ConfigReloadMessage: Configuration files for AdminDrop successfully reloaded.
+
+#Below indicates what a player starts off with for restrictions upon being added to config.
+#Default is: false
+DefaultThrowAway: false
+DefaultPickUp: false
+DefaultChestAccess: false
+DefaultDeathDrop: false
+DefaultBlockBreak: false
+DefaultBlockPlace: false
+
+#What is said to a player when this action is prevented and if the message is displayed.
+#The toggle defaults to: false
+PickUpMessage: You cannot pickup items.
+PickUpMessageToggle: false
+
+#Messages sent to a player when settings are changed or checked.
+#Includes Player name and a space before the custom text for all 'OtherMesage' statements.
+PickUpDeactivatedOtherMessage: can pick up items.
+PickUpActivatedOtherMessage: cannot pick up items.
+PickUpAlwaysActiveOtherMessage: can never pick up items.
+PickUpDeactivatedSelfMessage: You can pick up items.
+PickUpActivatedSelfMessage: You cannot pick up items.
+PickUpAlwaysActiveSelfMessage: You can never pick up items.
+
+#What is said to a player when this action is prevented and if the message is displayed.
+#The toggle defaults to: true
+ThrowMessage: You cannot throw items.
+ThrowMessageToggle: true
+
+#Messages sent to a player when settings are changed or checked.
+#Includes Player name and a space before the custom text for all 'OtherMesage' statements.
+ThrowDeactivatedOtherMessage: can throw items.
+ThrowActivatedOtherMessage: cannot throw items.
+ThrowAlwaysActiveOtherMessage: can never throw items.
+ThrowDeactivatedSelfMessage: You can throw items.
+ThrowActivatedSelfMessage: You cannot throw items.
+ThrowAlwaysActiveSelfMessage: You can never throw items.
+
+#What is said to a player when this action is prevented and if the message is displayed.
+#The toggle defaults to: true
+ChestMessage: You cannot open this.
+ChestMessageToggle: true
+
+#Messages sent to a player when settings are changed or checked.
+#Includes Player name and a space before the custom text for all 'OtherMesage' statements.
+ChestDeactivatedOtherMessage: can access chests.
+ChestActivatedOtherMessage: cannot access chests.
+ChestAlwaysActiveOtherMessage: can never access chests.
+ChestDeactivatedSelfMessage: You can access chests.
+ChestActivatedSelfMessage: You cannot access chests.
+ChestAlwaysActiveSelfMessage: You can never access chests.
+
+#What is said to a player when this action is prevented and if the message is displayed.
+#The toggle defaults to: true
+DropMessage: Your items have vanished upon your death.
+DropMessageToggle: true
+
+#Messages sent to a player when settings are changed or checked.
+#Includes Player name and a space before the custom text for all 'OtherMesage' statements.
+DropDeactivatedOtherMessage: can drop items at death.
+DropActivatedOtherMessage: is safe from dropping items at death.
+DropAlwaysActiveOtherMessage: can never drop items at death.
+DropDeactivatedSelfMessage: You drop items at death.
+DropActivatedSelfMessage: You are safe from dropping items at death.
+DropAlwaysActiveSelfMessage: You can never drop items at death.
+
+#What is said to a player when this action is prevented and if the message is displayed.
+#The toggle defaults to: false
+BlockBreakMessage: You cannot pickup items.
+BlockBreakMessageToggle: false
+
+#Messages sent to a player when settings are changed or checked.
+#Includes Player name and a space before the custom text for all 'OtherMesage' statements.
+BlockBreakDeactivatedOtherMessage: can break blocks.
+BlockBreakActivatedOtherMessage: cannot break blocks.
+BlockBreakAlwaysActiveOtherMessage: can never break blocks.
+BlockBreakDeactivatedSelfMessage: You can break blocks.
+BlockBreakActivatedSelfMessage: You cannot break blocks.
+BlockBreakAlwaysActiveSelfMessage: You can never break blocks.
+
+#What is said to a player when this action is prevented and if the message is displayed.
+#The toggle defaults to: false
+BlockPlaceMessage: You cannot pickup items.
+BlockPlaceMessageToggle: false
+
+#Messages sent to a player when settings are changed or checked.
+#Includes Player name and a space before the custom text for all 'OtherMesage' statements.
+BlockPlaceDeactivatedOtherMessage: can place blocks.
+BlockPlaceActivatedOtherMessage: cannot place blocks.
+BlockPlaceAlwaysActiveOtherMessage: can never place blocks.
+BlockPlaceDeactivatedSelfMessage: You can place blocks.
+BlockPlaceActivatedSelfMessage: You cannot place blocks.
+BlockPlaceAlwaysActiveSelfMessage: You can never place blocks.
+
+#What is said to a player when a player name is incorrect or not found.
+PlayerNotFoundMessage: Player not found or incorrectly spelled.
+
+#What is said to a player when checking the settings of a player/self and has no restrictions.
+#Includes Player name and a space before the custom text for all 'OtherMesage' statements.
+NothingIsActveOtherMessage: has no restrictions at this time.
+NothingIsActveSelfMessage: You have no restrictions at this time.
