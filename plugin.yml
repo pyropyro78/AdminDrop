@@ -25,6 +25,7 @@ commands:
         /ad blockplace - Toggles the restriction to place blocks on/off
         /ad blockplace [player/online] - Toggles other's restriction to place blocks on/off
         /ad blockplace [player/online/all] [ON/OFF] - Toggles other's restriction to place blocks on/off
+        /ad reload – Reloads config files
         /ad status - Gets current status
         /ad status [player] - Gets players current status
         /ad help - Displays commands
