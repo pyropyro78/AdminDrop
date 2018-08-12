@@ -69,6 +69,7 @@ public final class AdminDrop extends JavaPlugin implements Listener {
 	//DeathDrop
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onPlayerDeath(PlayerDeathEvent event) {
+	    //Check if player name is listed for stopping dropped items
 		if (PlayerToggles.dropaccess.get(event.getEntity().getName())) {
 			event.getDrops().clear();
 
@@ -83,6 +84,7 @@ public final class AdminDrop extends JavaPlugin implements Listener {
 	//ThrowAway
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onPlayerDropItemEvent(PlayerDropItemEvent e) {
+	    //Check if player name is listed for stopping the action of tossing items
 		if (PlayerToggles.throwaccess.get(e.getPlayer().getName())) {
 			e.setCancelled(true);
 
@@ -96,8 +98,10 @@ public final class AdminDrop extends JavaPlugin implements Listener {
 	//ChestAccess
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onInventoryOpenEvent(InventoryOpenEvent e){
+	    //Check if player name is listed for stopping the action of opening chests and other inventory based items
 		if (PlayerToggles.chestaccess.get(e.getPlayer().getName())) {
 			e.getInventory().getType();
+			//Checks for settings on if the item in question is restricted for opening
 			if ((e.getInventory().getType() == InventoryType.CHEST && MainConfig.chestitem) || (e.getInventory().getType() == InventoryType.ENDER_CHEST && MainConfig.enderchestitem) || (e.getInventory().getType() == InventoryType.HOPPER && MainConfig.hopperitem) || (e.getInventory().getType() == InventoryType.DROPPER && MainConfig.dropperitem) || (e.getInventory().getType() == InventoryType.DISPENSER && MainConfig.dispenseritem) || (e.getInventory().getType() == InventoryType.BREWING && MainConfig.brewingitem)){
 				Player player = (Player) e.getPlayer();
 				e.setCancelled(true);
@@ -112,6 +116,7 @@ public final class AdminDrop extends JavaPlugin implements Listener {
 
 	//PickUp
 	@EventHandler(priority = EventPriority.HIGHEST)
+	//Check if player name is listed for stopping the action of picking up items from the ground
 	public void onPlayerPickupItemEvent(PlayerPickupItemEvent e) {
 		Player p = e.getPlayer();
 		if (PlayerToggles.pickupaccess.get(p.getName())) {
@@ -129,6 +134,7 @@ public final class AdminDrop extends JavaPlugin implements Listener {
 	@EventHandler
 	public void onBlockBreak(BlockBreakEvent e) {
 		Player p = e.getPlayer();
+		//Check if player name is listed for stopping the action of breaking blocks
 		if (PlayerToggles.blockbreak.get(p.getName())) {
 			e.setCancelled(true);
 
@@ -144,6 +150,7 @@ public final class AdminDrop extends JavaPlugin implements Listener {
 	@EventHandler
 	public void onBlockPlace(BlockPlaceEvent e) {
 		Player p = e.getPlayer();
+		//Check if player name is listed for stopping the action of placing blocks
 		if (PlayerToggles.blockplace.get(p.getName())) {
 			e.setCancelled(true);
 
