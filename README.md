@@ -7,10 +7,10 @@ All things need limitations, why not item related interactions? This plugin allo
 Utilizing permissions you can force a player or group to always have restrictions or paired with a region plugin for event areas. Great for a multitude of server types ranging from RPG servers (prison servers especially) to hardcore PVP servers and can even come in handy for events.
 
 
-AdminDrop v3.0.0.0 Tested On:
+#### AdminDrop v3.0.0.0 Tested On:
 • 1.7.2 / 1.8 / 1.9 / 1.10 / 1.11 / 1.12
     
-Features:
+#### Features:
 
 • Stops the dropping of items on death for self, target or all offline/online players
 
@@ -32,8 +32,8 @@ Features:
 Want to reach out or follow me? Find me on Twitter @pyropyro78
  
 
-Permissions:
-Self
+#### Permissions:
+##### Self
 
 • AdminDrop.self.status - Check one's own status of toggles
 
@@ -50,7 +50,7 @@ Self
 • AdminDrop.self.block.place - Set one’s own restriction to placing blocks
 
 
-Other
+##### Other
 
 • AdminDrop.other.status - Check status of others' toggles.
 
@@ -68,7 +68,7 @@ Other
 
 
 
-Overrides
+##### Overrides
 
 
 • AdminDrop.alwayson.deathdrop - Makes toggle for drops on death always on
@@ -85,7 +85,7 @@ Overrides
 
 
 
-Override Ignore Star
+##### Override Ignore Star
 If you use the '*' permission on a user/group that you wish to have something like AdminDrop.alwayson.pickup you will need to use - -AdminDrop.ignore.star.pickup on the line before the '*' permission to enable it on that a user/group.
 
 • AdminDrop.ignore.star.deathdrop - Makes toggle for drops on death always on for ‘*’ users
@@ -102,11 +102,11 @@ If you use the '*' permission on a user/group that you wish to have something li
 
 
 
-Restricted
+##### Restricted
 
 • AdminDrop.restricted.reload – Allows user to reload config files if changes are made to the files while server is running
 
-Commands:
+#### Commands:
 
 • /ad deathdrop - Toggles Death Drops on/off
 
@@ -156,7 +156,7 @@ Commands:
 
 
 
-Alternate Commands:
+#### Alternate Commands:
 
 
 
@@ -208,8 +208,7 @@ Alternate Commands:
 
 
 
-Notes:
-
+#### Notes:
 
 
 • Remember, always delete your old config or make the appropriate changes when updating to a newer version as things may have changed.
@@ -218,4 +217,4 @@ Notes:
 
 
 
-This plugin was authored by pyropyro78.
+##### This plugin was authored by pyropyro78.
