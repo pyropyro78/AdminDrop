@@ -2,6 +2,8 @@
 #### Bukkit / Spigot / Minecraft / Server Plugin
 #
 
+##### Officially back on GitHub! This comes with a change to the MIT license in honor of Hacktober.
+
 All things need limitations, why not item related interactions? This plugin allows the server to impose restrictions on a player to prevent them from throwing/picking up items, opening specific inventories, and placing/breaking blocks.
 
 Utilizing permissions you can force a player or group to always have restrictions or paired with a region plugin for event areas. Great for a multitude of server types ranging from RPG servers (prison servers especially) to hardcore PVP servers and can even come in handy for events.
