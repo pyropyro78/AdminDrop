@@ -30,55 +30,45 @@ Want to reach out or follow me? Find me on Twitter @pyropyro78
  
 
 #### Permissions:
+
 ##### Self
+#
 
-• AdminDrop.self.status - Check one's own status of toggles
-
-• AdminDrop.self.deathdrop - Set one's own drops on death toggle
-
-• AdminDrop.self.throwaway - Set one's own throwing away toggle
-
-• AdminDrop.self.pickup - Set one's own picking up of items toggle
-
-• AdminDrop.self.chestaccess - Set one's own ability to open chests or storage items (single, double, ender, hopper, dropper, minecart chest, brewing stand)
-
-• AdminDrop.self.block.break - Set one’s own restriction to breaking blocks
-
-• AdminDrop.self.block.place - Set one’s own restriction to placing blocks
-
+| Self Permission Name | Self Permission Description | 
+| --------- | ------------------- |
+| AdminDrop.self.status | Check one's own status of toggles |
+| AdminDrop.self.deathdrop | Set one's own drops on death toggle |
+| AdminDrop.self.throwaway | Set one's own throwing away toggle |
+| AdminDrop.self.pickup | Set one's own picking up of items toggle |
+| AdminDrop.self.chestaccess | Set one's own ability to open chests or storage items (single, double, ender, hopper, dropper, minecart chest, brewing stand) |
+| AdminDrop.self.block.break | Set one’s own restriction to breaking blocks |
+| AdminDrop.self.block.place | Set one’s own restriction to placing blocks |
 
 ##### Other
+#
 
-• AdminDrop.other.status - Check status of others' toggles.
-
-• AdminDrop.other.deathdrop - Modify other user's drops on death toggle.
-
-• AdminDrop.other.throwaway - Set others' throwing away toggle.
-
-• AdminDrop.other.pickup - Modify other user's drops on death toggle.
-
-• AdminDrop.other.chestaccess - Set others' ability to open chests or storage items (single, double, ender, hopper, dropper, minecart chest, brewing stand).
-
-• AdminDrop.other.block.break - Set others' own restriction to breaking blocks
-
-• AdminDrop.other.block.place - Set others' own restriction to placing blocks
-
+| Other Permission Name | Other Permission Description | 
+| --------- | ------------------- |
+| AdminDrop.other.status | Check status of others' toggles |
+| AdminDrop.other.deathdrop | Modify other user's drops on death toggle. |
+| AdminDrop.other.throwaway | Set others' throwing away toggle |
+| AdminDrop.other.pickup | Modify other user's drops on death toggle |
+| AdminDrop.other.chestaccess | Set others' ability to open chests or storage items (single, double, ender, hopper, dropper, minecart chest, brewing stand) |
+| AdminDrop.other.block.break | Set others' own restriction to breaking blocks |
+| AdminDrop.other.block.place | Set others' own restriction to placing blocks |
 
 
 ##### Overrides
+#
 
-
-• AdminDrop.alwayson.deathdrop - Makes toggle for drops on death always on
-
-• AdminDrop.alwayson.throwaway - Makes throwing away toggle always on
-
-• AdminDrop.alwayson.pickup - Makes picking up of items toggle always on
-
-• AdminDrop.alwayson.chestaccess - Makes chest access toggle always on
-
-• AdminDrop.alwayson.block.break - Makes block breaking toggle always on
-
-• AdminDrop.alwayson/block.place - Makes block placing toggle always on
+| Override Permission Name | Override Permission Description | 
+| --------- | ------------------- |
+| AdminDrop.alwayson.deathdrop | Makes toggle for drops on death always on |
+| AdminDrop.alwayson.throwaway | Makes throwing away toggle always on |
+| AdminDrop.alwayson.pickup | Makes picking up of items toggle always on |
+| AdminDrop.other.chestaccess | Makes chest access toggle always on |
+| AdminDrop.alwayson.block.break | Makes block breaking toggle always on |
+| AdminDrop.alwayson.block.place | Makes block placing toggle always onlocks |
 
 
 
