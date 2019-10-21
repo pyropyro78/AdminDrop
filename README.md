@@ -1,34 +1,29 @@
 # AdminDrop
-#### Bukkit / Spigot / Minecraft / Server Plugin
+### Bukkit / Spigot / Minecraft / Server Plugin
 #
 
-##### Officially back on GitHub! This comes with a change to the MIT license in honor of Hacktober.
+#### Officially back on GitHub! This comes with a change to the MIT license in honor of Hacktober.
 
 All things need limitations, why not item related interactions? This plugin allows the server to impose restrictions on a player to prevent them from throwing/picking up items, opening specific inventories, and placing/breaking blocks.
 
 Utilizing permissions you can force a player or group to always have restrictions or paired with a region plugin for event areas. Great for a multitude of server types ranging from RPG servers (prison servers especially) to hardcore PVP servers and can even come in handy for events.
 
-
 #### AdminDrop v3.0.0.0 Tested On:
-• 1.7.2 / 1.8 / 1.9 / 1.10 / 1.11 / 1.12
+  1.7.2 | 1.8 | 1.9 | 1.10 | 1.11 | 1.12
     
 #### Features:
 
-• Stops the dropping of items on death for self, target or all offline/online players
+| Feature # | Feature Description | 
+| --------- | ------------------- |
+|     1     | Stops the dropping of items on death for self, target or all offline/online players | 
+|     2     | Stops the ability to throw items for self, target or all offline/online players | 
+|     3     | Stops the ability of picking up items for self, target or all offline/online players | 
+|     4     | Stops in the name of love; for self, target or all offline/online players | 
+|     5     | Stops the ability of opening chests and storage items for self, target or all offline/online players | 
+|     6     | Stops the ability to break blocks for self, target or all offline/online players | 
+|     7     | Stops the ability to place blocks for self, target or all offline/online players | 
+|     8     | Checks personal status of toggles and that of other players | 
 
-• Stops the ability to throw items for self, target or all offline/online players
-
-• Stops the ability of picking up items for self, target or all offline/online players
-
-• Stops in the name of love; for self, target or all offline/online players
-
-• Stops the ability of opening chests and storage items for self, target or all offline/online players
-
-• Stops the ability to break blocks for self, target or all offline/online players
-
-• Stops the ability to place blocks for self, target or all offline/online players
-
-• Checks personal status of toggles and that of other players
     
  
 Want to reach out or follow me? Find me on Twitter @pyropyro78
