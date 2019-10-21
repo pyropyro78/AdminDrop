@@ -109,7 +109,7 @@ If you use the '*' permission on a user/group that you wish to have something li
 | /ad chestaccess | Toggles the ability to open chests on/off |
 | /ad chestaccess [player/online/all] | Toggles other's ability to open chests on/off |
 | /ad chestaccess [player/online/all] [ON/OFF] | Toggles other's ability to open chests on/off |
-| /ad blockbreak - Toggles the restriction to break blocks on/off | 
+| /ad blockbreak | Toggles the restriction to break blocks on/off | 
 | /ad blockbreak [player/online/all] | Toggles other's restriction to break blocks on/off |
 | /ad blockbreak [player/online/all] [ON/OFF] | Toggles other's restriction to break blocks on/off |
 | /ad blockplace | Toggles the restriction to place blocks on/off |
@@ -127,61 +127,38 @@ If you use the '*' permission on a user/group that you wish to have something li
 #
 | Command Name | Command Description |
 | --------- | ------------------- |
-
 | /ad dd | Toggles Death Drops on/off |
-| /ad dd [player/online/all] | Toggles other's Death Drops on/off
-
+| /ad dd [player/online/all] | Toggles other's Death Drops on/off |
 | /ad dd [player/online/all] [ON/OFF] | Toggles other's Death Drops on/off |
-
 | /ad ta | Toggles the ability to throw away items on/off |
-
-| /ad ta [player/online/all] - Toggles other's throw away items on/off
-
-| /ad ta [player/online/all] [ON/OFF] - Toggles other's throw away items on/off
-
-| /ad pu - Toggles the ability to pick up items on/off
-
-| /ad pu [player/online/all] - Toggles other's ability to pick up items on/off
-
-| /ad pu [player/online/all] [ON/OFF] - Toggles other's ability to pick up items on/off
-
-| /ad ca - Toggles the ability to open chests on/off
-
-| /ad ca [player/online/all] - Toggles other's ability to open chests on/off
-
-| /ad ca [player/online/all] [ON/OFF] - Toggles other's ability to open chests on/off
-
-| /ad bb - Toggles the restriction to break blocks on/off
-
-| /ad bb [player/online/all] - Toggles other's restriction to break blocks on/off
-
-| /ad bb [player/online/all] [ON/OFF] - Toggles other's restriction to break blocks on/off
-
-| /ad bp - Toggles the restriction to place blocks on/off
-
-| /ad bp [player/online/all] - Toggles other's restriction to place blocks on/off
-
-| /ad bp [player/online/all] [ON/OFF] - Toggles other's restriction to place blocks on/off
-
-| /ad reload – Reloads config files
-
-| /ad status - Gets current status
-
-| /ad status [player] - Gets players current status
-
-| /ad help - Displays commands
-
-| /ad ac - Shows alternate commands
+| /ad ta [player/online/all] | Toggles other's throw away items on/off |
+| /ad ta [player/online/all] [ON/OFF] | Toggles other's throw away items on/off |
+| /ad pu | Toggles the ability to pick up items on/off |
+| /ad pu [player/online/all] | Toggles other's ability to pick up items on/off |
+| /ad pu [player/online/all] [ON/OFF] | Toggles other's ability to pick up items on/off |
+| /ad ca | Toggles the ability to open chests on/off |
+| /ad ca [player/online/all] | Toggles other's ability to open chests on/off |
+| /ad ca [player/online/all] [ON/OFF] | Toggles other's ability to open chests on/off |
+| /ad bb | Toggles the restriction to break blocks on/off |
+| /ad bb [player/online/all] | Toggles other's restriction to break blocks on/off
+| /ad bb [player/online/all] [ON/OFF] | Toggles other's restriction to break blocks on/off |
+| /ad bp | Toggles the restriction to place blocks on/off |
+| /ad bp [player/online/all] | Toggles other's restriction to place blocks on/off |
+| /ad bp [player/online/all] [ON/OFF] | Toggles other's restriction to place blocks on/off |
+| /ad reload | Reloads config files |
+| /ad status | Gets current status |
+| /ad status [player] | Gets players current status |
+| /ad help | Displays commands |
+| /ad ac | Shows alternate commands |
 
 
 
 #### Notes:
-
+#
 
 • Remember, always delete your old config or make the appropriate changes when updating to a newer version as things may have changed.
 
 • Items do not stay in inventory on death if drops are toggled to not drop, they just simply do not drop them.
-
 
 
 ##### This plugin was authored by pyropyro78.
