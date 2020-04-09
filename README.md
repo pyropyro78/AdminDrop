@@ -11,6 +11,10 @@ Utilizing permissions you can force a player or group to always have restriction
 
 #### AdminDrop v3.0.0.0 Tested On:
 • 1.7.2 / 1.8 / 1.9 / 1.10 / 1.11 / 1.12
+
+#### AdminDrop v4.0.0.0rxx-SNAPSHOT Not Always Tested.
+Use Builds on Jenkins with that in mind. 
+Jenkins is currently only open to some, that will change with time.
     
 #### Features:
 
@@ -110,7 +114,7 @@ If you use the '*' permission on a user/group that you wish to have something li
 
 #### Commands:
 
-• /ad deathdrop - Toggles Death Drops on/off
+• /ad deathdrop - Toggles Death Drops [ON/OFF]
 
 • /ad deathdrop [player/online/all] - Toggles other's Death Drops on/off
 
